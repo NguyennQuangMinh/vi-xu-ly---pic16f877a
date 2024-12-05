@@ -1,0 +1,441 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F877A ]
+[d frameptr 0 ]
+"4 E:\User\Hai\Cong viec Khoa\Giao trinh bai giang\Vi xu ly\Microchip\SPI\Master.X\ADC0808.c
+[v _InitADC InitADC `(v  1 e 1 0 ]
+"13
+[v _ReadADC ReadADC `(ui  1 e 2 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"43 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"41 E:\User\Hai\Cong viec Khoa\Giao trinh bai giang\Vi xu ly\Microchip\SPI\Master.X\lcd_hd44780_pic16.c
+[v _LCDByte LCDByte `(v  1 e 1 0 ]
+"96
+[v _LCDBusyLoop LCDBusyLoop `(v  1 e 1 0 ]
+"154
+[v _LCDInit LCDInit `(v  1 e 1 0 ]
+"212
+[v _LCDWriteString LCDWriteString `(v  1 e 1 0 ]
+"313
+[v _LCDGotoXY LCDGotoXY `(v  1 e 1 0 ]
+"39 E:\User\Hai\Cong viec Khoa\Giao trinh bai giang\Vi xu ly\Microchip\SPI\Master.X\Master.c
+[v _timer2_initialize timer2_initialize `(v  1 e 1 0 ]
+"53
+[v _Count_Up Count_Up `II(v  1 e 1 0 ]
+"79
+[v _SPI_Initialize_Master SPI_Initialize_Master `(v  1 e 1 0 ]
+"89
+[v _SPI_Write SPI_Write `(v  1 e 1 0 ]
+"96
+[v _SPI_Read SPI_Read `(uc  1 e 1 0 ]
+"102
+[v _main main `(i  1 e 2 0 ]
+"15 E:\User\Hai\Cong viec Khoa\Giao trinh bai giang\Vi xu ly\Microchip\SPI\Master.X/custom_char.h
+[v ___cgram __cgram `[64]uc  1 e 64 0 ]
+"217 C:\Program Files\Microchip\xc8\v2.30\pic\include\proc\pic16f877a.h
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+[s S362 . 1 `uc 1 RC0 1 0 :1:0 
+`uc 1 RC1 1 0 :1:1 
+`uc 1 RC2 1 0 :1:2 
+`uc 1 RC3 1 0 :1:3 
+`uc 1 RC4 1 0 :1:4 
+`uc 1 RC5 1 0 :1:5 
+`uc 1 RC6 1 0 :1:6 
+`uc 1 RC7 1 0 :1:7 
+]
+"296
+[u S371 . 1 `S362 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES371  1 e 1 @7 ]
+"341
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
+[s S199 . 1 `uc 1 RD0 1 0 :1:0 
+`uc 1 RD1 1 0 :1:1 
+`uc 1 RD2 1 0 :1:2 
+`uc 1 RD3 1 0 :1:3 
+`uc 1 RD4 1 0 :1:4 
+`uc 1 RD5 1 0 :1:5 
+`uc 1 RD6 1 0 :1:6 
+`uc 1 RD7 1 0 :1:7 
+]
+"358
+[u S208 . 1 `S199 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES208  1 e 1 @8 ]
+"809
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
+"816
+[v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
+[s S309 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 TRISA3 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+]
+"1341
+[u S316 . 1 `S309 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES316  1 e 1 @133 ]
+"1376
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1438
+[v _TRISC TRISC `VEuc  1 e 1 @135 ]
+[s S59 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"1455
+[u S68 . 1 `S59 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES68  1 e 1 @135 ]
+"1500
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+[s S38 . 1 `uc 1 TRISD0 1 0 :1:0 
+`uc 1 TRISD1 1 0 :1:1 
+`uc 1 TRISD2 1 0 :1:2 
+`uc 1 TRISD3 1 0 :1:3 
+`uc 1 TRISD4 1 0 :1:4 
+`uc 1 TRISD5 1 0 :1:5 
+`uc 1 TRISD6 1 0 :1:6 
+`uc 1 TRISD7 1 0 :1:7 
+]
+"1517
+[u S47 . 1 `S38 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES47  1 e 1 @136 ]
+"1817
+[v _PR2 PR2 `VEuc  1 e 1 @146 ]
+"1831
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
+[s S83 . 1 `uc 1 BF 1 0 :1:0 
+`uc 1 UA 1 0 :1:1 
+`uc 1 R_nW 1 0 :1:2 
+`uc 1 S 1 0 :1:3 
+`uc 1 P 1 0 :1:4 
+`uc 1 D_nA 1 0 :1:5 
+`uc 1 CKE 1 0 :1:6 
+`uc 1 SMP 1 0 :1:7 
+]
+"1885
+[s S92 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D 1 0 :1:5 
+]
+[s S97 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 I2C_READ 1 0 :1:2 
+`uc 1 I2C_START 1 0 :1:3 
+`uc 1 I2C_STOP 1 0 :1:4 
+`uc 1 I2C_DATA 1 0 :1:5 
+]
+[s S103 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nW 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nA 1 0 :1:5 
+]
+[s S108 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 nWRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 nADDRESS 1 0 :1:5 
+]
+[s S113 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 R_W 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 D_A 1 0 :1:5 
+]
+[s S118 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 READ_WRITE 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 DATA_ADDRESS 1 0 :1:5 
+]
+[u S123 . 1 `S83 1 . 1 0 `S92 1 . 1 0 `S97 1 . 1 0 `S103 1 . 1 0 `S108 1 . 1 0 `S113 1 . 1 0 `S118 1 . 1 0 ]
+[v _SSPSTATbits SSPSTATbits `VES123  1 e 1 @148 ]
+"2230
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @159 ]
+"2570
+[v _GIE GIE `VEb  1 e 0 @95 ]
+"2630
+[v _PEIE PEIE `VEb  1 e 0 @94 ]
+"2660
+[v _RA1 RA1 `VEb  1 e 0 @41 ]
+"2663
+[v _RA2 RA2 `VEb  1 e 0 @42 ]
+"2666
+[v _RA3 RA3 `VEb  1 e 0 @43 ]
+"2873
+[v _T2CKPS0 T2CKPS0 `VEb  1 e 0 @144 ]
+"2876
+[v _T2CKPS1 T2CKPS1 `VEb  1 e 0 @145 ]
+"2897
+[v _TMR2IE TMR2IE `VEb  1 e 0 @1121 ]
+"2900
+[v _TMR2IF TMR2IF `VEb  1 e 0 @97 ]
+"2903
+[v _TMR2ON TMR2ON `VEb  1 e 0 @146 ]
+"2906
+[v _TOUTPS0 TOUTPS0 `VEb  1 e 0 @147 ]
+"2909
+[v _TOUTPS1 TOUTPS1 `VEb  1 e 0 @148 ]
+"2912
+[v _TOUTPS2 TOUTPS2 `VEb  1 e 0 @149 ]
+"23 E:\User\Hai\Cong viec Khoa\Giao trinh bai giang\Vi xu ly\Microchip\SPI\Master.X\Master.c
+[v _count count `ui  1 e 2 0 ]
+[v _count1 count1 `ui  1 e 2 0 ]
+"24
+[v _do_dienap do_dienap `uc  1 e 1 0 ]
+"25
+[v _Dong Dong `f  1 e 4 0 ]
+[v _Dienap Dienap `f  1 e 4 0 ]
+"26
+[v _adc_ok adc_ok `uc  1 e 1 0 ]
+"102
+[v _main main `(i  1 e 2 0 ]
+{
+"105
+[v main@Tx_data Tx_data `[10]uc  1 a 10 33 ]
+"104
+[v main@Rx_data Rx_data `[10]uc  1 a 10 23 ]
+"106
+[v main@Digit Digit `[3]uc  1 a 3 46 ]
+"107
+[v main@ADC_Value ADC_Value `ui  1 a 2 49 ]
+"103
+[v main@i_spi i_spi `uc  1 a 1 45 ]
+"167
+} 0
+"39
+[v _timer2_initialize timer2_initialize `(v  1 e 1 0 ]
+{
+"52
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+{
+"10
+[v ___lwmod@counter counter `uc  1 a 1 5 ]
+"5
+[v ___lwmod@divisor divisor `ui  1 p 2 0 ]
+[v ___lwmod@dividend dividend `ui  1 p 2 2 ]
+"25
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+{
+"10
+[v ___lwdiv@quotient quotient `ui  1 a 2 12 ]
+"11
+[v ___lwdiv@counter counter `uc  1 a 1 11 ]
+"5
+[v ___lwdiv@divisor divisor `ui  1 p 2 6 ]
+[v ___lwdiv@dividend dividend `ui  1 p 2 8 ]
+"30
+} 0
+"43 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\fltol.c
+[v ___fltol __fltol `(l  1 e 4 0 ]
+{
+"45
+[v ___fltol@exp1 exp1 `uc  1 a 1 10 ]
+[v ___fltol@sign1 sign1 `uc  1 a 1 9 ]
+"43
+[v ___fltol@f1 f1 `d  1 p 4 0 ]
+"70
+} 0
+"89 E:\User\Hai\Cong viec Khoa\Giao trinh bai giang\Vi xu ly\Microchip\SPI\Master.X\Master.c
+[v _SPI_Write SPI_Write `(v  1 e 1 0 ]
+{
+[v SPI_Write@incoming incoming `uc  1 a 1 wreg ]
+[v SPI_Write@incoming incoming `uc  1 a 1 wreg ]
+"92
+[v SPI_Write@incoming incoming `uc  1 a 1 0 ]
+"94
+} 0
+"96
+[v _SPI_Read SPI_Read `(uc  1 e 1 0 ]
+{
+"100
+} 0
+"79
+[v _SPI_Initialize_Master SPI_Initialize_Master `(v  1 e 1 0 ]
+{
+"87
+} 0
+"212 E:\User\Hai\Cong viec Khoa\Giao trinh bai giang\Vi xu ly\Microchip\SPI\Master.X\lcd_hd44780_pic16.c
+[v _LCDWriteString LCDWriteString `(v  1 e 1 0 ]
+{
+[v LCDWriteString@msg msg `*.24DCuc  1 a 1 wreg ]
+"248
+[v LCDWriteString@cc cc `c  1 a 1 13 ]
+"212
+[v LCDWriteString@msg msg `*.24DCuc  1 a 1 wreg ]
+[v LCDWriteString@msg msg `*.24DCuc  1 a 1 14 ]
+"266
+} 0
+"154
+[v _LCDInit LCDInit `(v  1 e 1 0 ]
+{
+[v LCDInit@style style `uc  1 a 1 wreg ]
+"206
+[v LCDInit@__i __i `uc  1 a 1 15 ]
+"154
+[v LCDInit@style style `uc  1 a 1 wreg ]
+"170
+[v LCDInit@style style `uc  1 a 1 14 ]
+"211
+} 0
+"313
+[v _LCDGotoXY LCDGotoXY `(v  1 e 1 0 ]
+{
+[v LCDGotoXY@x x `uc  1 a 1 wreg ]
+[v LCDGotoXY@x x `uc  1 a 1 wreg ]
+[v LCDGotoXY@y y `uc  1 p 1 12 ]
+"315
+[v LCDGotoXY@x x `uc  1 a 1 15 ]
+"356
+} 0
+"41
+[v _LCDByte LCDByte `(v  1 e 1 0 ]
+{
+[v LCDByte@c c `uc  1 a 1 wreg ]
+"51
+[v LCDByte@temp temp `uc  1 a 1 11 ]
+"50
+[v LCDByte@ln ln `uc  1 a 1 9 ]
+[v LCDByte@hn hn `uc  1 a 1 8 ]
+"41
+[v LCDByte@c c `uc  1 a 1 wreg ]
+[v LCDByte@isdata isdata `uc  1 p 1 5 ]
+"53
+[v LCDByte@c c `uc  1 a 1 10 ]
+"94
+} 0
+"96
+[v _LCDBusyLoop LCDBusyLoop `(v  1 e 1 0 ]
+{
+"100
+[v LCDBusyLoop@status status `uc  1 a 1 4 ]
+[v LCDBusyLoop@temp temp `uc  1 a 1 3 ]
+[v LCDBusyLoop@busy busy `uc  1 a 1 2 ]
+"152
+} 0
+"4 E:\User\Hai\Cong viec Khoa\Giao trinh bai giang\Vi xu ly\Microchip\SPI\Master.X\ADC0808.c
+[v _InitADC InitADC `(v  1 e 1 0 ]
+{
+"9
+} 0
+"53 E:\User\Hai\Cong viec Khoa\Giao trinh bai giang\Vi xu ly\Microchip\SPI\Master.X\Master.c
+[v _Count_Up Count_Up `II(v  1 e 1 0 ]
+{
+"77
+} 0
+"10 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\xxtofl.c
+[v ___xxtofl __xxtofl `(d  1 e 4 0 ]
+{
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+"13
+[v ___xxtofl@arg arg `ul  1 a 4 6 ]
+"12
+[v ___xxtofl@exp exp `uc  1 a 1 5 ]
+"10
+[v ___xxtofl@sign sign `uc  1 a 1 wreg ]
+[v ___xxtofl@val val `l  1 p 4 9 ]
+"15
+[v ___xxtofl@sign sign `uc  1 a 1 4 ]
+"44
+} 0
+"8 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+{
+[s S705 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+"13
+[s S710 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S713 . 4 `l 1 i 4 0 `d 1 f 4 0 `S705 1 fAsBytes 4 0 `S710 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S713  1 a 4 15 ]
+"12
+[v ___flmul@grs grs `ul  1 a 4 9 ]
+[s S782 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+"14
+[u S785 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S782 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S785  1 a 2 19 ]
+"10
+[v ___flmul@bexp bexp `uc  1 a 1 14 ]
+"11
+[v ___flmul@aexp aexp `uc  1 a 1 13 ]
+"9
+[v ___flmul@sign sign `uc  1 a 1 8 ]
+"8
+[v ___flmul@b b `d  1 p 4 0 ]
+[v ___flmul@a a `d  1 p 4 4 ]
+"205
+} 0
+"4 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+{
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
+"6
+[v __Umul8_16@word_mpld word_mpld `ui  1 a 2 6 ]
+"5
+[v __Umul8_16@product product `ui  1 a 2 4 ]
+"4
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 wreg ]
+[v __Umul8_16@multiplicand multiplicand `uc  1 p 1 0 ]
+[v __Umul8_16@multiplier multiplier `uc  1 a 1 8 ]
+"60
+} 0
+"8 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+{
+"21
+[v ___fldiv@grs grs `ul  1 a 4 7 ]
+"22
+[v ___fldiv@rem rem `ul  1 a 4 0 ]
+"20
+[v ___fldiv@new_exp new_exp `i  1 a 2 5 ]
+"19
+[v ___fldiv@aexp aexp `uc  1 a 1 12 ]
+"18
+[v ___fldiv@bexp bexp `uc  1 a 1 11 ]
+"16
+[v ___fldiv@sign sign `uc  1 a 1 4 ]
+"8
+[v ___fldiv@a a `d  1 p 4 0 ]
+[v ___fldiv@b b `d  1 p 4 4 ]
+"185
+} 0
+"13 E:\User\Hai\Cong viec Khoa\Giao trinh bai giang\Vi xu ly\Microchip\SPI\Master.X\ADC0808.c
+[v _ReadADC ReadADC `(ui  1 e 2 0 ]
+{
+[v ReadADC@Channel Channel `uc  1 a 1 wreg ]
+"15
+[v ReadADC@i i `ui  1 a 2 7 ]
+"16
+[v ReadADC@ADC_value ADC_value `ui  1 a 2 5 ]
+"13
+[v ReadADC@Channel Channel `uc  1 a 1 wreg ]
+"16
+[v ReadADC@Channel Channel `uc  1 a 1 4 ]
+"81
+} 0

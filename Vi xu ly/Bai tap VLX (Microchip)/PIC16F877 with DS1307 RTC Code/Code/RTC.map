@@ -1,0 +1,563 @@
+HI-TECH Software C Compiler 
+
+Linker command line:
+
+--edf=C:\Program Files (x86)\HI-TECH Software\PICC\9.83\dat\en_msgs.txt -cs \
+  -h+RTC.sym -z -Q16F877 -ol.obj -MRTC.map -E1 -ACONST=00h-0FFhx32 \
+  -ACODE=00h-07FFhx4 -ASTRCODE=00h-01FFFh -AENTRY=00h-0FFhx32 \
+  -ASTRING=00h-0FFhx32 -ABANK0=020h-06Fh -ABANK1=0A0h-0EFh \
+  -ABANK2=0110h-016Fh -ABANK3=0190h-01EFh \
+  -ARAM=020h-06Fh,0A0h-0EFh,0110h-016Fh,0190h-01EFh \
+  -AABS1=020h-07Fh,0A0h-0EFh,0110h-016Fh,0190h-01EFh -ACOMMON=070h-07Fh \
+  -ASFR0=00h-01Fh -ASFR1=080h-09Fh -ASFR2=0100h-010Fh -ASFR3=0180h-018Fh \
+  -preset_vec=00h,intentry,init,end_init -ppowerup=CODE -pfunctab=CODE \
+  -ACONFIG=02007h-02007h -pconfig=CONFIG -DCONFIG=2 -AIDLOC=02000h-02003h \
+  -pidloc=IDLOC -DIDLOC=2 -AEEDATA=00h-0FFh/02100h -peeprom_data=EEDATA \
+  -DEEDATA=2 -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 -k \
+  startup.obj RTC.obj 
+
+Object code version is 3.10
+
+Machine type is 16F877
+
+
+
+                Name                               Link     Load   Length Selector   Space Scale
+startup.obj     end_init                              0        0        3        0       0
+RTC.obj         config                             2007     2007        1     400E       0
+                text583                             3D8      3D8        C      7B0       0
+                text573                             429      429      3D7      852       0
+                maintext                            3E4      3E4       45      7C8       0
+                cstackBANK0                          25       25        3       20       1
+                cstackCOMMON                         70       70        E       70       1
+                bssBANK0                             20       20        5       20       1
+                cinit                               3CF      3CF        9      79E       0
+                strings                               3        3       2C        6       0
+
+TOTAL           Name                               Link     Load   Length     Space
+        CLASS   CONST          
+
+        CLASS   CODE           
+                end_init                              0        0        3         0
+                text583                             3D8      3D8        C         0
+                text573                             429      429      3D7         0
+                maintext                            3E4      3E4       45         0
+                cinit                               3CF      3CF        9         0
+
+        CLASS   STRCODE        
+
+        CLASS   ENTRY          
+
+        CLASS   STRING         
+                strings                               3        3       2C         0
+
+        CLASS   BANK0          
+                cstackBANK0                          25       25        3         1
+                bssBANK0                             20       20        5         1
+
+        CLASS   BANK1          
+
+        CLASS   BANK2          
+
+        CLASS   BANK3          
+
+        CLASS   RAM            
+
+        CLASS   ABS1           
+                abs_s1                               7E       7E        2         1
+
+        CLASS   COMMON         
+                cstackCOMMON                         70       70        E         1
+
+        CLASS   SFR0           
+
+        CLASS   SFR1           
+
+        CLASS   SFR2           
+
+        CLASS   SFR3           
+
+        CLASS   CONFIG         
+                config                             2007     2007        1         0
+
+        CLASS   IDLOC          
+
+        CLASS   EEDATA         
+
+
+
+SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class     Delta
+
+                reset_vec                      000000  000003  000003         0       0  CODE        2
+                strings                        000003  00002C  00002F         6       0  STRING      2
+                bssBANK0                       000020  000008  000028        20       1  BANK0       1
+                cstackCOMMON                   000070  00000E  00007E        70       1  COMMON      1
+                cinit                          0003CF  000009  0003D8       79E       0  CODE        2
+                text583                        0003D8  00000C  0003E4       7B0       0  CODE        2
+                maintext                       0003E4  000045  000429       7C8       0  CODE        2
+                text573                        000429  0003D7  000800       852       0  CODE        2
+                config                         002007  000001  002008      400E       0  CONFIG      2
+
+
+UNUSED ADDRESS RANGES
+
+        Name                Unused          Largest block    Delta
+        BANK0            0028-006F             48           1
+        BANK1            00A0-00EF             50           1
+        BANK2            0110-016F             60           1
+        BANK3            0190-01EF             60           1
+        CODE             002F-03CE            3A0           2
+                         0800-1FFF            800
+        CONST            002F-03CE            100           2
+                         0800-1FFF            100
+        EEDATA           2100-21FF            100           2
+        ENTRY            002F-03CE            100           2
+                         0800-1FFF            100
+        IDLOC            2000-2003              4           2
+        RAM              0028-006F             48           1
+                         00A0-00EF             50
+                         0110-016F             60
+                         0190-01EF             60
+        SFR0             0000-001F             20           1
+        SFR1             0080-009F             20           1
+        SFR2             0100-010F             10           1
+        SFR3             0180-018F             10           1
+        STRCODE          002F-03CE            3A0           2
+                         0800-1FFF           1800
+        STRING           002F-03CE            100           2
+                         0800-1FFF            100
+
+                                  Symbol Table
+
+??_ClearLCDScreen                    cstackCOMMON 0073
+??_DisplayDateOnLCD                  cstackCOMMON 0075
+??_DisplayTimeToLCD                  cstackCOMMON 0075
+??_Get_DS1307_RTC_Date               cstackCOMMON 0078
+??_Get_DS1307_RTC_Time               cstackCOMMON 0078
+??_I2C_ReStart                       cstackCOMMON 0070
+??_I2C_Read_Byte                     cstackCOMMON 0070
+??_I2C_Send_ACK                      cstackCOMMON 0070
+??_I2C_Send_NACK                     cstackCOMMON 0070
+??_I2C_Start                         cstackCOMMON 0070
+??_I2C_Stop                          cstackCOMMON 0070
+??_I2C_Write_Byte                    cstackCOMMON 0070
+??_InitI2C                           cstackCOMMON 0070
+??_InitLCD                           cstackCOMMON 0073
+??_Read_Bytes_From_DS1307_RTC        cstackCOMMON 0074
+??_Set_DS1307_RTC_Date               cstackCOMMON 007B
+??_Set_DS1307_RTC_Time               cstackCOMMON 007B
+??_ToggleEpinOfLCD                   cstackCOMMON 0070
+??_WriteCommandToLCD                 cstackCOMMON 0072
+??_WriteDataToLCD                    cstackCOMMON 0072
+??_WriteStringToLCD                  cstackCOMMON 0073
+??_Write_Bytes_To_DS1307_RTC         cstackCOMMON 0073
+??___bmul                            cstackCOMMON 0071
+??___lbdiv                           cstackCOMMON 0071
+??___lbmod                           cstackCOMMON 0071
+??_main                              cstackBANK0  0025
+?_ClearLCDScreen                     cstackCOMMON 0070
+?_DisplayDateOnLCD                   cstackCOMMON 0070
+?_DisplayTimeToLCD                   cstackCOMMON 0070
+?_Get_DS1307_RTC_Date                cstackCOMMON 0070
+?_Get_DS1307_RTC_Time                cstackCOMMON 0070
+?_I2C_ReStart                        cstackCOMMON 0070
+?_I2C_Read_Byte                      cstackCOMMON 0070
+?_I2C_Send_ACK                       cstackCOMMON 0070
+?_I2C_Send_NACK                      cstackCOMMON 0070
+?_I2C_Start                          cstackCOMMON 0070
+?_I2C_Stop                           cstackCOMMON 0070
+?_I2C_Write_Byte                     cstackCOMMON 0070
+?_InitI2C                            cstackCOMMON 0070
+?_InitLCD                            cstackCOMMON 0070
+?_Read_Bytes_From_DS1307_RTC         cstackCOMMON 0071
+?_Set_DS1307_RTC_Date                cstackCOMMON 0078
+?_Set_DS1307_RTC_Time                cstackCOMMON 0078
+?_ToggleEpinOfLCD                    cstackCOMMON 0070
+?_WriteCommandToLCD                  cstackCOMMON 0070
+?_WriteDataToLCD                     cstackCOMMON 0070
+?_WriteStringToLCD                   cstackCOMMON 0070
+?_Write_Bytes_To_DS1307_RTC          cstackCOMMON 0071
+?___bmul                             cstackCOMMON 0070
+?___lbdiv                            cstackCOMMON 0070
+?___lbmod                            cstackCOMMON 0070
+?_main                               cstackCOMMON 0070
+DisplayDateOnLCD@pDateArray          cstackCOMMON 0075
+DisplayTimeToLCD@pTimeArray          cstackCOMMON 0075
+I2C_Write_Byte@Byte                  cstackCOMMON 0070
+Read_Bytes_From_DS1307_RTC@Address   cstackCOMMON 0075
+Read_Bytes_From_DS1307_RTC@NoOfBytes cstackCOMMON 0072
+Read_Bytes_From_DS1307_RTC@i         cstackCOMMON 0076
+Read_Bytes_From_DS1307_RTC@pData     cstackCOMMON 0071
+Set_DS1307_RTC_Date@Date             cstackCOMMON 007D
+Set_DS1307_RTC_Date@Day              cstackCOMMON 007A
+Set_DS1307_RTC_Date@Month            cstackCOMMON 0078
+Set_DS1307_RTC_Date@Year             cstackCOMMON 0079
+Set_DS1307_RTC_Time@Hours            cstackCOMMON 0078
+Set_DS1307_RTC_Time@Mins             cstackCOMMON 0079
+Set_DS1307_RTC_Time@Mode             cstackCOMMON 007D
+Set_DS1307_RTC_Time@Secs             cstackCOMMON 007A
+WriteCommandToLCD@Command            cstackCOMMON 0072
+WriteDataToLCD@LCDChar               cstackCOMMON 0072
+WriteStringToLCD@s                   cstackCOMMON 0073
+Write_Bytes_To_DS1307_RTC@Address    cstackCOMMON 0075
+Write_Bytes_To_DS1307_RTC@NoOfBytes  cstackCOMMON 0072
+Write_Bytes_To_DS1307_RTC@i          cstackCOMMON 0076
+Write_Bytes_To_DS1307_RTC@pData      cstackCOMMON 0071
+_ACKDT                               (abs)        048D
+_ACKEN                               (abs)        048C
+_ACKSTAT                             (abs)        048E
+_ClearLCDScreen                      text573      07B6
+_DisplayDateOnLCD                    text573      053F
+_DisplayTimeToLCD                    text573      05C3
+_Get_DS1307_RTC_Date                 text573      0429
+_Get_DS1307_RTC_Time                 text573      0454
+_I2C_ReStart                         text573      079F
+_I2C_Read_Byte                       text573      0790
+_I2C_Send_ACK                        text573      07AD
+_I2C_Send_NACK                       text573      07A5
+_I2C_Start                           text573      0788
+_I2C_Stop                            text573      0798
+_I2C_Write_Byte                      text573      077A
+_InitI2C                             text583      03D8
+_InitLCD                             text573      0690
+_PEN                                 (abs)        048A
+_PORTB                               (abs)        0006
+_RB0                                 (abs)        0030
+_RB1                                 (abs)        0031
+_RB4                                 (abs)        0034
+_RB5                                 (abs)        0035
+_RB6                                 (abs)        0036
+_RB7                                 (abs)        0037
+_RCEN                                (abs)        048B
+_RSEN                                (abs)        0489
+_Read_Bytes_From_DS1307_RTC          text573      073F
+_SEN                                 (abs)        0488
+_SSPADD                              (abs)        0093
+_SSPBUF                              (abs)        0013
+_SSPCON                              (abs)        0014
+_SSPIF                               (abs)        0063
+_SSPSTAT                             (abs)        0094
+_Set_DS1307_RTC_Date                 text573      04F0
+_Set_DS1307_RTC_Time                 text573      04A5
+_TRISB0                              (abs)        0430
+_TRISB1                              (abs)        0431
+_TRISB4                              (abs)        0434
+_TRISB5                              (abs)        0435
+_TRISB6                              (abs)        0436
+_TRISB7                              (abs)        0437
+_TRISC3                              (abs)        043B
+_TRISC4                              (abs)        043C
+_Temp                                bssBANK0     0020
+_ToggleEpinOfLCD                     text573      06EE
+_WriteCommandToLCD                   text573      0704
+_WriteDataToLCD                      text573      0630
+_WriteStringToLCD                    text573      0679
+_Write_Bytes_To_DS1307_RTC           text573      0716
+__Habs1                              abs1         0000
+__Hbank0                             bank0        0000
+__Hbank1                             bank1        0000
+__Hbank2                             bank2        0000
+__Hbank3                             bank3        0000
+__HbssBANK0                          bssBANK0     0000
+__Hcinit                             cinit        0000
+__Hclrtext                           clrtext      0000
+__Hcode                              code         0000
+__Hcommon                            common       0000
+__Hconfig                            config       2008
+__HcstackBANK0                       cstackBANK0  0000
+__HcstackCOMMON                      cstackCOMMON 0000
+__Heeprom_data                       eeprom_data  0000
+__Hend_init                          end_init     0003
+__Hfunctab                           functab      0000
+__Hidloc                             idloc        0000
+__Hinit                              init         0000
+__Hintentry                          intentry     0000
+__Hmaintext                          maintext     0000
+__Hpa_nodes                          pa_nodes     0000
+__Hpowerup                           powerup      0000
+__Hram                               ram          0000
+__Hreset_vec                         reset_vec    0000
+__Hsfr0                              sfr0         0000
+__Hsfr1                              sfr1         0000
+__Hsfr2                              sfr2         0000
+__Hsfr3                              sfr3         0000
+__Hstrings                           strings      0000
+__Htext                              text         0000
+__Labs1                              abs1         0000
+__Lbank0                             bank0        0000
+__Lbank1                             bank1        0000
+__Lbank2                             bank2        0000
+__Lbank3                             bank3        0000
+__LbssBANK0                          bssBANK0     0000
+__Lcinit                             cinit        0000
+__Lclrtext                           clrtext      0000
+__Lcode                              code         0000
+__Lcommon                            common       0000
+__Lconfig                            config       2007
+__LcstackBANK0                       cstackBANK0  0000
+__LcstackCOMMON                      cstackCOMMON 0000
+__Leeprom_data                       eeprom_data  0000
+__Lend_init                          end_init     0000
+__Lfunctab                           functab      0000
+__Lidloc                             idloc        0000
+__Linit                              init         0000
+__Lintentry                          intentry     0000
+__Lmaintext                          maintext     0000
+__Lpa_nodes                          pa_nodes     0000
+__Lpowerup                           powerup      0000
+__Lram                               ram          0000
+__Lreset_vec                         reset_vec    0000
+__Lsfr0                              sfr0         0000
+__Lsfr1                              sfr1         0000
+__Lsfr2                              sfr2         0000
+__Lsfr3                              sfr3         0000
+__Lstrings                           strings      0000
+__Ltext                              text         0000
+__S0                                 (abs)        2008
+__S1                                 (abs)        007E
+__S2                                 (abs)        0000
+___bmul                              text573      0497
+___bmul@multiplicand                 cstackCOMMON 0070
+___bmul@multiplier                   cstackCOMMON 0072
+___bmul@product                      cstackCOMMON 0071
+___lbdiv                             text573      0642
+___lbdiv@counter                     cstackCOMMON 0072
+___lbdiv@dividend                    cstackCOMMON 0071
+___lbdiv@divisor                     cstackCOMMON 0070
+___lbdiv@quotient                    cstackCOMMON 0073
+___lbmod                             text573      065D
+___lbmod@counter                     cstackCOMMON 0073
+___lbmod@dividend                    cstackCOMMON 0072
+___lbmod@divisor                     cstackCOMMON 0070
+___lbmod@rem                         cstackCOMMON 0074
+__end_of_ClearLCDScreen              text573      07C4
+__end_of_DisplayDateOnLCD            text573      05C3
+__end_of_DisplayTimeToLCD            text573      0630
+__end_of_Get_DS1307_RTC_Date         text573      0454
+__end_of_Get_DS1307_RTC_Time         text573      0497
+__end_of_I2C_ReStart                 text573      07A5
+__end_of_I2C_Read_Byte               text573      0798
+__end_of_I2C_Send_ACK                text573      07B6
+__end_of_I2C_Send_NACK               text573      07AD
+__end_of_I2C_Start                   text573      0790
+__end_of_I2C_Stop                    text573      079F
+__end_of_I2C_Write_Byte              text573      0788
+__end_of_InitI2C                     text583      03E4
+__end_of_InitLCD                     text573      06EE
+__end_of_Read_Bytes_From_DS1307_RTC  text573      077A
+__end_of_Set_DS1307_RTC_Date         text573      053F
+__end_of_Set_DS1307_RTC_Time         text573      04F0
+__end_of_ToggleEpinOfLCD             text573      0704
+__end_of_WriteCommandToLCD           text573      0716
+__end_of_WriteDataToLCD              text573      0642
+__end_of_WriteStringToLCD            text573      0690
+__end_of_Write_Bytes_To_DS1307_RTC   text573      073F
+__end_of___bmul                      text573      04A5
+__end_of___lbdiv                     text573      065D
+__end_of___lbmod                     text573      0679
+__end_of_main                        maintext     0429
+__pbssBANK0                          bssBANK0     0020
+__pcstackBANK0                       cstackBANK0  0025
+__pcstackCOMMON                      cstackCOMMON 0070
+__pmaintext                          maintext     03E4
+__pstrings                           strings      0003
+__ptext565                           text565      0000
+__ptext566                           text573      053F
+__ptext567                           text573      05C3
+__ptext568                           text573      07B6
+__ptext569                           text573      0679
+__ptext570                           text573      0690
+__ptext571                           text573      0630
+__ptext572                           text573      0704
+__ptext573                           text573      0429
+__ptext574                           text573      04F0
+__ptext575                           text573      0454
+__ptext576                           text573      04A5
+__ptext577                           text573      06EE
+__ptext578                           text573      073F
+__ptext579                           text573      0716
+__ptext580                           text573      065D
+__ptext581                           text573      0642
+__ptext582                           text573      0497
+__ptext583                           text583      03D8
+__ptext584                           text573      07AD
+__ptext585                           text573      07A5
+__ptext586                           text573      0790
+__ptext587                           text573      079F
+__ptext588                           text573      0798
+__ptext589                           text573      077A
+__ptext590                           text573      0788
+__ptext591                           text591      0000
+__size_of_ClearLCDScreen             (abs)        0000
+__size_of_DisplayDateOnLCD           (abs)        0000
+__size_of_DisplayTimeToLCD           (abs)        0000
+__size_of_Get_DS1307_RTC_Date        (abs)        0000
+__size_of_Get_DS1307_RTC_Time        (abs)        0000
+__size_of_I2C_ReStart                (abs)        0000
+__size_of_I2C_Read_Byte              (abs)        0000
+__size_of_I2C_Send_ACK               (abs)        0000
+__size_of_I2C_Send_NACK              (abs)        0000
+__size_of_I2C_Start                  (abs)        0000
+__size_of_I2C_Stop                   (abs)        0000
+__size_of_I2C_Write_Byte             (abs)        0000
+__size_of_InitI2C                    (abs)        0000
+__size_of_InitLCD                    (abs)        0000
+__size_of_Read_Bytes_From_DS1307_RTC (abs)        0000
+__size_of_Set_DS1307_RTC_Date        (abs)        0000
+__size_of_Set_DS1307_RTC_Time        (abs)        0000
+__size_of_ToggleEpinOfLCD            (abs)        0000
+__size_of_WriteCommandToLCD          (abs)        0000
+__size_of_WriteDataToLCD             (abs)        0000
+__size_of_WriteStringToLCD           (abs)        0000
+__size_of_Write_Bytes_To_DS1307_RTC  (abs)        0000
+__size_of___bmul                     (abs)        0000
+__size_of___lbdiv                    (abs)        0000
+__size_of___lbmod                    (abs)        0000
+__size_of_main                       (abs)        0000
+_exit                                init         0000
+_main                                maintext     03E4
+_pRTCArray                           bssBANK0     0021
+btemp                                (abs)        007E
+end_of_initialization                cinit        03D4
+intlevel0                            functab      0000
+intlevel1                            functab      0000
+intlevel2                            functab      0000
+intlevel3                            functab      0000
+intlevel4                            functab      0000
+intlevel5                            functab      0000
+l1348                                                 
+l1354                                                 
+l1360                                                 
+l1366                                                 
+l1372                                                 
+l1378                                                 
+l1390                                                 
+l2033                                                 
+l2036                                                 
+l2039                                                 
+l2042                                                 
+l2048                                                 
+l2051                                                 
+l3374                                                 
+l3410                                                 
+l3416                                                 
+l4255                                                 
+l4257                                                 
+l4647                                                 
+l4649                                                 
+l4659                                                 
+l4661                                                 
+l4663                                                 
+l4667                                                 
+l4669                                                 
+l4671                                                 
+l4679                                                 
+l4681                                                 
+l4687                                                 
+l4689                                                 
+l4691                                                 
+l4697                                                 
+l4701                                                 
+l4705                                                 
+l4711                                                 
+l4713                                                 
+l4717                                                 
+l4719                                                 
+l4725                                                 
+l4733                                                 
+l4737                                                 
+l4741                                                 
+l4751                                                 
+l4755                                                 
+l4757                                                 
+l4759                                                 
+l4761                                                 
+l4765                                                 
+l4767                                                 
+l4775                                                 
+l4777                                                 
+l4779                                                 
+l4789                                                 
+l4791                                                 
+l4793                                                 
+l4795                                                 
+l4797                                                 
+l4799                                                 
+l4809                                                 
+l4813                                                 
+l4815                                                 
+l4821                                                 
+l4823                                                 
+l4825                                                 
+l4827                                                 
+l4829                                                 
+l4831                                                 
+l4833                                                 
+l4835                                                 
+l4837                                                 
+l4839                                                 
+l4843                                                 
+l4845                                                 
+l4847                                                 
+l4849                                                 
+l4851                                                 
+l4853                                                 
+l4855                                                 
+l4857                                                 
+l4859                                                 
+l4861                                                 
+l4863                                                 
+l4865                                                 
+l4867                                                 
+l4869                                                 
+l4871                                                 
+l4873                                                 
+l4875                                                 
+l4877                                                 
+l4879                                                 
+l4881                                                 
+l4883                                                 
+l4885                                                 
+l4887                                                 
+l4889                                                 
+l4891                                                 
+l4893                                                 
+l4895                                                 
+l4897                                                 
+l4899                                                 
+l4901                                                 
+l4903                                                 
+l4905                                                 
+l4907                                                 
+l4911                                                 
+l4915                                                 
+l4917                                                 
+l4919                                                 
+l4921                                                 
+l4923                                                 
+l4925                                                 
+l4927                                                 
+l4929                                                 
+l4931                                                 
+l4943                                                 
+l4945                                                 
+l4947                                                 
+l4949                                                 
+l4951                                                 
+l4953                                                 
+l4955                                                 
+l4977                                                 
+l4979                                                 
+l4981                                                 
+l4985                                                 
+l4987                                                 
+l677                                                  
+l686                                                  
+l694                                                  
+l701                                                  
+l704                                                  
+l707                                                  
+reset_vec                            reset_vec    0000
+start                                init         0000
+start_initialization                 cinit        03CF
+wtemp0                               (abs)        007E

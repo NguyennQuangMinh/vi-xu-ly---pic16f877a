@@ -1,0 +1,13 @@
+1. Phần mềm hỗ trợ xây dựng chương trình C  (miễn phí)
+MPLABX IDE :  https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide
+
+2. Phần mềm biên dịch cho vi xử lý 8bit của Microchip: (miễn phí)
+XC8: https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers#tabs
+
+3. Phần mềm mô phỏng phần cứng và phần mềm Proteus version từ 8.5 trở lên. (không có bản miễn phí).
+  Ví dụ như http://dammedientu.vn/download-proteus-8-8-full-huong-dan/
+
+4.  Cài cặt và tìm hiểu hướng dẫn sử dụng trên mạng
+
+5. Tìm hiểu các hướng dẫn lập trình cho vi điều khiển PIC16F877A trên web.
+

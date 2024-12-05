@@ -1,0 +1,3271 @@
+
+
+HI-TECH Software PIC PRO Macro Assembler V9.83 build 10920 
+                                                                                               Thu Jan 31 17:42:40 2013
+
+HI-TECH Software Omniscient Code Generator (PRO mode) build 10920
+     1                           	processor	16F877
+     2                           	opt	pw 120
+     3                           	opt	pm
+     4                           	psect	config,global,class=CONFIG,delta=2
+     5                           	psect	text565,local,class=CODE,delta=2
+     6                           	psect	strings,global,class=STRING,delta=2
+     7                           	psect	cinit,global,class=CODE,delta=2
+     8                           	psect	bssBANK0,global,class=BANK0,space=1,delta=1
+     9                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1
+    10                           	psect	cstackBANK0,global,class=BANK0,space=1,delta=1
+    11                           	psect	maintext,global,class=CODE,delta=2
+    12                           	psect	text573,local,class=CODE,delta=2
+    13                           	psect	text583,local,class=CODE,delta=2
+    14                           	psect	text591,local,class=CODE,delta=2
+    15                           	psect	pa_nodes,global,class=CODE,delta=2
+    16                           	dabs	1,0x7E,2
+    17  000A                     	;#
+    18                           
+    19                           	psect	config
+    20  2007  FF72               	dw	65394	;#
+    21                           
+    22                           	psect	text565
+    23  0000                     __ptext565:	
+    24  0006                     _PORTB	set	6
+    25  0013                     _SSPBUF	set	19
+    26  0014                     _SSPCON	set	20
+    27  0030                     _RB0	set	48
+    28  0031                     _RB1	set	49
+    29  0034                     _RB4	set	52
+    30  0035                     _RB5	set	53
+    31  0036                     _RB6	set	54
+    32  0037                     _RB7	set	55
+    33  0063                     _SSPIF	set	99
+    34  0093                     _SSPADD	set	147
+    35  0094                     _SSPSTAT	set	148
+    36  048D                     _ACKDT	set	1165
+    37  048C                     _ACKEN	set	1164
+    38  048E                     _ACKSTAT	set	1166
+    39  048A                     _PEN	set	1162
+    40  048B                     _RCEN	set	1163
+    41  0489                     _RSEN	set	1161
+    42  0488                     _SEN	set	1160
+    43  0430                     _TRISB0	set	1072
+    44  0431                     _TRISB1	set	1073
+    45  0434                     _TRISB4	set	1076
+    46  0435                     _TRISB5	set	1077
+    47  0436                     _TRISB6	set	1078
+    48  0437                     _TRISB7	set	1079
+    49  043B                     _TRISC3	set	1083
+    50  043C                     _TRISC4	set	1084
+    51                           
+    52                           	psect	strings
+    53  0003                     __pstrings:	
+    54  0003                     stringtab:	
+    55                           ;	global	stringdir,stringtab,__stringbase
+    56                           
+    57  0003                     stringcode:	
+    58                           ;	String table - string pointers are 1 byte each
+    59                           
+    60  0003                     stringdir:	
+    61  0003  3000               	movlw	high stringdir
+    62  0004  008A               	movwf	10
+    63  0005  0804               	movf	4,w
+    64  0006  0A84               	incf	4,f
+    65  0007  0782               	addwf	2,f
+    66  0008                     __stringbase:	
+    67  0008  3400               	retlw	0
+    68  0009                     STR_10:	
+    69  0009  343F               	retlw	63	;'?'
+    70  000A  343F               	retlw	63	;'?'
+    71  000B  343F               	retlw	63	;'?'
+    72  000C  3400               	retlw	0
+    73  000D                     STR_5:	
+    74  000D  3457               	retlw	87	;'W'
+    75  000E  3445               	retlw	69	;'E'
+    76  000F  3444               	retlw	68	;'D'
+    77  0010  3400               	retlw	0
+    78  0011                     STR_4:	
+    79  0011  3454               	retlw	84	;'T'
+    80  0012  3455               	retlw	85	;'U'
+    81  0013  3445               	retlw	69	;'E'
+    82  0014  3400               	retlw	0
+    83  0015                     STR_7:	
+    84  0015  3446               	retlw	70	;'F'
+    85  0016  3452               	retlw	82	;'R'
+    86  0017  3449               	retlw	73	;'I'
+    87  0018  3400               	retlw	0
+    88  0019                     STR_3:	
+    89  0019  344D               	retlw	77	;'M'
+    90  001A  344F               	retlw	79	;'O'
+    91  001B  344E               	retlw	78	;'N'
+    92  001C  3400               	retlw	0
+    93  001D                     STR_9:	
+    94  001D  3453               	retlw	83	;'S'
+    95  001E  3455               	retlw	85	;'U'
+    96  001F  344E               	retlw	78	;'N'
+    97  0020  3400               	retlw	0
+    98  0021                     STR_8:	
+    99  0021  3453               	retlw	83	;'S'
+   100  0022  3441               	retlw	65	;'A'
+   101  0023  3454               	retlw	84	;'T'
+   102  0024  3400               	retlw	0
+   103  0025                     STR_6:	
+   104  0025  3454               	retlw	84	;'T'
+   105  0026  3448               	retlw	72	;'H'
+   106  0027  3455               	retlw	85	;'U'
+   107  0028  3400               	retlw	0
+   108  0029                     STR_1:	
+   109  0029  3441               	retlw	65	;'A'
+   110  002A  344D               	retlw	77	;'M'
+   111  002B  3400               	retlw	0
+   112  002C                     STR_2:	
+   113  002C  3450               	retlw	80	;'P'
+   114  002D  344D               	retlw	77	;'M'
+   115  002E  3400               	retlw	0
+   116                           
+   117                           	psect	cinit
+   118  03CF                     start_initialization:	
+   119                           
+   120                           ; Clear objects allocated to BANK0
+   121  03CF  01A0               	clrf	__pbssBANK0& (0+127)
+   122  03D0  01A1               	clrf	(__pbssBANK0+1)& (0+127)
+   123  03D1  01A2               	clrf	(__pbssBANK0+2)& (0+127)
+   124  03D2  01A3               	clrf	(__pbssBANK0+3)& (0+127)
+   125  03D3  01A4               	clrf	(__pbssBANK0+4)& (0+127)
+   126  03D4                     end_of_initialization:	
+   127                           ;End of C runtime variable initialization code
+   128                           
+   129  03D4  0183               	clrf	3
+   130  03D5  120A  118A  2BE4   	ljmp	_main	;jump to C main() function
+   131                           
+   132                           	psect	bssBANK0
+   133  0020                     __pbssBANK0:	
+   134  0020                     _Temp:	
+   135  0020                     	ds	1
+   136  0021                     _pRTCArray:	
+   137  0021                     	ds	4
+   138                           
+   139                           	psect	cstackCOMMON
+   140  0070                     __pcstackCOMMON:	
+   141  0070                     ?_I2C_Start:	
+   142  0070                     ??_I2C_Start:	
+   143                           ; 0 bytes @ 0x0
+   144                           
+   145  0070                     ?_I2C_Write_Byte:	
+   146                           ; 0 bytes @ 0x0
+   147                           
+   148  0070                     ??_I2C_Write_Byte:	
+   149                           ; 1 bit 
+   150                           
+   151  0070                     ?_I2C_Stop:	
+   152                           ; 0 bytes @ 0x0
+   153                           
+   154  0070                     ??_I2C_Stop:	
+   155                           ; 0 bytes @ 0x0
+   156                           
+   157  0070                     ?_I2C_ReStart:	
+   158                           ; 0 bytes @ 0x0
+   159                           
+   160  0070                     ??_I2C_ReStart:	
+   161                           ; 0 bytes @ 0x0
+   162                           
+   163  0070                     ??_I2C_Read_Byte:	
+   164                           ; 0 bytes @ 0x0
+   165                           
+   166  0070                     ?_I2C_Send_NACK:	
+   167                           ; 0 bytes @ 0x0
+   168                           
+   169  0070                     ??_I2C_Send_NACK:	
+   170                           ; 0 bytes @ 0x0
+   171                           
+   172  0070                     ?_I2C_Send_ACK:	
+   173                           ; 0 bytes @ 0x0
+   174                           
+   175  0070                     ??_I2C_Send_ACK:	
+   176                           ; 0 bytes @ 0x0
+   177                           
+   178  0070                     ?_InitI2C:	
+   179                           ; 0 bytes @ 0x0
+   180                           
+   181  0070                     ??_InitI2C:	
+   182                           ; 0 bytes @ 0x0
+   183                           
+   184  0070                     ?_ToggleEpinOfLCD:	
+   185                           ; 0 bytes @ 0x0
+   186                           
+   187  0070                     ??_ToggleEpinOfLCD:	
+   188                           ; 0 bytes @ 0x0
+   189                           
+   190  0070                     ?_WriteCommandToLCD:	
+   191                           ; 0 bytes @ 0x0
+   192                           
+   193  0070                     ?_WriteDataToLCD:	
+   194                           ; 0 bytes @ 0x0
+   195                           
+   196  0070                     ?_InitLCD:	
+   197                           ; 0 bytes @ 0x0
+   198                           
+   199  0070                     ?_WriteStringToLCD:	
+   200                           ; 0 bytes @ 0x0
+   201                           
+   202  0070                     ?_ClearLCDScreen:	
+   203                           ; 0 bytes @ 0x0
+   204                           
+   205  0070                     ?_DisplayTimeToLCD:	
+   206                           ; 0 bytes @ 0x0
+   207                           
+   208  0070                     ?_DisplayDateOnLCD:	
+   209                           ; 0 bytes @ 0x0
+   210                           
+   211  0070                     ?_main:	
+   212                           ; 0 bytes @ 0x0
+   213                           
+   214  0070                     ?_I2C_Read_Byte:	
+   215                           ; 0 bytes @ 0x0
+   216                           
+   217  0070                     ?_Get_DS1307_RTC_Time:	
+   218                           ; 1 bytes @ 0x0
+   219                           
+   220  0070                     ?_Get_DS1307_RTC_Date:	
+   221                           ; 1 bytes @ 0x0
+   222                           
+   223  0070                     ?___bmul:	
+   224                           ; 1 bytes @ 0x0
+   225                           
+   226  0070                     ?___lbdiv:	
+   227                           ; 1 bytes @ 0x0
+   228                           
+   229  0070                     ?___lbmod:	
+   230                           ; 1 bytes @ 0x0
+   231                           
+   232  0070                     I2C_Write_Byte@Byte:	
+   233                           ; 1 bytes @ 0x0
+   234                           
+   235  0070                     ___bmul@multiplicand:	
+   236                           ; 1 bytes @ 0x0
+   237                           
+   238  0070                     ___lbdiv@divisor:	
+   239                           ; 1 bytes @ 0x0
+   240                           
+   241  0070                     ___lbmod@divisor:	
+   242                           ; 1 bytes @ 0x0
+   243                           
+   244                           
+   245                           ; 1 bytes @ 0x0
+   246  0070                     	ds	1
+   247  0071                     ?_Write_Bytes_To_DS1307_RTC:	
+   248  0071                     ?_Read_Bytes_From_DS1307_RTC:	
+   249                           ; 0 bytes @ 0x1
+   250                           
+   251  0071                     ??___bmul:	
+   252                           ; 0 bytes @ 0x1
+   253                           
+   254  0071                     ??___lbdiv:	
+   255                           ; 0 bytes @ 0x1
+   256                           
+   257  0071                     ??___lbmod:	
+   258                           ; 0 bytes @ 0x1
+   259                           
+   260  0071                     Write_Bytes_To_DS1307_RTC@pData:	
+   261                           ; 0 bytes @ 0x1
+   262                           
+   263  0071                     Read_Bytes_From_DS1307_RTC@pData:	
+   264                           ; 1 bytes @ 0x1
+   265                           
+   266  0071                     ___bmul@product:	
+   267                           ; 1 bytes @ 0x1
+   268                           
+   269  0071                     ___lbdiv@dividend:	
+   270                           ; 1 bytes @ 0x1
+   271                           
+   272                           
+   273                           ; 1 bytes @ 0x1
+   274  0071                     	ds	1
+   275  0072                     ??_WriteCommandToLCD:	
+   276  0072                     ??_WriteDataToLCD:	
+   277                           ; 0 bytes @ 0x2
+   278                           
+   279  0072                     Write_Bytes_To_DS1307_RTC@NoOfBytes:	
+   280                           ; 0 bytes @ 0x2
+   281                           
+   282  0072                     WriteCommandToLCD@Command:	
+   283                           ; 1 bytes @ 0x2
+   284                           
+   285  0072                     WriteDataToLCD@LCDChar:	
+   286                           ; 1 bytes @ 0x2
+   287                           
+   288  0072                     ___bmul@multiplier:	
+   289                           ; 1 bytes @ 0x2
+   290                           
+   291  0072                     ___lbdiv@counter:	
+   292                           ; 1 bytes @ 0x2
+   293                           
+   294  0072                     ___lbmod@dividend:	
+   295                           ; 1 bytes @ 0x2
+   296                           
+   297  0072                     Read_Bytes_From_DS1307_RTC@NoOfBytes:	
+   298                           ; 1 bytes @ 0x2
+   299                           
+   300                           
+   301                           ; 2 bytes @ 0x2
+   302  0072                     	ds	1
+   303  0073                     ??_Write_Bytes_To_DS1307_RTC:	
+   304  0073                     ??_InitLCD:	
+   305                           ; 0 bytes @ 0x3
+   306                           
+   307  0073                     ??_WriteStringToLCD:	
+   308                           ; 0 bytes @ 0x3
+   309                           
+   310  0073                     ??_ClearLCDScreen:	
+   311                           ; 0 bytes @ 0x3
+   312                           
+   313  0073                     WriteStringToLCD@s:	
+   314                           ; 0 bytes @ 0x3
+   315                           
+   316  0073                     ___lbdiv@quotient:	
+   317                           ; 1 bytes @ 0x3
+   318                           
+   319  0073                     ___lbmod@counter:	
+   320                           ; 1 bytes @ 0x3
+   321                           
+   322                           
+   323                           ; 1 bytes @ 0x3
+   324  0073                     	ds	1
+   325  0074                     ??_Read_Bytes_From_DS1307_RTC:	
+   326  0074                     ___lbmod@rem:	
+   327                           ; 0 bytes @ 0x4
+   328                           
+   329                           
+   330                           ; 1 bytes @ 0x4
+   331  0074                     	ds	1
+   332  0075                     ??_DisplayTimeToLCD:	
+   333  0075                     ??_DisplayDateOnLCD:	
+   334                           ; 0 bytes @ 0x5
+   335                           
+   336  0075                     Write_Bytes_To_DS1307_RTC@Address:	
+   337                           ; 0 bytes @ 0x5
+   338                           
+   339  0075                     Read_Bytes_From_DS1307_RTC@Address:	
+   340                           ; 1 bytes @ 0x5
+   341                           
+   342  0075                     DisplayTimeToLCD@pTimeArray:	
+   343                           ; 1 bytes @ 0x5
+   344                           
+   345  0075                     DisplayDateOnLCD@pDateArray:	
+   346                           ; 1 bytes @ 0x5
+   347                           
+   348                           
+   349                           ; 1 bytes @ 0x5
+   350  0075                     	ds	1
+   351  0076                     Write_Bytes_To_DS1307_RTC@i:	
+   352  0076                     Read_Bytes_From_DS1307_RTC@i:	
+   353                           ; 2 bytes @ 0x6
+   354                           
+   355                           
+   356                           ; 2 bytes @ 0x6
+   357  0076                     	ds	2
+   358  0078                     ?_Set_DS1307_RTC_Time:	
+   359  0078                     ??_Get_DS1307_RTC_Time:	
+   360                           ; 0 bytes @ 0x8
+   361                           
+   362  0078                     ?_Set_DS1307_RTC_Date:	
+   363                           ; 0 bytes @ 0x8
+   364                           
+   365  0078                     ??_Get_DS1307_RTC_Date:	
+   366                           ; 0 bytes @ 0x8
+   367                           
+   368  0078                     Set_DS1307_RTC_Time@Hours:	
+   369                           ; 0 bytes @ 0x8
+   370                           
+   371  0078                     Set_DS1307_RTC_Date@Month:	
+   372                           ; 1 bytes @ 0x8
+   373                           
+   374                           
+   375                           ; 1 bytes @ 0x8
+   376  0078                     	ds	1
+   377  0079                     Set_DS1307_RTC_Time@Mins:	
+   378  0079                     Set_DS1307_RTC_Date@Year:	
+   379                           ; 1 bytes @ 0x9
+   380                           
+   381                           
+   382                           ; 1 bytes @ 0x9
+   383  0079                     	ds	1
+   384  007A                     Set_DS1307_RTC_Time@Secs:	
+   385  007A                     Set_DS1307_RTC_Date@Day:	
+   386                           ; 1 bytes @ 0xA
+   387                           
+   388                           
+   389                           ; 1 bytes @ 0xA
+   390  007A                     	ds	1
+   391  007B                     ??_Set_DS1307_RTC_Time:	
+   392  007B                     ??_Set_DS1307_RTC_Date:	
+   393                           ; 0 bytes @ 0xB
+   394                           
+   395                           
+   396                           ; 0 bytes @ 0xB
+   397  007B                     	ds	2
+   398  007D                     Set_DS1307_RTC_Time@Mode:	
+   399  007D                     Set_DS1307_RTC_Date@Date:	
+   400                           ; 1 bytes @ 0xD
+   401                           
+   402                           
+   403                           ; 1 bytes @ 0xD
+   404  007D                     	ds	1
+   405                           
+   406                           	psect	cstackBANK0
+   407  0025                     __pcstackBANK0:	
+   408  0025                     ??_main:	
+   409                           
+   410                           ; 0 bytes @ 0x0
+   411  0025                     	ds	3
+   412                           
+   413                           	psect	maintext
+   414  03E4                     __pmaintext:	
+   415 ;;Data sizes: Strings 38, constant 0, data 0, bss 5, persistent 0 stack 0
+   416 ;;Auto spaces:   Size  Autos    Used
+   417 ;; COMMON          14     14      14
+   418 ;; BANK0           80      3       8
+   419 ;; BANK1           80      0       0
+   420 ;; BANK3           96      0       0
+   421 ;; BANK2           96      0       0
+   422 ;;
+   423 ;; Pointer list with targets:
+   424 ;; ?_Get_DS1307_RTC_Date	PTR unsigned char  size(1) Largest target is 4
+   425 ;;		 -> pRTCArray(BANK0[4]), 
+   426 ;;
+   427 ;; ?_Get_DS1307_RTC_Time	PTR unsigned char  size(1) Largest target is 4
+   428 ;;		 -> pRTCArray(BANK0[4]), 
+   429 ;;
+   430 ;; DisplayDateOnLCD@pDateArray	PTR unsigned char  size(1) Largest target is 4
+   431 ;;		 -> pRTCArray(BANK0[4]), 
+   432 ;;
+   433 ;; DisplayTimeToLCD@pTimeArray	PTR unsigned char  size(1) Largest target is 4
+   434 ;;		 -> pRTCArray(BANK0[4]), 
+   435 ;;
+   436 ;; WriteStringToLCD@s	PTR const unsigned char  size(1) Largest target is 4
+   437 ;;		 -> STR_10(CODE[4]), STR_9(CODE[4]), STR_8(CODE[4]), STR_7(CODE[4]), 
+   438 ;;		 -> STR_6(CODE[4]), STR_5(CODE[4]), STR_4(CODE[4]), STR_3(CODE[4]), 
+   439 ;;		 -> STR_2(CODE[3]), STR_1(CODE[3]), 
+   440 ;;
+   441 ;; sp__Get_DS1307_RTC_Date	PTR unsigned char  size(1) Largest target is 4
+   442 ;;		 -> pRTCArray(BANK0[4]), 
+   443 ;;
+   444 ;; sp__Get_DS1307_RTC_Time	PTR unsigned char  size(1) Largest target is 4
+   445 ;;		 -> pRTCArray(BANK0[4]), 
+   446 ;;
+   447 ;; Read_Bytes_From_DS1307_RTC@pData	PTR unsigned char  size(1) Largest target is 4
+   448 ;;		 -> pRTCArray(BANK0[4]), 
+   449 ;;
+   450 ;; Write_Bytes_To_DS1307_RTC@pData	PTR unsigned char  size(1) Largest target is 4
+   451 ;;		 -> pRTCArray(BANK0[4]), 
+   452 ;;
+   453 ;;
+   454 ;; Critical Paths under _main in COMMON
+   455 ;;
+   456 ;;   _main->_Set_DS1307_RTC_Time
+   457 ;;   _main->_Set_DS1307_RTC_Date
+   458 ;;   _DisplayDateOnLCD->___lbmod
+   459 ;;   _DisplayTimeToLCD->_ClearLCDScreen
+   460 ;;   _DisplayTimeToLCD->___lbmod
+   461 ;;   _ClearLCDScreen->_WriteCommandToLCD
+   462 ;;   _WriteStringToLCD->_WriteDataToLCD
+   463 ;;   _InitLCD->_WriteCommandToLCD
+   464 ;;   _WriteDataToLCD->_ToggleEpinOfLCD
+   465 ;;   _WriteCommandToLCD->_ToggleEpinOfLCD
+   466 ;;   _Get_DS1307_RTC_Date->_Read_Bytes_From_DS1307_RTC
+   467 ;;   _Set_DS1307_RTC_Date->_Write_Bytes_To_DS1307_RTC
+   468 ;;   _Get_DS1307_RTC_Time->_Read_Bytes_From_DS1307_RTC
+   469 ;;   _Set_DS1307_RTC_Time->_Write_Bytes_To_DS1307_RTC
+   470 ;;   _Read_Bytes_From_DS1307_RTC->_I2C_Write_Byte
+   471 ;;   _Write_Bytes_To_DS1307_RTC->_I2C_Write_Byte
+   472 ;;
+   473 ;; Critical Paths under _main in BANK0
+   474 ;;
+   475 ;;   None.
+   476 ;;
+   477 ;; Critical Paths under _main in BANK1
+   478 ;;
+   479 ;;   None.
+   480 ;;
+   481 ;; Critical Paths under _main in BANK3
+   482 ;;
+   483 ;;   None.
+   484 ;;
+   485 ;; Critical Paths under _main in BANK2
+   486 ;;
+   487 ;;   None.
+   488 ;;
+   489 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   490 ;;
+   491 ;;
+   492 ;;Call Graph Tables:
+   493 ;;
+   494 ;; ---------------------------------------------------------------------------------
+   495 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   496 ;; ---------------------------------------------------------------------------------
+   497 ;; (0) _main                                                 3     3      0    3084
+   498 ;;                                              0 BANK0      3     3      0
+   499 ;;                            _InitLCD
+   500 ;;                            _InitI2C
+   501 ;;                _Set_DS1307_RTC_Time
+   502 ;;                _Set_DS1307_RTC_Date
+   503 ;;                _Get_DS1307_RTC_Time
+   504 ;;                   _DisplayTimeToLCD
+   505 ;;                _Get_DS1307_RTC_Date
+   506 ;;                   _DisplayDateOnLCD
+   507 ;; ---------------------------------------------------------------------------------
+   508 ;; (1) _DisplayDateOnLCD                                     1     1      0     652
+   509 ;;                                              5 COMMON     1     1      0
+   510 ;;                  _WriteCommandToLCD
+   511 ;;                            ___lbdiv
+   512 ;;                     _WriteDataToLCD
+   513 ;;                            ___lbmod
+   514 ;;                   _WriteStringToLCD
+   515 ;; ---------------------------------------------------------------------------------
+   516 ;; (1) _DisplayTimeToLCD                                     1     1      0     652
+   517 ;;                                              5 COMMON     1     1      0
+   518 ;;                     _ClearLCDScreen
+   519 ;;                            ___lbdiv
+   520 ;;                     _WriteDataToLCD
+   521 ;;                            ___lbmod
+   522 ;;                   _WriteStringToLCD
+   523 ;; ---------------------------------------------------------------------------------
+   524 ;; (2) _ClearLCDScreen                                       2     2      0      44
+   525 ;;                                              3 COMMON     2     2      0
+   526 ;;                  _WriteCommandToLCD
+   527 ;; ---------------------------------------------------------------------------------
+   528 ;; (2) _WriteStringToLCD                                     1     1      0      89
+   529 ;;                                              3 COMMON     1     1      0
+   530 ;;                     _WriteDataToLCD
+   531 ;; ---------------------------------------------------------------------------------
+   532 ;; (1) _InitLCD                                              3     3      0      44
+   533 ;;                                              3 COMMON     3     3      0
+   534 ;;                    _ToggleEpinOfLCD
+   535 ;;                  _WriteCommandToLCD
+   536 ;; ---------------------------------------------------------------------------------
+   537 ;; (3) _WriteDataToLCD                                       1     1      0      44
+   538 ;;                                              2 COMMON     1     1      0
+   539 ;;                    _ToggleEpinOfLCD
+   540 ;; ---------------------------------------------------------------------------------
+   541 ;; (2) _WriteCommandToLCD                                    1     1      0      44
+   542 ;;                                              2 COMMON     1     1      0
+   543 ;;                    _ToggleEpinOfLCD
+   544 ;; ---------------------------------------------------------------------------------
+   545 ;; (1) _Get_DS1307_RTC_Date                                  1     1      0     248
+   546 ;;                                              8 COMMON     1     1      0
+   547 ;;         _Read_Bytes_From_DS1307_RTC
+   548 ;;                             ___bmul
+   549 ;; ---------------------------------------------------------------------------------
+   550 ;; (1) _Set_DS1307_RTC_Date                                  6     3      3     631
+   551 ;;                                              8 COMMON     6     3      3
+   552 ;;                            ___lbmod
+   553 ;;                            ___lbdiv
+   554 ;;          _Write_Bytes_To_DS1307_RTC
+   555 ;; ---------------------------------------------------------------------------------
+   556 ;; (1) _Get_DS1307_RTC_Time                                  1     1      0     248
+   557 ;;                                              8 COMMON     1     1      0
+   558 ;;         _Read_Bytes_From_DS1307_RTC
+   559 ;;                             ___bmul
+   560 ;; ---------------------------------------------------------------------------------
+   561 ;; (1) _Set_DS1307_RTC_Time                                  6     3      3     609
+   562 ;;                                              8 COMMON     6     3      3
+   563 ;;                            ___lbmod
+   564 ;;                            ___lbdiv
+   565 ;;          _Write_Bytes_To_DS1307_RTC
+   566 ;; ---------------------------------------------------------------------------------
+   567 ;; (4) _ToggleEpinOfLCD                                      2     2      0       0
+   568 ;;                                              0 COMMON     2     2      0
+   569 ;; ---------------------------------------------------------------------------------
+   570 ;; (2) _Read_Bytes_From_DS1307_RTC                           7     4      3     156
+   571 ;;                                              1 COMMON     7     4      3
+   572 ;;                          _I2C_Start
+   573 ;;                     _I2C_Write_Byte
+   574 ;;                        _I2C_ReStart
+   575 ;;                      _I2C_Read_Byte
+   576 ;;                       _I2C_Send_ACK
+   577 ;;                      _I2C_Send_NACK
+   578 ;;                           _I2C_Stop
+   579 ;; ---------------------------------------------------------------------------------
+   580 ;; (2) _Write_Bytes_To_DS1307_RTC                            7     5      2     134
+   581 ;;                                              1 COMMON     7     5      2
+   582 ;;                          _I2C_Start
+   583 ;;                     _I2C_Write_Byte
+   584 ;;                           _I2C_Stop
+   585 ;; ---------------------------------------------------------------------------------
+   586 ;; (2) ___lbmod                                              5     4      1     159
+   587 ;;                                              0 COMMON     5     4      1
+   588 ;; ---------------------------------------------------------------------------------
+   589 ;; (2) ___lbdiv                                              4     3      1     162
+   590 ;;                                              0 COMMON     4     3      1
+   591 ;; ---------------------------------------------------------------------------------
+   592 ;; (2) ___bmul                                               3     2      1      92
+   593 ;;                                              0 COMMON     3     2      1
+   594 ;; ---------------------------------------------------------------------------------
+   595 ;; (1) _InitI2C                                              0     0      0       0
+   596 ;; ---------------------------------------------------------------------------------
+   597 ;; (3) _I2C_Send_ACK                                         0     0      0       0
+   598 ;; ---------------------------------------------------------------------------------
+   599 ;; (3) _I2C_Send_NACK                                        0     0      0       0
+   600 ;; ---------------------------------------------------------------------------------
+   601 ;; (3) _I2C_Read_Byte                                        0     0      0       0
+   602 ;; ---------------------------------------------------------------------------------
+   603 ;; (3) _I2C_ReStart                                          0     0      0       0
+   604 ;; ---------------------------------------------------------------------------------
+   605 ;; (3) _I2C_Stop                                             0     0      0       0
+   606 ;; ---------------------------------------------------------------------------------
+   607 ;; (3) _I2C_Write_Byte                                       1     1      0      22
+   608 ;;                                              0 COMMON     1     1      0
+   609 ;; ---------------------------------------------------------------------------------
+   610 ;; (3) _I2C_Start                                            0     0      0       0
+   611 ;; ---------------------------------------------------------------------------------
+   612 ;; Estimated maximum stack depth 4
+   613 ;; ---------------------------------------------------------------------------------
+   614 ;; Call Graph Graphs:
+   615 ;; _main (ROOT)
+   616 ;;   _InitLCD
+   617 ;;     _ToggleEpinOfLCD
+   618 ;;     _WriteCommandToLCD
+   619 ;;       _ToggleEpinOfLCD
+   620 ;;   _InitI2C
+   621 ;;   _Set_DS1307_RTC_Time
+   622 ;;     ___lbmod
+   623 ;;     ___lbdiv
+   624 ;;     _Write_Bytes_To_DS1307_RTC
+   625 ;;       _I2C_Start
+   626 ;;       _I2C_Write_Byte
+   627 ;;       _I2C_Stop
+   628 ;;   _Set_DS1307_RTC_Date
+   629 ;;     ___lbmod
+   630 ;;     ___lbdiv
+   631 ;;     _Write_Bytes_To_DS1307_RTC
+   632 ;;       _I2C_Start
+   633 ;;       _I2C_Write_Byte
+   634 ;;       _I2C_Stop
+   635 ;;   _Get_DS1307_RTC_Time
+   636 ;;     _Read_Bytes_From_DS1307_RTC
+   637 ;;       _I2C_Start
+   638 ;;       _I2C_Write_Byte
+   639 ;;       _I2C_ReStart
+   640 ;;       _I2C_Read_Byte
+   641 ;;       _I2C_Send_ACK
+   642 ;;       _I2C_Send_NACK
+   643 ;;       _I2C_Stop
+   644 ;;     ___bmul
+   645 ;;   _DisplayTimeToLCD
+   646 ;;     _ClearLCDScreen
+   647 ;;       _WriteCommandToLCD
+   648 ;;         _ToggleEpinOfLCD
+   649 ;;     ___lbdiv
+   650 ;;     _WriteDataToLCD
+   651 ;;       _ToggleEpinOfLCD
+   652 ;;     ___lbmod
+   653 ;;     _WriteStringToLCD
+   654 ;;       _WriteDataToLCD
+   655 ;;         _ToggleEpinOfLCD
+   656 ;;   _Get_DS1307_RTC_Date
+   657 ;;     _Read_Bytes_From_DS1307_RTC
+   658 ;;       _I2C_Start
+   659 ;;       _I2C_Write_Byte
+   660 ;;       _I2C_ReStart
+   661 ;;       _I2C_Read_Byte
+   662 ;;       _I2C_Send_ACK
+   663 ;;       _I2C_Send_NACK
+   664 ;;       _I2C_Stop
+   665 ;;     ___bmul
+   666 ;;   _DisplayDateOnLCD
+   667 ;;     _WriteCommandToLCD
+   668 ;;       _ToggleEpinOfLCD
+   669 ;;     ___lbdiv
+   670 ;;     _WriteDataToLCD
+   671 ;;       _ToggleEpinOfLCD
+   672 ;;     ___lbmod
+   673 ;;     _WriteStringToLCD
+   674 ;;       _WriteDataToLCD
+   675 ;;         _ToggleEpinOfLCD
+   676 ;;
+   677 ;; Address spaces:
+   678 ;;Name               Size   Autos  Total    Cost      Usage
+   679 ;;BITCOMMON            E      0       0       0        0.0%
+   680 ;;EEDATA             100      0       0       0        0.0%
+   681 ;;NULL                 0      0       0       0        0.0%
+   682 ;;CODE                 0      0       0       0        0.0%
+   683 ;;COMMON               E      E       E       1      100.0%
+   684 ;;BITSFR0              0      0       0       1        0.0%
+   685 ;;SFR0                 0      0       0       1        0.0%
+   686 ;;BITSFR1              0      0       0       2        0.0%
+   687 ;;SFR1                 0      0       0       2        0.0%
+   688 ;;STACK                0      0       4       2        0.0%
+   689 ;;ABS                  0      0      16       3        0.0%
+   690 ;;BITBANK0            50      0       0       4        0.0%
+   691 ;;BITSFR3              0      0       0       4        0.0%
+   692 ;;SFR3                 0      0       0       4        0.0%
+   693 ;;BANK0               50      3       8       5       10.0%
+   694 ;;BITSFR2              0      0       0       5        0.0%
+   695 ;;SFR2                 0      0       0       5        0.0%
+   696 ;;BITBANK1            50      0       0       6        0.0%
+   697 ;;BANK1               50      0       0       7        0.0%
+   698 ;;BITBANK3            60      0       0       8        0.0%
+   699 ;;BANK3               60      0       0       9        0.0%
+   700 ;;BITBANK2            60      0       0      10        0.0%
+   701 ;;BANK2               60      0       0      11        0.0%
+   702 ;;DATA                 0      0      1A      12        0.0%
+   703                           
+   704                           
+   705 ;; *************** function _main *****************
+   706 ;; Defined at:
+   707 ;;		line 16 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\Main.c"
+   708 ;; Parameters:    Size  Location     Type
+   709 ;;		None
+   710 ;; Auto vars:     Size  Location     Type
+   711 ;;		None
+   712 ;; Return value:  Size  Location     Type
+   713 ;;		None               void
+   714 ;; Registers used:
+   715 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   716 ;; Tracked objects:
+   717 ;;		On entry : 17F/0
+   718 ;;		On exit  : 0/0
+   719 ;;		Unchanged: 0/0
+   720 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   721 ;;      Params:         0       0       0       0       0
+   722 ;;      Locals:         0       0       0       0       0
+   723 ;;      Temps:          0       3       0       0       0
+   724 ;;      Totals:         0       3       0       0       0
+   725 ;;Total ram usage:        3 bytes
+   726 ;; Hardware stack levels required when called:    4
+   727 ;; This function calls:
+   728 ;;		_InitLCD
+   729 ;;		_InitI2C
+   730 ;;		_Set_DS1307_RTC_Time
+   731 ;;		_Set_DS1307_RTC_Date
+   732 ;;		_Get_DS1307_RTC_Time
+   733 ;;		_DisplayTimeToLCD
+   734 ;;		_Get_DS1307_RTC_Date
+   735 ;;		_DisplayDateOnLCD
+   736 ;; This function is called by:
+   737 ;;		Startup code after reset
+   738 ;; This function uses a non-reentrant model
+   739 ;;
+   740  03E4                     _main:	
+   741                           
+   742                           ;Main.c: 17: InitLCD();
+   743                           
+   744                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   745  03E4  120A  118A  2690   	fcall	_InitLCD
+      +       120A  118A         
+   746                           
+   747                           ;Main.c: 18: InitI2C();
+   748  03E9  120A  118A  23D8   	fcall	_InitI2C
+      +       120A  118A         
+   749                           
+   750                           ;Main.c: 21: Set_DS1307_RTC_Time(0, 8, 32, 59);
+   751  03EE  3008               	movlw	8
+   752  03EF  00F8               	movwf	?_Set_DS1307_RTC_Time
+   753  03F0  3020               	movlw	32
+   754  03F1  00F9               	movwf	?_Set_DS1307_RTC_Time+1
+   755  03F2  303B               	movlw	59
+   756  03F3  00FA               	movwf	?_Set_DS1307_RTC_Time+2
+   757  03F4  3000               	movlw	0
+   758  03F5  120A  118A  24A5   	fcall	_Set_DS1307_RTC_Time
+      +       120A  118A         
+   759                           
+   760                           ;Main.c: 24: Set_DS1307_RTC_Date(15, 12, 12, 6);
+   761  03FA  300C               	movlw	12
+   762  03FB  00F8               	movwf	?_Set_DS1307_RTC_Date
+   763  03FC  00F9               	movwf	?_Set_DS1307_RTC_Date+1
+   764  03FD  3006               	movlw	6
+   765  03FE  00FA               	movwf	?_Set_DS1307_RTC_Date+2
+   766  03FF  300F               	movlw	15
+   767  0400  120A  118A  24F0   	fcall	_Set_DS1307_RTC_Date
+      +       120A  118A         
+   768  0405                     l4983:	
+   769                           
+   770                           ;Main.c: 27: {
+   771                           ;Main.c: 29: DisplayTimeToLCD(Get_DS1307_RTC_Time());
+   772  0405  120A  118A  2454   	fcall	_Get_DS1307_RTC_Time
+      +       120A  118A         
+   773  040A  120A  118A  25C3   	fcall	_DisplayTimeToLCD
+      +       120A  118A         
+   774                           
+   775                           ;Main.c: 32: DisplayDateOnLCD(Get_DS1307_RTC_Date());
+   776  040F  120A  118A  2429   	fcall	_Get_DS1307_RTC_Date
+      +       120A  118A         
+   777  0414  120A  118A  253F   	fcall	_DisplayDateOnLCD
+      +       120A  118A         
+   778                           
+   779                           ;Main.c: 34: _delay((unsigned long)((1000)*(20000000/4000.0)));
+   780  0419  301A               	movlw	26
+   781  041A  1283               	bcf	3,5	;RP0=0, select bank0
+   782  041B  1303               	bcf	3,6	;RP1=0, select bank0
+   783  041C  00A7               	movwf	??_main+2
+   784  041D  305E               	movlw	94
+   785  041E  00A6               	movwf	??_main+1
+   786  041F  3086               	movlw	134
+   787  0420  00A5               	movwf	??_main
+   788  0421                     u497:	
+   789  0421  0BA5               	decfsz	??_main,f
+   790  0422  2C21               	goto	u497
+   791  0423  0BA6               	decfsz	??_main+1,f
+   792  0424  2C21               	goto	u497
+   793  0425  0BA7               	decfsz	??_main+2,f
+   794  0426  2C21               	goto	u497
+   795  0427  0064               	clrwdt
+   796  0428  2C05               	goto	l4983
+   797  0429                     __end_of_main:	
+   798                           
+   799                           	psect	text573
+   800  0429                     __ptext573:	
+   801 ;; =============== function _WriteCommandToLCD ends ============
+   802                           
+   803                           
+   804 ;; *************** function _Get_DS1307_RTC_Date *****************
+   805 ;; Defined at:
+   806 ;;		line 210 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\DS1307.c"
+   807 ;; Parameters:    Size  Location     Type
+   808 ;;		None
+   809 ;; Auto vars:     Size  Location     Type
+   810 ;;		None
+   811 ;; Return value:  Size  Location     Type
+   812 ;;                  1    wreg      PTR unsigned char 
+   813 ;; Registers used:
+   814 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   815 ;; Tracked objects:
+   816 ;;		On entry : 0/0
+   817 ;;		On exit  : 160/0
+   818 ;;		Unchanged: FFE9F/0
+   819 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   820 ;;      Params:         0       0       0       0       0
+   821 ;;      Locals:         0       0       0       0       0
+   822 ;;      Temps:          1       0       0       0       0
+   823 ;;      Totals:         1       0       0       0       0
+   824 ;;Total ram usage:        1 bytes
+   825 ;; Hardware stack levels used:    1
+   826 ;; Hardware stack levels required when called:    2
+   827 ;; This function calls:
+   828 ;;		_Read_Bytes_From_DS1307_RTC
+   829 ;;		___bmul
+   830 ;; This function is called by:
+   831 ;;		_main
+   832 ;; This function uses a non-reentrant model
+   833 ;;
+   834  0429                     _Get_DS1307_RTC_Date:	
+   835                           
+   836                           ;DS1307.c: 212: Read_Bytes_From_DS1307_RTC(0x03, pRTCArray, 4);
+   837                           
+   838                           ; Regs used in _Get_DS1307_RTC_Date: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   839  0429  3021               	movlw	_pRTCArray& (0+255)
+   840  042A  00F1               	movwf	?_Read_Bytes_From_DS1307_RTC
+   841  042B  3004               	movlw	4
+   842  042C  00F2               	movwf	?_Read_Bytes_From_DS1307_RTC+1
+   843  042D  3003               	movlw	3
+   844  042E  01F3               	clrf	?_Read_Bytes_From_DS1307_RTC+2
+   845  042F  273F  120A  118A   	fcall	_Read_Bytes_From_DS1307_RTC
+   846                           
+   847                           ;DS1307.c: 215: Temp = pRTCArray[1];
+   848  0432  0822               	movf	_pRTCArray+1,w
+   849                           
+   850                           ;DS1307.c: 216: pRTCArray[1] = (Temp>>4)*10 + (Temp&0x0F);
+   851  0433  27CB  120A  118A   	fcall	PL3	;call to abstracted procedure
+   852  0436  2497  120A  118A   	fcall	___bmul
+   853  0439  00F8               	movwf	??_Get_DS1307_RTC_Date
+   854  043A  0820               	movf	_Temp,w
+   855  043B  390F               	andlw	15
+   856  043C  0778               	addwf	??_Get_DS1307_RTC_Date,w
+   857  043D  00A2               	movwf	_pRTCArray+1
+   858                           
+   859                           ;DS1307.c: 219: Temp = pRTCArray[2];
+   860                           
+   861                           ;DS1307.c: 220: pRTCArray[2] = (Temp>>4)*10 + (Temp&0x0F);
+   862  043E  27C4  120A  118A   	fcall	PL2	;call to abstracted procedure
+   863  0441  2497  120A  118A   	fcall	___bmul
+   864  0444  00F8               	movwf	??_Get_DS1307_RTC_Date
+   865  0445  0820               	movf	_Temp,w
+   866  0446  390F               	andlw	15
+   867  0447  0778               	addwf	??_Get_DS1307_RTC_Date,w
+   868  0448  00A3               	movwf	_pRTCArray+2
+   869                           
+   870                           ;DS1307.c: 223: Temp = pRTCArray[3];
+   871  0449  0824               	movf	_pRTCArray+3,w
+   872                           
+   873                           ;DS1307.c: 224: pRTCArray[3] = (Temp>>4)*10 + (Temp&0x0F);
+   874  044A  27CB  120A  118A   	fcall	PL3	;call to abstracted procedure
+   875  044D  2497               	fcall	___bmul
+   876  044E  00F8               	movwf	??_Get_DS1307_RTC_Date
+   877  044F  0820               	movf	_Temp,w
+   878  0450  390F               	andlw	15
+   879  0451  0778               	addwf	??_Get_DS1307_RTC_Date,w
+   880  0452  00A4               	movwf	_pRTCArray+3
+   881                           
+   882                           ;DS1307.c: 226: return pRTCArray;
+   883  0453  3421               	retlw	_pRTCArray& (0+255)
+   884  0454                     __end_of_Get_DS1307_RTC_Date:	
+   885  0454                     __ptext575:	
+   886 ;; =============== function _Set_DS1307_RTC_Date ends ============
+   887                           
+   888                           
+   889 ;; *************** function _Get_DS1307_RTC_Time *****************
+   890 ;; Defined at:
+   891 ;;		line 146 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\DS1307.c"
+   892 ;; Parameters:    Size  Location     Type
+   893 ;;		None
+   894 ;; Auto vars:     Size  Location     Type
+   895 ;;		None
+   896 ;; Return value:  Size  Location     Type
+   897 ;;                  1    wreg      PTR unsigned char 
+   898 ;; Registers used:
+   899 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   900 ;; Tracked objects:
+   901 ;;		On entry : 0/0
+   902 ;;		On exit  : 160/0
+   903 ;;		Unchanged: FFE9F/0
+   904 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   905 ;;      Params:         0       0       0       0       0
+   906 ;;      Locals:         0       0       0       0       0
+   907 ;;      Temps:          1       0       0       0       0
+   908 ;;      Totals:         1       0       0       0       0
+   909 ;;Total ram usage:        1 bytes
+   910 ;; Hardware stack levels used:    1
+   911 ;; Hardware stack levels required when called:    2
+   912 ;; This function calls:
+   913 ;;		_Read_Bytes_From_DS1307_RTC
+   914 ;;		___bmul
+   915 ;; This function is called by:
+   916 ;;		_main
+   917 ;; This function uses a non-reentrant model
+   918 ;;
+   919  0454                     _Get_DS1307_RTC_Time:	
+   920                           
+   921                           ;DS1307.c: 148: Read_Bytes_From_DS1307_RTC(0x00, pRTCArray, 3);
+   922                           
+   923                           ; Regs used in _Get_DS1307_RTC_Time: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   924  0454  3021               	movlw	_pRTCArray& (0+255)
+   925  0455  00F1               	movwf	?_Read_Bytes_From_DS1307_RTC
+   926  0456  3003               	movlw	3
+   927  0457  00F2               	movwf	?_Read_Bytes_From_DS1307_RTC+1
+   928  0458  3000               	movlw	0
+   929  0459  01F3               	clrf	?_Read_Bytes_From_DS1307_RTC+2
+   930  045A  273F  120A  118A   	fcall	_Read_Bytes_From_DS1307_RTC
+   931                           
+   932                           ;DS1307.c: 151: Temp = pRTCArray[0];
+   933  045D  0821               	movf	_pRTCArray,w
+   934  045E  00A0               	movwf	_Temp
+   935                           
+   936                           ;DS1307.c: 152: pRTCArray[0] = ((Temp&0x7F)>>4)*10 + (Temp&0x0F);
+   937  045F  300A               	movlw	10
+   938  0460  00F0               	movwf	?___bmul
+   939  0461  0E20               	swapf	_Temp,w
+   940  0462  390F               	andlw	15
+   941  0463  3907               	andlw	7
+   942  0464  2497  120A  118A   	fcall	___bmul
+   943  0467  00F8               	movwf	??_Get_DS1307_RTC_Time
+   944  0468  0820               	movf	_Temp,w
+   945  0469  390F               	andlw	15
+   946  046A  0778               	addwf	??_Get_DS1307_RTC_Time,w
+   947  046B  00A1               	movwf	_pRTCArray
+   948                           
+   949                           ;DS1307.c: 155: Temp = pRTCArray[1];
+   950  046C  0822               	movf	_pRTCArray+1,w
+   951                           
+   952                           ;DS1307.c: 156: pRTCArray[1] = (Temp>>4)*10 + (Temp&0x0F);
+   953  046D  27CB  120A  118A   	fcall	PL3	;call to abstracted procedure
+   954  0470  2497  120A  118A   	fcall	___bmul
+   955  0473  00F8               	movwf	??_Get_DS1307_RTC_Time
+   956  0474  0820               	movf	_Temp,w
+   957  0475  390F               	andlw	15
+   958  0476  0778               	addwf	??_Get_DS1307_RTC_Time,w
+   959  0477  00A2               	movwf	_pRTCArray+1
+   960                           
+   961                           ;DS1307.c: 159: if(pRTCArray[2]&0x40)
+   962  0478  1F23               	btfss	_pRTCArray+2,6
+   963  0479  2C8B               	goto	l4811
+   964                           
+   965                           ;DS1307.c: 160: {
+   966                           ;DS1307.c: 161: if(pRTCArray[2]&0x20)
+   967  047A  1EA3               	btfss	_pRTCArray+2,5
+   968  047B  2C7F               	goto	l4805
+   969                           
+   970                           ;DS1307.c: 162: pRTCArray[3] = 1;
+   971  047C  01A4               	clrf	_pRTCArray+3
+   972  047D  0AA4               	incf	_pRTCArray+3,f
+   973  047E  2C80               	goto	l4807
+   974  047F                     l4805:	
+   975                           
+   976                           ;DS1307.c: 163: else
+   977                           ;DS1307.c: 164: pRTCArray[3] = 0;
+   978  047F  01A4               	clrf	_pRTCArray+3
+   979  0480                     l4807:	
+   980                           
+   981                           ;DS1307.c: 166: Temp = pRTCArray[2];
+   982                           
+   983                           ;DS1307.c: 167: pRTCArray[2] = ((Temp&0x1F)>>4)*10 + (Temp&0x0F);
+   984  0480  27C4  120A  118A   	fcall	PL2	;call to abstracted procedure
+   985  0483  3901               	andlw	1
+   986  0484  2497               	fcall	___bmul
+   987  0485  00F8               	movwf	??_Get_DS1307_RTC_Time
+   988  0486  0820               	movf	_Temp,w
+   989  0487  390F               	andlw	15
+   990  0488  0778               	addwf	??_Get_DS1307_RTC_Time,w
+   991  0489  00A3               	movwf	_pRTCArray+2
+   992                           
+   993                           ;DS1307.c: 168: }
+   994  048A  3421               	retlw	_pRTCArray& (0+255)
+   995  048B                     l4811:	
+   996                           
+   997                           ;DS1307.c: 169: else
+   998                           ;DS1307.c: 170: {
+   999                           ;DS1307.c: 171: Temp = pRTCArray[2];
+  1000                           
+  1001                           ;DS1307.c: 172: pRTCArray[2] = (Temp>>4)*10 + (Temp&0x0F);
+  1002  048B  27C4  120A  118A   	fcall	PL2	;call to abstracted procedure
+  1003  048E  2497               	fcall	___bmul
+  1004  048F  00F8               	movwf	??_Get_DS1307_RTC_Time
+  1005  0490  0820               	movf	_Temp,w
+  1006  0491  390F               	andlw	15
+  1007  0492  0778               	addwf	??_Get_DS1307_RTC_Time,w
+  1008  0493  00A3               	movwf	_pRTCArray+2
+  1009                           
+  1010                           ;DS1307.c: 173: pRTCArray[3] = 2;
+  1011  0494  3002               	movlw	2
+  1012  0495  00A4               	movwf	_pRTCArray+3
+  1013                           
+  1014                           ;DS1307.c: 174: }
+  1015                           ;DS1307.c: 176: return pRTCArray;
+  1016  0496  3421               	retlw	_pRTCArray& (0+255)
+  1017  0497                     __end_of_Get_DS1307_RTC_Time:	
+  1018  0497                     __ptext582:	
+  1019 ;; =============== function ___lbdiv ends ============
+  1020                           
+  1021                           
+  1022 ;; *************** function ___bmul *****************
+  1023 ;; Defined at:
+  1024 ;;		line 3 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\bmul.c"
+  1025 ;; Parameters:    Size  Location     Type
+  1026 ;;  multiplier      1    wreg     unsigned char 
+  1027 ;;  multiplicand    1    0[COMMON] unsigned char 
+  1028 ;; Auto vars:     Size  Location     Type
+  1029 ;;  multiplier      1    2[COMMON] unsigned char 
+  1030 ;;  product         1    1[COMMON] unsigned char 
+  1031 ;; Return value:  Size  Location     Type
+  1032 ;;                  1    wreg      unsigned char 
+  1033 ;; Registers used:
+  1034 ;;		wreg, status,2, status,0
+  1035 ;; Tracked objects:
+  1036 ;;		On entry : 160/0
+  1037 ;;		On exit  : 160/0
+  1038 ;;		Unchanged: FFE9F/0
+  1039 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1040 ;;      Params:         1       0       0       0       0
+  1041 ;;      Locals:         2       0       0       0       0
+  1042 ;;      Temps:          0       0       0       0       0
+  1043 ;;      Totals:         3       0       0       0       0
+  1044 ;;Total ram usage:        3 bytes
+  1045 ;; Hardware stack levels used:    1
+  1046 ;; This function calls:
+  1047 ;;		Nothing
+  1048 ;; This function is called by:
+  1049 ;;		_Get_DS1307_RTC_Time
+  1050 ;;		_Get_DS1307_RTC_Date
+  1051 ;; This function uses a non-reentrant model
+  1052 ;;
+  1053  0497                     ___bmul:	
+  1054                           
+  1055                           ; Regs used in ___bmul: [wreg+status,2+status,0]
+  1056                           ;___bmul@multiplier stored from wreg
+  1057  0497  00F2               	movwf	___bmul@multiplier
+  1058  0498  01F1               	clrf	___bmul@product
+  1059  0499                     l4673:	
+  1060  0499  0870               	movf	___bmul@multiplicand,w
+  1061  049A  1872               	btfsc	___bmul@multiplier,0
+  1062  049B  07F1               	addwf	___bmul@product,f
+  1063  049C  1003               	clrc
+  1064  049D  0DF0               	rlf	___bmul@multiplicand,f
+  1065  049E  1003               	clrc
+  1066  049F  0CF2               	rrf	___bmul@multiplier,f
+  1067  04A0  08F2               	movf	___bmul@multiplier,f
+  1068  04A1  1D03               	skipz
+  1069  04A2  2C99               	goto	l4673
+  1070  04A3  0871               	movf	___bmul@product,w
+  1071  04A4  0008               	return
+  1072  04A5                     __end_of___bmul:	
+  1073  04A5                     __ptext576:	
+  1074 ;; =============== function _Get_DS1307_RTC_Time ends ============
+  1075                           
+  1076                           
+  1077 ;; *************** function _Set_DS1307_RTC_Time *****************
+  1078 ;; Defined at:
+  1079 ;;		line 117 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\DS1307.c"
+  1080 ;; Parameters:    Size  Location     Type
+  1081 ;;  Mode            1    wreg     unsigned char 
+  1082 ;;  Hours           1    8[COMMON] unsigned char 
+  1083 ;;  Mins            1    9[COMMON] unsigned char 
+  1084 ;;  Secs            1   10[COMMON] unsigned char 
+  1085 ;; Auto vars:     Size  Location     Type
+  1086 ;;  Mode            1   13[COMMON] unsigned char 
+  1087 ;; Return value:  Size  Location     Type
+  1088 ;;		None               void
+  1089 ;; Registers used:
+  1090 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  1091 ;; Tracked objects:
+  1092 ;;		On entry : 60/0
+  1093 ;;		On exit  : 60/0
+  1094 ;;		Unchanged: FFE9F/0
+  1095 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1096 ;;      Params:         3       0       0       0       0
+  1097 ;;      Locals:         1       0       0       0       0
+  1098 ;;      Temps:          2       0       0       0       0
+  1099 ;;      Totals:         6       0       0       0       0
+  1100 ;;Total ram usage:        6 bytes
+  1101 ;; Hardware stack levels used:    1
+  1102 ;; Hardware stack levels required when called:    2
+  1103 ;; This function calls:
+  1104 ;;		___lbmod
+  1105 ;;		___lbdiv
+  1106 ;;		_Write_Bytes_To_DS1307_RTC
+  1107 ;; This function is called by:
+  1108 ;;		_main
+  1109 ;; This function uses a non-reentrant model
+  1110 ;;
+  1111  04A5                     _Set_DS1307_RTC_Time:	
+  1112                           
+  1113                           ; Regs used in _Set_DS1307_RTC_Time: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  1114                           ;Set_DS1307_RTC_Time@Mode stored from wreg
+  1115  04A5  00FD               	movwf	Set_DS1307_RTC_Time@Mode
+  1116                           
+  1117                           ;DS1307.c: 119: pRTCArray[0] = (((unsigned char)(Secs/10))<<4)|((unsigned char)(Secs%10)
+      +                          );
+  1118  04A6  300A               	movlw	10
+  1119  04A7  00F0               	movwf	?___lbmod
+  1120  04A8  087A               	movf	Set_DS1307_RTC_Time@Secs,w
+  1121  04A9  265D  120A  118A   	fcall	___lbmod
+  1122  04AC  00FB               	movwf	??_Set_DS1307_RTC_Time
+  1123  04AD  300A               	movlw	10
+  1124  04AE  00F0               	movwf	?___lbdiv
+  1125  04AF  087A               	movf	Set_DS1307_RTC_Time@Secs,w
+  1126  04B0  2642  120A  118A   	fcall	___lbdiv
+  1127  04B3  00FC               	movwf	??_Set_DS1307_RTC_Time+1
+  1128  04B4  0E7C               	swapf	??_Set_DS1307_RTC_Time+1,w
+  1129  04B5  39F0               	andlw	240
+  1130  04B6  047B               	iorwf	??_Set_DS1307_RTC_Time,w
+  1131  04B7  00A1               	movwf	_pRTCArray
+  1132                           
+  1133                           ;DS1307.c: 120: pRTCArray[1] = (((unsigned char)(Mins/10))<<4)|((unsigned char)(Mins%10)
+      +                          );
+  1134  04B8  300A               	movlw	10
+  1135  04B9  00F0               	movwf	?___lbmod
+  1136  04BA  0879               	movf	Set_DS1307_RTC_Time@Mins,w
+  1137  04BB  265D  120A  118A   	fcall	___lbmod
+  1138  04BE  00FB               	movwf	??_Set_DS1307_RTC_Time
+  1139  04BF  300A               	movlw	10
+  1140  04C0  00F0               	movwf	?___lbdiv
+  1141  04C1  0879               	movf	Set_DS1307_RTC_Time@Mins,w
+  1142  04C2  2642  120A  118A   	fcall	___lbdiv
+  1143  04C5  00FC               	movwf	??_Set_DS1307_RTC_Time+1
+  1144  04C6  0E7C               	swapf	??_Set_DS1307_RTC_Time+1,w
+  1145  04C7  39F0               	andlw	240
+  1146  04C8  047B               	iorwf	??_Set_DS1307_RTC_Time,w
+  1147  04C9  00A2               	movwf	_pRTCArray+1
+  1148                           
+  1149                           ;DS1307.c: 121: pRTCArray[2] = (((unsigned char)(Hours/10))<<4)|((unsigned char)(Hours%1
+      +                          0));
+  1150  04CA  300A               	movlw	10
+  1151  04CB  00F0               	movwf	?___lbmod
+  1152  04CC  0878               	movf	Set_DS1307_RTC_Time@Hours,w
+  1153  04CD  265D  120A  118A   	fcall	___lbmod
+  1154  04D0  00FB               	movwf	??_Set_DS1307_RTC_Time
+  1155  04D1  300A               	movlw	10
+  1156  04D2  00F0               	movwf	?___lbdiv
+  1157  04D3  0878               	movf	Set_DS1307_RTC_Time@Hours,w
+  1158  04D4  2642  120A  118A   	fcall	___lbdiv
+  1159  04D7  00FC               	movwf	??_Set_DS1307_RTC_Time+1
+  1160  04D8  0E7C               	swapf	??_Set_DS1307_RTC_Time+1,w
+  1161  04D9  39F0               	andlw	240
+  1162  04DA  047B               	iorwf	??_Set_DS1307_RTC_Time,w
+  1163  04DB  00A3               	movwf	_pRTCArray+2
+  1164                           
+  1165                           ;DS1307.c: 123: switch(Mode)
+  1166  04DC  2CE2               	goto	l4785
+  1167  04DD                     l690:	
+  1168                           ;DS1307.c: 124: {
+  1169                           ;DS1307.c: 125: case 0: pRTCArray[2] |= 0x40; break;
+  1170                           
+  1171  04DD  1723               	bsf	_pRTCArray+2,6
+  1172  04DE  2CEA               	goto	l4787
+  1173  04DF                     l4781:	
+  1174  04DF  3060               	movlw	96
+  1175  04E0  04A3               	iorwf	_pRTCArray+2,f
+  1176  04E1  2CEA               	goto	l4787
+  1177  04E2                     l4785:	
+  1178  04E2  087D               	movf	Set_DS1307_RTC_Time@Mode,w
+  1179                           
+  1180                           ; Switch size 1, requested type "space"
+  1181                           ; Number of cases is 2, Range of values is 0 to 1
+  1182                           ; switch strategies available:
+  1183                           ; Name         Instructions Cycles
+  1184                           ; simple_byte            7     4 (average)
+  1185                           ; direct_byte           14     8 (fixed)
+  1186                           ; jumptable            260     6 (fixed)
+  1187                           ; rangetable             6     6 (fixed)
+  1188                           ; spacedrange           10     9 (fixed)
+  1189                           ; locatedrange           2     3 (fixed)
+  1190                           ;	Chosen strategy is simple_byte
+  1191  04E3  3A00               	xorlw	0	; case 0
+  1192  04E4  1903               	skipnz
+  1193  04E5  2CDD               	goto	l690
+  1194  04E6  3A01               	xorlw	1	; case 1
+  1195  04E7  1903               	skipnz
+  1196  04E8  2CDF               	goto	l4781
+  1197  04E9  2CEA               	goto	l4787
+  1198  04EA                     l4787:	
+  1199                           
+  1200                           ;DS1307.c: 132: Write_Bytes_To_DS1307_RTC(0x00, pRTCArray, 3);
+  1201  04EA  3021               	movlw	_pRTCArray& (0+255)
+  1202  04EB  00F1               	movwf	?_Write_Bytes_To_DS1307_RTC
+  1203  04EC  3003               	movlw	3
+  1204  04ED  00F2               	movwf	?_Write_Bytes_To_DS1307_RTC+1
+  1205  04EE  3000               	movlw	0
+  1206  04EF  2F16               	ljmp	_Write_Bytes_To_DS1307_RTC
+  1207  04F0                     __end_of_Set_DS1307_RTC_Time:	
+  1208  04F0                     __ptext574:	
+  1209 ;; =============== function _Get_DS1307_RTC_Date ends ============
+  1210                           
+  1211                           
+  1212 ;; *************** function _Set_DS1307_RTC_Date *****************
+  1213 ;; Defined at:
+  1214 ;;		line 189 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\DS1307.c"
+  1215 ;; Parameters:    Size  Location     Type
+  1216 ;;  Date            1    wreg     unsigned char 
+  1217 ;;  Month           1    8[COMMON] unsigned char 
+  1218 ;;  Year            1    9[COMMON] unsigned char 
+  1219 ;;  Day             1   10[COMMON] unsigned char 
+  1220 ;; Auto vars:     Size  Location     Type
+  1221 ;;  Date            1   13[COMMON] unsigned char 
+  1222 ;; Return value:  Size  Location     Type
+  1223 ;;		None               void
+  1224 ;; Registers used:
+  1225 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  1226 ;; Tracked objects:
+  1227 ;;		On entry : 60/0
+  1228 ;;		On exit  : 60/0
+  1229 ;;		Unchanged: FFE9F/0
+  1230 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1231 ;;      Params:         3       0       0       0       0
+  1232 ;;      Locals:         1       0       0       0       0
+  1233 ;;      Temps:          2       0       0       0       0
+  1234 ;;      Totals:         6       0       0       0       0
+  1235 ;;Total ram usage:        6 bytes
+  1236 ;; Hardware stack levels used:    1
+  1237 ;; Hardware stack levels required when called:    2
+  1238 ;; This function calls:
+  1239 ;;		___lbmod
+  1240 ;;		___lbdiv
+  1241 ;;		_Write_Bytes_To_DS1307_RTC
+  1242 ;; This function is called by:
+  1243 ;;		_main
+  1244 ;; This function uses a non-reentrant model
+  1245 ;;
+  1246  04F0                     _Set_DS1307_RTC_Date:	
+  1247                           
+  1248                           ; Regs used in _Set_DS1307_RTC_Date: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  1249                           ;Set_DS1307_RTC_Date@Date stored from wreg
+  1250  04F0  00FD               	movwf	Set_DS1307_RTC_Date@Date
+  1251                           
+  1252                           ;DS1307.c: 191: pRTCArray[0] = (((unsigned char)(Day/10))<<4)|((unsigned char)(Day%10));
+  1253  04F1  300A               	movlw	10
+  1254  04F2  00F0               	movwf	?___lbmod
+  1255  04F3  087A               	movf	Set_DS1307_RTC_Date@Day,w
+  1256  04F4  265D  120A  118A   	fcall	___lbmod
+  1257  04F7  00FB               	movwf	??_Set_DS1307_RTC_Date
+  1258  04F8  300A               	movlw	10
+  1259  04F9  00F0               	movwf	?___lbdiv
+  1260  04FA  087A               	movf	Set_DS1307_RTC_Date@Day,w
+  1261  04FB  2642  120A  118A   	fcall	___lbdiv
+  1262  04FE  00FC               	movwf	??_Set_DS1307_RTC_Date+1
+  1263  04FF  0E7C               	swapf	??_Set_DS1307_RTC_Date+1,w
+  1264  0500  39F0               	andlw	240
+  1265  0501  047B               	iorwf	??_Set_DS1307_RTC_Date,w
+  1266  0502  00A1               	movwf	_pRTCArray
+  1267                           
+  1268                           ;DS1307.c: 192: pRTCArray[1] = (((unsigned char)(Date/10))<<4)|((unsigned char)(Date%10)
+      +                          );
+  1269  0503  300A               	movlw	10
+  1270  0504  00F0               	movwf	?___lbmod
+  1271  0505  087D               	movf	Set_DS1307_RTC_Date@Date,w
+  1272  0506  265D  120A  118A   	fcall	___lbmod
+  1273  0509  00FB               	movwf	??_Set_DS1307_RTC_Date
+  1274  050A  300A               	movlw	10
+  1275  050B  00F0               	movwf	?___lbdiv
+  1276  050C  087D               	movf	Set_DS1307_RTC_Date@Date,w
+  1277  050D  2642  120A  118A   	fcall	___lbdiv
+  1278  0510  00FC               	movwf	??_Set_DS1307_RTC_Date+1
+  1279  0511  0E7C               	swapf	??_Set_DS1307_RTC_Date+1,w
+  1280  0512  39F0               	andlw	240
+  1281  0513  047B               	iorwf	??_Set_DS1307_RTC_Date,w
+  1282  0514  00A2               	movwf	_pRTCArray+1
+  1283                           
+  1284                           ;DS1307.c: 193: pRTCArray[2] = (((unsigned char)(Month/10))<<4)|((unsigned char)(Month%1
+      +                          0));
+  1285  0515  300A               	movlw	10
+  1286  0516  00F0               	movwf	?___lbmod
+  1287  0517  0878               	movf	Set_DS1307_RTC_Date@Month,w
+  1288  0518  265D  120A  118A   	fcall	___lbmod
+  1289  051B  00FB               	movwf	??_Set_DS1307_RTC_Date
+  1290  051C  300A               	movlw	10
+  1291  051D  00F0               	movwf	?___lbdiv
+  1292  051E  0878               	movf	Set_DS1307_RTC_Date@Month,w
+  1293  051F  2642  120A  118A   	fcall	___lbdiv
+  1294  0522  00FC               	movwf	??_Set_DS1307_RTC_Date+1
+  1295  0523  0E7C               	swapf	??_Set_DS1307_RTC_Date+1,w
+  1296  0524  39F0               	andlw	240
+  1297  0525  047B               	iorwf	??_Set_DS1307_RTC_Date,w
+  1298  0526  00A3               	movwf	_pRTCArray+2
+  1299                           
+  1300                           ;DS1307.c: 194: pRTCArray[3] = (((unsigned char)(Year/10))<<4)|((unsigned char)(Year%10)
+      +                          );
+  1301  0527  300A               	movlw	10
+  1302  0528  00F0               	movwf	?___lbmod
+  1303  0529  0879               	movf	Set_DS1307_RTC_Date@Year,w
+  1304  052A  265D  120A  118A   	fcall	___lbmod
+  1305  052D  00FB               	movwf	??_Set_DS1307_RTC_Date
+  1306  052E  300A               	movlw	10
+  1307  052F  00F0               	movwf	?___lbdiv
+  1308  0530  0879               	movf	Set_DS1307_RTC_Date@Year,w
+  1309  0531  2642  120A  118A   	fcall	___lbdiv
+  1310  0534  00FC               	movwf	??_Set_DS1307_RTC_Date+1
+  1311  0535  0E7C               	swapf	??_Set_DS1307_RTC_Date+1,w
+  1312  0536  39F0               	andlw	240
+  1313  0537  047B               	iorwf	??_Set_DS1307_RTC_Date,w
+  1314  0538  00A4               	movwf	_pRTCArray+3
+  1315                           
+  1316                           ;DS1307.c: 197: Write_Bytes_To_DS1307_RTC(0x03, pRTCArray, 4);
+  1317  0539  3021               	movlw	_pRTCArray& (0+255)
+  1318  053A  00F1               	movwf	?_Write_Bytes_To_DS1307_RTC
+  1319  053B  3004               	movlw	4
+  1320  053C  00F2               	movwf	?_Write_Bytes_To_DS1307_RTC+1
+  1321  053D  3003               	movlw	3
+  1322  053E  2F16               	ljmp	_Write_Bytes_To_DS1307_RTC
+  1323  053F                     __end_of_Set_DS1307_RTC_Date:	
+  1324  053F                     __ptext566:	
+  1325 ;; =============== function _main ends ============
+  1326                           
+  1327                           
+  1328 ;; *************** function _DisplayDateOnLCD *****************
+  1329 ;; Defined at:
+  1330 ;;		line 146 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\LCD.c"
+  1331 ;; Parameters:    Size  Location     Type
+  1332 ;;  pDateArray      1    wreg     PTR unsigned char 
+  1333 ;;		 -> pRTCArray(4), 
+  1334 ;; Auto vars:     Size  Location     Type
+  1335 ;;  pDateArray      1    5[COMMON] PTR unsigned char 
+  1336 ;;		 -> pRTCArray(4), 
+  1337 ;; Return value:  Size  Location     Type
+  1338 ;;		None               void
+  1339 ;; Registers used:
+  1340 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  1341 ;; Tracked objects:
+  1342 ;;		On entry : 160/0
+  1343 ;;		On exit  : 0/0
+  1344 ;;		Unchanged: 0/0
+  1345 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1346 ;;      Params:         0       0       0       0       0
+  1347 ;;      Locals:         1       0       0       0       0
+  1348 ;;      Temps:          0       0       0       0       0
+  1349 ;;      Totals:         1       0       0       0       0
+  1350 ;;Total ram usage:        1 bytes
+  1351 ;; Hardware stack levels used:    1
+  1352 ;; Hardware stack levels required when called:    3
+  1353 ;; This function calls:
+  1354 ;;		_WriteCommandToLCD
+  1355 ;;		___lbdiv
+  1356 ;;		_WriteDataToLCD
+  1357 ;;		___lbmod
+  1358 ;;		_WriteStringToLCD
+  1359 ;; This function is called by:
+  1360 ;;		_main
+  1361 ;; This function uses a non-reentrant model
+  1362 ;;
+  1363  053F                     _DisplayDateOnLCD:	
+  1364                           
+  1365                           ; Regs used in _DisplayDateOnLCD: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  1366                           ;DisplayDateOnLCD@pDateArray stored from wreg
+  1367  053F  00F5               	movwf	DisplayDateOnLCD@pDateArray
+  1368                           
+  1369                           ;LCD.c: 147: WriteCommandToLCD(0xc0);
+  1370  0540  30C0               	movlw	192
+  1371  0541  2704  120A  118A   	fcall	_WriteCommandToLCD
+  1372                           
+  1373                           ;LCD.c: 150: WriteDataToLCD( (pDateArray[1]/10)+0x30 );
+  1374  0544  300A               	movlw	10
+  1375  0545  00F0               	movwf	?___lbdiv
+  1376  0546  27F7  120A  118A   	fcall	PL10	;call to abstracted procedure
+  1377  0549  2642  120A  118A   	fcall	___lbdiv
+  1378  054C  3E30               	addlw	48
+  1379  054D  2630  120A  118A   	fcall	_WriteDataToLCD
+  1380                           
+  1381                           ;LCD.c: 151: WriteDataToLCD( (pDateArray[1]%10)+0x30 );
+  1382  0550  300A               	movlw	10
+  1383  0551  00F0               	movwf	?___lbmod
+  1384  0552  27F7  120A  118A   	fcall	PL10	;call to abstracted procedure
+  1385  0555  265D  120A  118A   	fcall	___lbmod
+  1386  0558  3E30               	addlw	48
+  1387  0559  2630  120A  118A   	fcall	_WriteDataToLCD
+  1388                           
+  1389                           ;LCD.c: 154: WriteDataToLCD('/');
+  1390  055C  302F               	movlw	47
+  1391  055D  2630  120A  118A   	fcall	_WriteDataToLCD
+  1392                           
+  1393                           ;LCD.c: 157: WriteDataToLCD( (pDateArray[2]/10)+0x30 );
+  1394  0560  300A               	movlw	10
+  1395  0561  00F0               	movwf	?___lbdiv
+  1396  0562  27F1  120A  118A   	fcall	PL9	;call to abstracted procedure
+  1397  0565  2642  120A  118A   	fcall	___lbdiv
+  1398  0568  3E30               	addlw	48
+  1399  0569  2630  120A  118A   	fcall	_WriteDataToLCD
+  1400                           
+  1401                           ;LCD.c: 158: WriteDataToLCD( (pDateArray[2]%10)+0x30 );
+  1402  056C  300A               	movlw	10
+  1403  056D  00F0               	movwf	?___lbmod
+  1404  056E  27F1  120A  118A   	fcall	PL9	;call to abstracted procedure
+  1405  0571  265D  120A  118A   	fcall	___lbmod
+  1406  0574  3E30               	addlw	48
+  1407  0575  2630  120A  118A   	fcall	_WriteDataToLCD
+  1408                           
+  1409                           ;LCD.c: 161: WriteDataToLCD('/');
+  1410  0578  302F               	movlw	47
+  1411  0579  2630  120A  118A   	fcall	_WriteDataToLCD
+  1412                           
+  1413                           ;LCD.c: 164: WriteDataToLCD( (pDateArray[3]/10)+0x30 );
+  1414  057C  300A               	movlw	10
+  1415  057D  00F0               	movwf	?___lbdiv
+  1416  057E  27EB  120A  118A   	fcall	PL8	;call to abstracted procedure
+  1417  0581  2642  120A  118A   	fcall	___lbdiv
+  1418  0584  3E30               	addlw	48
+  1419  0585  2630  120A  118A   	fcall	_WriteDataToLCD
+  1420                           
+  1421                           ;LCD.c: 165: WriteDataToLCD( (pDateArray[3]%10)+0x30 );
+  1422  0588  300A               	movlw	10
+  1423  0589  00F0               	movwf	?___lbmod
+  1424  058A  27EB  120A  118A   	fcall	PL8	;call to abstracted procedure
+  1425  058D  265D  120A  118A   	fcall	___lbmod
+  1426  0590  3E30               	addlw	48
+  1427  0591  2630  120A  118A   	fcall	_WriteDataToLCD
+  1428                           
+  1429                           ;LCD.c: 168: WriteDataToLCD(' ');
+  1430  0594  3020               	movlw	32
+  1431  0595  2630  120A  118A   	fcall	_WriteDataToLCD
+  1432                           
+  1433                           ;LCD.c: 171: switch(pDateArray[0])
+  1434  0598  0875               	movf	DisplayDateOnLCD@pDateArray,w
+  1435  0599  0084               	movwf	4
+  1436  059A  1383               	bcf	3,7	;select IRP bank0
+  1437  059B  0800               	movf	0,w
+  1438                           
+  1439                           ; Switch size 1, requested type "space"
+  1440                           ; Number of cases is 7, Range of values is 1 to 7
+  1441                           ; switch strategies available:
+  1442                           ; Name         Instructions Cycles
+  1443                           ; simple_byte           22    12 (average)
+  1444                           ; direct_byte           32    11 (fixed)
+  1445                           ; jumptable            263     9 (fixed)
+  1446                           ;	Chosen strategy is simple_byte
+  1447  059C  3A01               	xorlw	1	; case 1
+  1448  059D  1903               	skipnz
+  1449  059E  2DB3               	goto	l4957
+  1450  059F  3A03               	xorlw	3	; case 2
+  1451  05A0  1903               	skipnz
+  1452  05A1  2DB5               	goto	l4959
+  1453  05A2  3A01               	xorlw	1	; case 3
+  1454  05A3  1903               	skipnz
+  1455  05A4  2DB7               	goto	l4961
+  1456  05A5  3A07               	xorlw	7	; case 4
+  1457  05A6  1903               	skipnz
+  1458  05A7  2DB9               	goto	l4963
+  1459  05A8  3A01               	xorlw	1	; case 5
+  1460  05A9  1903               	skipnz
+  1461  05AA  2DBB               	goto	l4965
+  1462  05AB  3A03               	xorlw	3	; case 6
+  1463  05AC  1903               	skipnz
+  1464  05AD  2DBD               	goto	l4967
+  1465  05AE  3A01               	xorlw	1	; case 7
+  1466  05AF  1903               	skipnz
+  1467  05B0  2DBF               	goto	l4969
+  1468  05B1  2DC1               	goto	l4971
+  1469  05B2  0008               	return
+  1470  05B3                     l4957:	
+  1471  05B3  3011               	movlw	(STR_3-__stringbase)& (0+255)
+  1472  05B4  2E79               	ljmp	_WriteStringToLCD
+  1473  05B5                     l4959:	
+  1474  05B5  3009               	movlw	(STR_4-__stringbase)& (0+255)
+  1475  05B6  2E79               	ljmp	_WriteStringToLCD
+  1476  05B7                     l4961:	
+  1477  05B7  3005               	movlw	(STR_5-__stringbase)& (0+255)
+  1478  05B8  2E79               	ljmp	_WriteStringToLCD
+  1479  05B9                     l4963:	
+  1480  05B9  301D               	movlw	(STR_6-__stringbase)& (0+255)
+  1481  05BA  2E79               	ljmp	_WriteStringToLCD
+  1482  05BB                     l4965:	
+  1483  05BB  300D               	movlw	(STR_7-__stringbase)& (0+255)
+  1484  05BC  2E79               	ljmp	_WriteStringToLCD
+  1485  05BD                     l4967:	
+  1486  05BD  3019               	movlw	(STR_8-__stringbase)& (0+255)
+  1487  05BE  2E79               	ljmp	_WriteStringToLCD
+  1488  05BF                     l4969:	
+  1489  05BF  3015               	movlw	(STR_9-__stringbase)& (0+255)
+  1490  05C0  2E79               	ljmp	_WriteStringToLCD
+  1491  05C1                     l4971:	
+  1492  05C1  3001               	movlw	(STR_10-__stringbase)& (0+255)
+  1493  05C2  2E79               	ljmp	_WriteStringToLCD
+  1494  05C3                     __end_of_DisplayDateOnLCD:	
+  1495  05C3                     __ptext567:	
+  1496 ;; =============== function _DisplayDateOnLCD ends ============
+  1497                           
+  1498                           
+  1499 ;; *************** function _DisplayTimeToLCD *****************
+  1500 ;; Defined at:
+  1501 ;;		line 108 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\LCD.c"
+  1502 ;; Parameters:    Size  Location     Type
+  1503 ;;  pTimeArray      1    wreg     PTR unsigned char 
+  1504 ;;		 -> pRTCArray(4), 
+  1505 ;; Auto vars:     Size  Location     Type
+  1506 ;;  pTimeArray      1    5[COMMON] PTR unsigned char 
+  1507 ;;		 -> pRTCArray(4), 
+  1508 ;; Return value:  Size  Location     Type
+  1509 ;;		None               void
+  1510 ;; Registers used:
+  1511 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  1512 ;; Tracked objects:
+  1513 ;;		On entry : 160/0
+  1514 ;;		On exit  : 0/0
+  1515 ;;		Unchanged: 0/0
+  1516 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1517 ;;      Params:         0       0       0       0       0
+  1518 ;;      Locals:         1       0       0       0       0
+  1519 ;;      Temps:          0       0       0       0       0
+  1520 ;;      Totals:         1       0       0       0       0
+  1521 ;;Total ram usage:        1 bytes
+  1522 ;; Hardware stack levels used:    1
+  1523 ;; Hardware stack levels required when called:    3
+  1524 ;; This function calls:
+  1525 ;;		_ClearLCDScreen
+  1526 ;;		___lbdiv
+  1527 ;;		_WriteDataToLCD
+  1528 ;;		___lbmod
+  1529 ;;		_WriteStringToLCD
+  1530 ;; This function is called by:
+  1531 ;;		_main
+  1532 ;; This function uses a non-reentrant model
+  1533 ;;
+  1534  05C3                     _DisplayTimeToLCD:	
+  1535                           
+  1536                           ; Regs used in _DisplayTimeToLCD: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  1537                           ;DisplayTimeToLCD@pTimeArray stored from wreg
+  1538  05C3  00F5               	movwf	DisplayTimeToLCD@pTimeArray
+  1539                           
+  1540                           ;LCD.c: 109: ClearLCDScreen();
+  1541  05C4  27B6  120A  118A   	fcall	_ClearLCDScreen
+  1542                           
+  1543                           ;LCD.c: 112: WriteDataToLCD( (pTimeArray[2]/10)+0x30 );
+  1544  05C7  300A               	movlw	10
+  1545  05C8  00F0               	movwf	?___lbdiv
+  1546  05C9  27DF  120A  118A   	fcall	PL6	;call to abstracted procedure
+  1547  05CC  2642  120A  118A   	fcall	___lbdiv
+  1548  05CF  3E30               	addlw	48
+  1549  05D0  2630  120A  118A   	fcall	_WriteDataToLCD
+  1550                           
+  1551                           ;LCD.c: 113: WriteDataToLCD( (pTimeArray[2]%10)+0x30 );
+  1552  05D3  300A               	movlw	10
+  1553  05D4  00F0               	movwf	?___lbmod
+  1554  05D5  27DF  120A  118A   	fcall	PL6	;call to abstracted procedure
+  1555  05D8  265D  120A  118A   	fcall	___lbmod
+  1556  05DB  3E30               	addlw	48
+  1557  05DC  2630  120A  118A   	fcall	_WriteDataToLCD
+  1558                           
+  1559                           ;LCD.c: 116: WriteDataToLCD(':');
+  1560  05DF  303A               	movlw	58
+  1561  05E0  2630  120A  118A   	fcall	_WriteDataToLCD
+  1562                           
+  1563                           ;LCD.c: 119: WriteDataToLCD( (pTimeArray[1]/10)+0x30 );
+  1564  05E3  300A               	movlw	10
+  1565  05E4  00F0               	movwf	?___lbdiv
+  1566  05E5  27E5  120A  118A   	fcall	PL7	;call to abstracted procedure
+  1567  05E8  2642  120A  118A   	fcall	___lbdiv
+  1568  05EB  3E30               	addlw	48
+  1569  05EC  2630  120A  118A   	fcall	_WriteDataToLCD
+  1570                           
+  1571                           ;LCD.c: 120: WriteDataToLCD( (pTimeArray[1]%10)+0x30 );
+  1572  05EF  300A               	movlw	10
+  1573  05F0  00F0               	movwf	?___lbmod
+  1574  05F1  27E5  120A  118A   	fcall	PL7	;call to abstracted procedure
+  1575  05F4  265D  120A  118A   	fcall	___lbmod
+  1576  05F7  3E30               	addlw	48
+  1577  05F8  2630  120A  118A   	fcall	_WriteDataToLCD
+  1578                           
+  1579                           ;LCD.c: 123: WriteDataToLCD(':');
+  1580  05FB  303A               	movlw	58
+  1581  05FC  2630  120A  118A   	fcall	_WriteDataToLCD
+  1582                           
+  1583                           ;LCD.c: 126: WriteDataToLCD( (pTimeArray[0]/10)+0x30 );
+  1584  05FF  300A               	movlw	10
+  1585  0600  00F0               	movwf	?___lbdiv
+  1586  0601  0875               	movf	DisplayTimeToLCD@pTimeArray,w
+  1587  0602  0084               	movwf	4
+  1588  0603  1383               	bcf	3,7	;select IRP bank0
+  1589  0604  0800               	movf	0,w
+  1590  0605  2642  120A  118A   	fcall	___lbdiv
+  1591  0608  3E30               	addlw	48
+  1592  0609  2630  120A  118A   	fcall	_WriteDataToLCD
+  1593                           
+  1594                           ;LCD.c: 127: WriteDataToLCD( (pTimeArray[0]%10)+0x30 );
+  1595  060C  300A               	movlw	10
+  1596  060D  00F0               	movwf	?___lbmod
+  1597  060E  0875               	movf	DisplayTimeToLCD@pTimeArray,w
+  1598  060F  0084               	movwf	4
+  1599  0610  1383               	bcf	3,7	;select IRP bank0
+  1600  0611  0800               	movf	0,w
+  1601  0612  265D  120A  118A   	fcall	___lbmod
+  1602  0615  3E30               	addlw	48
+  1603  0616  2630  120A  118A   	fcall	_WriteDataToLCD
+  1604                           
+  1605                           ;LCD.c: 130: WriteDataToLCD(' ');
+  1606  0619  3020               	movlw	32
+  1607  061A  2630  120A  118A   	fcall	_WriteDataToLCD
+  1608                           
+  1609                           ;LCD.c: 133: switch(pTimeArray[3])
+  1610  061D  0875               	movf	DisplayTimeToLCD@pTimeArray,w
+  1611  061E  3E03               	addlw	3
+  1612  061F  0084               	movwf	4
+  1613  0620  1383               	bcf	3,7	;select IRP bank0
+  1614  0621  0800               	movf	0,w
+  1615                           
+  1616                           ; Switch size 1, requested type "space"
+  1617                           ; Number of cases is 2, Range of values is 0 to 1
+  1618                           ; switch strategies available:
+  1619                           ; Name         Instructions Cycles
+  1620                           ; simple_byte            7     4 (average)
+  1621                           ; direct_byte           14     8 (fixed)
+  1622                           ; jumptable            260     6 (fixed)
+  1623                           ; rangetable             6     6 (fixed)
+  1624                           ; spacedrange           10     9 (fixed)
+  1625                           ; locatedrange           2     3 (fixed)
+  1626                           ;	Chosen strategy is simple_byte
+  1627  0622  3A00               	xorlw	0	; case 0
+  1628  0623  1903               	skipnz
+  1629  0624  2E2A               	goto	l4933
+  1630  0625  3A01               	xorlw	1	; case 1
+  1631  0626  1903               	skipnz
+  1632  0627  2E2C               	goto	l4935
+  1633  0628  2E2E               	goto	l4937
+  1634  0629  0008               	return
+  1635  062A                     l4933:	
+  1636  062A  3021               	movlw	(STR_1-__stringbase)& (0+255)
+  1637  062B  2E79               	ljmp	_WriteStringToLCD
+  1638  062C                     l4935:	
+  1639  062C  3024               	movlw	(STR_2-__stringbase)& (0+255)
+  1640  062D  2E79               	ljmp	_WriteStringToLCD
+  1641  062E                     l4937:	
+  1642  062E  3048               	movlw	72
+  1643  062F  2E30               	ljmp	_WriteDataToLCD
+  1644  0630                     __end_of_DisplayTimeToLCD:	
+  1645  0630                     __ptext571:	
+  1646 ;; =============== function _InitLCD ends ============
+  1647                           
+  1648                           
+  1649 ;; *************** function _WriteDataToLCD *****************
+  1650 ;; Defined at:
+  1651 ;;		line 28 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\LCD.c"
+  1652 ;; Parameters:    Size  Location     Type
+  1653 ;;  LCDChar         1    wreg     unsigned char 
+  1654 ;; Auto vars:     Size  Location     Type
+  1655 ;;  LCDChar         1    2[COMMON] unsigned char 
+  1656 ;; Return value:  Size  Location     Type
+  1657 ;;		None               void
+  1658 ;; Registers used:
+  1659 ;;		wreg, status,2, status,0, pclath, cstack
+  1660 ;; Tracked objects:
+  1661 ;;		On entry : 0/0
+  1662 ;;		On exit  : 0/0
+  1663 ;;		Unchanged: 0/0
+  1664 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1665 ;;      Params:         0       0       0       0       0
+  1666 ;;      Locals:         1       0       0       0       0
+  1667 ;;      Temps:          0       0       0       0       0
+  1668 ;;      Totals:         1       0       0       0       0
+  1669 ;;Total ram usage:        1 bytes
+  1670 ;; Hardware stack levels used:    1
+  1671 ;; Hardware stack levels required when called:    1
+  1672 ;; This function calls:
+  1673 ;;		_ToggleEpinOfLCD
+  1674 ;; This function is called by:
+  1675 ;;		_WriteStringToLCD
+  1676 ;;		_DisplayTimeToLCD
+  1677 ;;		_DisplayDateOnLCD
+  1678 ;; This function uses a non-reentrant model
+  1679 ;;
+  1680  0630                     _WriteDataToLCD:	
+  1681                           
+  1682                           ; Regs used in _WriteDataToLCD: [wreg+status,2+status,0+pclath+cstack]
+  1683                           ;WriteDataToLCD@LCDChar stored from wreg
+  1684  0630  00F2               	movwf	WriteDataToLCD@LCDChar
+  1685  0631  27FD               	call	PL11	;select bank 0
+  1686                           
+  1687                           ;LCD.c: 29: RB1 = 1;
+  1688  0632  300F               	movlw	15
+  1689  0633  1486               	bsf	6,1
+  1690                           
+  1691                           ;LCD.c: 31: PORTB &= 0x0F;
+  1692  0634  0586               	andwf	6,f	;volatile
+  1693                           
+  1694                           ;LCD.c: 32: PORTB |= (LCDChar&0xF0);
+  1695  0635  0872               	movf	WriteDataToLCD@LCDChar,w
+  1696  0636  39F0               	andlw	240
+  1697  0637  0486               	iorwf	6,f	;volatile
+  1698                           
+  1699                           ;LCD.c: 33: ToggleEpinOfLCD();
+  1700  0638  26EE  120A  118A   	fcall	_ToggleEpinOfLCD
+  1701                           
+  1702                           ;LCD.c: 35: PORTB &= 0x0F;
+  1703  063B  300F               	movlw	15
+  1704  063C  27FD               	call	PL11	;select bank 0
+  1705  063D  0586               	andwf	6,f	;volatile
+  1706                           
+  1707                           ;LCD.c: 36: PORTB |= ((LCDChar<<4)&0xF0);
+  1708  063E  0E72               	swapf	WriteDataToLCD@LCDChar,w
+  1709  063F  39F0               	andlw	240
+  1710  0640  0486               	iorwf	6,f	;volatile
+  1711                           
+  1712                           ;LCD.c: 37: ToggleEpinOfLCD();
+  1713  0641  2EEE               	ljmp	l4773
+  1714  0642                     __end_of_WriteDataToLCD:	
+  1715  0642                     __ptext581:	
+  1716 ;; =============== function ___lbmod ends ============
+  1717                           
+  1718                           
+  1719 ;; *************** function ___lbdiv *****************
+  1720 ;; Defined at:
+  1721 ;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lbdiv.c"
+  1722 ;; Parameters:    Size  Location     Type
+  1723 ;;  dividend        1    wreg     unsigned char 
+  1724 ;;  divisor         1    0[COMMON] unsigned char 
+  1725 ;; Auto vars:     Size  Location     Type
+  1726 ;;  dividend        1    1[COMMON] unsigned char 
+  1727 ;;  quotient        1    3[COMMON] unsigned char 
+  1728 ;;  counter         1    2[COMMON] unsigned char 
+  1729 ;; Return value:  Size  Location     Type
+  1730 ;;                  1    wreg      unsigned char 
+  1731 ;; Registers used:
+  1732 ;;		wreg, status,2, status,0
+  1733 ;; Tracked objects:
+  1734 ;;		On entry : 0/0
+  1735 ;;		On exit  : 0/0
+  1736 ;;		Unchanged: FFFFF/0
+  1737 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1738 ;;      Params:         1       0       0       0       0
+  1739 ;;      Locals:         3       0       0       0       0
+  1740 ;;      Temps:          0       0       0       0       0
+  1741 ;;      Totals:         4       0       0       0       0
+  1742 ;;Total ram usage:        4 bytes
+  1743 ;; Hardware stack levels used:    1
+  1744 ;; This function calls:
+  1745 ;;		Nothing
+  1746 ;; This function is called by:
+  1747 ;;		_Set_DS1307_RTC_Time
+  1748 ;;		_Set_DS1307_RTC_Date
+  1749 ;;		_DisplayTimeToLCD
+  1750 ;;		_DisplayDateOnLCD
+  1751 ;; This function uses a non-reentrant model
+  1752 ;;
+  1753  0642                     ___lbdiv:	
+  1754                           
+  1755                           ; Regs used in ___lbdiv: [wreg+status,2+status,0]
+  1756                           ;___lbdiv@dividend stored from wreg
+  1757  0642  00F1               	movwf	___lbdiv@dividend
+  1758  0643  01F3               	clrf	___lbdiv@quotient
+  1759  0644  0870               	movf	___lbdiv@divisor,w
+  1760  0645  1903               	btfsc	3,2
+  1761  0646  2E5B               	goto	l4707
+  1762  0647  01F2               	clrf	___lbdiv@counter
+  1763  0648                     l4693:	
+  1764  0648  0AF2               	incf	___lbdiv@counter,f
+  1765  0649  1BF0               	btfsc	___lbdiv@divisor,7
+  1766  064A  2E4E               	goto	l3407
+  1767  064B  1003               	clrc
+  1768  064C  0DF0               	rlf	___lbdiv@divisor,f
+  1769  064D  2E48               	goto	l4693
+  1770  064E                     l3407:	
+  1771  064E  1003               	clrc
+  1772  064F  0DF3               	rlf	___lbdiv@quotient,f
+  1773  0650  0870               	movf	___lbdiv@divisor,w
+  1774  0651  0271               	subwf	___lbdiv@dividend,w
+  1775  0652  1C03               	skipc
+  1776  0653  2E58               	goto	L2
+  1777  0654  0870               	movf	___lbdiv@divisor,w
+  1778  0655  02F1               	subwf	___lbdiv@dividend,f
+  1779  0656  1473               	bsf	___lbdiv@quotient,0
+  1780  0657  1003               	clrc
+  1781  0658                     L2:	
+  1782  0658  0CF0               	rrf	___lbdiv@divisor,f
+  1783  0659  0BF2               	decfsz	___lbdiv@counter,f
+  1784  065A  2E4E               	goto	l3407
+  1785  065B                     l4707:	
+  1786  065B  0873               	movf	___lbdiv@quotient,w
+  1787  065C  0008               	return
+  1788  065D                     __end_of___lbdiv:	
+  1789  065D                     __ptext580:	
+  1790 ;; =============== function _Write_Bytes_To_DS1307_RTC ends ============
+  1791                           
+  1792                           
+  1793 ;; *************** function ___lbmod *****************
+  1794 ;; Defined at:
+  1795 ;;		line 5 in file "C:\Program Files (x86)\HI-TECH Software\PICC\9.83\sources\lbmod.c"
+  1796 ;; Parameters:    Size  Location     Type
+  1797 ;;  dividend        1    wreg     unsigned char 
+  1798 ;;  divisor         1    0[COMMON] unsigned char 
+  1799 ;; Auto vars:     Size  Location     Type
+  1800 ;;  dividend        1    2[COMMON] unsigned char 
+  1801 ;;  rem             1    4[COMMON] unsigned char 
+  1802 ;;  counter         1    3[COMMON] unsigned char 
+  1803 ;; Return value:  Size  Location     Type
+  1804 ;;                  1    wreg      unsigned char 
+  1805 ;; Registers used:
+  1806 ;;		wreg, status,2, status,0
+  1807 ;; Tracked objects:
+  1808 ;;		On entry : 0/0
+  1809 ;;		On exit  : 0/0
+  1810 ;;		Unchanged: FFFFF/0
+  1811 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1812 ;;      Params:         1       0       0       0       0
+  1813 ;;      Locals:         3       0       0       0       0
+  1814 ;;      Temps:          1       0       0       0       0
+  1815 ;;      Totals:         5       0       0       0       0
+  1816 ;;Total ram usage:        5 bytes
+  1817 ;; Hardware stack levels used:    1
+  1818 ;; This function calls:
+  1819 ;;		Nothing
+  1820 ;; This function is called by:
+  1821 ;;		_Set_DS1307_RTC_Time
+  1822 ;;		_Set_DS1307_RTC_Date
+  1823 ;;		_DisplayTimeToLCD
+  1824 ;;		_DisplayDateOnLCD
+  1825 ;; This function uses a non-reentrant model
+  1826 ;;
+  1827  065D                     ___lbmod:	
+  1828                           
+  1829                           ; Regs used in ___lbmod: [wreg+status,2+status,0]
+  1830                           ;___lbmod@dividend stored from wreg
+  1831  065D  00F2               	movwf	___lbmod@dividend
+  1832  065E  3008               	movlw	8
+  1833  065F  00F3               	movwf	___lbmod@counter
+  1834  0660  01F4               	clrf	___lbmod@rem
+  1835  0661                     l4715:	
+  1836  0661  0872               	movf	___lbmod@dividend,w
+  1837  0662  00F1               	movwf	??___lbmod
+  1838  0663  3007               	movlw	7
+  1839  0664  1003               	clrc
+  1840  0665                     L1:	
+  1841  0665  0CF1               	rrf	??___lbmod,f
+  1842  0666  3EFF               	addlw	-1
+  1843  0667  1003               	clrc
+  1844  0668  1D03               	skipz
+  1845  0669  2E65               	goto	L1
+  1846  066A  0D74               	rlf	___lbmod@rem,w
+  1847  066B  0471               	iorwf	??___lbmod,w
+  1848  066C  00F4               	movwf	___lbmod@rem
+  1849  066D  1003               	clrc
+  1850  066E  0DF2               	rlf	___lbmod@dividend,f
+  1851  066F  0870               	movf	___lbmod@divisor,w
+  1852  0670  0274               	subwf	___lbmod@rem,w
+  1853  0671  1C03               	skipc
+  1854  0672  2E75               	goto	l4723
+  1855  0673  0870               	movf	___lbmod@divisor,w
+  1856  0674  02F4               	subwf	___lbmod@rem,f
+  1857  0675                     l4723:	
+  1858  0675  0BF3               	decfsz	___lbmod@counter,f
+  1859  0676  2E61               	goto	l4715
+  1860  0677  0874               	movf	___lbmod@rem,w
+  1861  0678  0008               	return
+  1862  0679                     __end_of___lbmod:	
+  1863  0679                     __ptext569:	
+  1864 ;; =============== function _ClearLCDScreen ends ============
+  1865                           
+  1866                           
+  1867 ;; *************** function _WriteStringToLCD *****************
+  1868 ;; Defined at:
+  1869 ;;		line 92 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\LCD.c"
+  1870 ;; Parameters:    Size  Location     Type
+  1871 ;;  s               1    wreg     PTR const unsigned char 
+  1872 ;;		 -> STR_10(4), STR_9(4), STR_8(4), STR_7(4), 
+  1873 ;;		 -> STR_6(4), STR_5(4), STR_4(4), STR_3(4), 
+  1874 ;;		 -> STR_2(3), STR_1(3), 
+  1875 ;; Auto vars:     Size  Location     Type
+  1876 ;;  s               1    3[COMMON] PTR const unsigned char 
+  1877 ;;		 -> STR_10(4), STR_9(4), STR_8(4), STR_7(4), 
+  1878 ;;		 -> STR_6(4), STR_5(4), STR_4(4), STR_3(4), 
+  1879 ;;		 -> STR_2(3), STR_1(3), 
+  1880 ;; Return value:  Size  Location     Type
+  1881 ;;		None               void
+  1882 ;; Registers used:
+  1883 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  1884 ;; Tracked objects:
+  1885 ;;		On entry : 100/0
+  1886 ;;		On exit  : 0/0
+  1887 ;;		Unchanged: 0/0
+  1888 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1889 ;;      Params:         0       0       0       0       0
+  1890 ;;      Locals:         1       0       0       0       0
+  1891 ;;      Temps:          0       0       0       0       0
+  1892 ;;      Totals:         1       0       0       0       0
+  1893 ;;Total ram usage:        1 bytes
+  1894 ;; Hardware stack levels used:    1
+  1895 ;; Hardware stack levels required when called:    2
+  1896 ;; This function calls:
+  1897 ;;		_WriteDataToLCD
+  1898 ;; This function is called by:
+  1899 ;;		_DisplayTimeToLCD
+  1900 ;;		_DisplayDateOnLCD
+  1901 ;; This function uses a non-reentrant model
+  1902 ;;
+  1903  0679                     _WriteStringToLCD:	
+  1904                           
+  1905                           ; Regs used in _WriteStringToLCD: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  1906                           ;WriteStringToLCD@s stored from wreg
+  1907  0679  00F3               	movwf	WriteStringToLCD@s
+  1908  067A                     l4913:	
+  1909                           ;LCD.c: 93: while(*s)
+  1910                           
+  1911  067A  0873               	movf	WriteStringToLCD@s,w
+  1912  067B  0084               	movwf	4
+  1913  067C  120A  118A  2003   	fcall	stringdir
+      +       120A  118A         
+  1914  0681  3800               	iorlw	0
+  1915  0682  1903               	btfsc	3,2
+  1916  0683  0008               	return
+  1917                           
+  1918                           ;LCD.c: 94: WriteDataToLCD(*s++);
+  1919  0684  0873               	movf	WriteStringToLCD@s,w
+  1920  0685  0084               	movwf	4
+  1921  0686  120A  118A  2003   	fcall	stringdir
+      +       120A  118A         
+  1922  068B  2630  120A  118A   	fcall	_WriteDataToLCD
+  1923  068E  0AF3               	incf	WriteStringToLCD@s,f
+  1924  068F  2E7A               	goto	l4913
+  1925  0690                     __end_of_WriteStringToLCD:	
+  1926  0690                     __ptext570:	
+  1927 ;; =============== function _WriteStringToLCD ends ============
+  1928                           
+  1929                           
+  1930 ;; *************** function _InitLCD *****************
+  1931 ;; Defined at:
+  1932 ;;		line 42 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\LCD.c"
+  1933 ;; Parameters:    Size  Location     Type
+  1934 ;;		None
+  1935 ;; Auto vars:     Size  Location     Type
+  1936 ;;		None
+  1937 ;; Return value:  Size  Location     Type
+  1938 ;;		None               void
+  1939 ;; Registers used:
+  1940 ;;		wreg, status,2, status,0, pclath, cstack
+  1941 ;; Tracked objects:
+  1942 ;;		On entry : 17F/0
+  1943 ;;		On exit  : 0/0
+  1944 ;;		Unchanged: 0/0
+  1945 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1946 ;;      Params:         0       0       0       0       0
+  1947 ;;      Locals:         0       0       0       0       0
+  1948 ;;      Temps:          3       0       0       0       0
+  1949 ;;      Totals:         3       0       0       0       0
+  1950 ;;Total ram usage:        3 bytes
+  1951 ;; Hardware stack levels used:    1
+  1952 ;; Hardware stack levels required when called:    2
+  1953 ;; This function calls:
+  1954 ;;		_ToggleEpinOfLCD
+  1955 ;;		_WriteCommandToLCD
+  1956 ;; This function is called by:
+  1957 ;;		_main
+  1958 ;; This function uses a non-reentrant model
+  1959 ;;
+  1960  0690                     _InitLCD:	
+  1961                           
+  1962                           ;LCD.c: 44: RB0 = 0;
+  1963                           
+  1964                           ; Regs used in _InitLCD: [wreg+status,2+status,0+pclath+cstack]
+  1965                           
+  1966                           ;LCD.c: 45: RB1 = 0;
+  1967                           
+  1968                           ;LCD.c: 46: RB4 = 0;
+  1969                           
+  1970                           ;LCD.c: 47: RB5 = 0;
+  1971                           
+  1972                           ;LCD.c: 48: RB6 = 0;
+  1973                           
+  1974                           ;LCD.c: 49: RB7 = 0;
+  1975  0690  27D8  120A  118A   	fcall	PL5	;call to abstracted procedure
+  1976                           
+  1977                           ;LCD.c: 50: TRISB0 = 0;
+  1978  0693  1683               	bsf	3,5	;RP0=1, select bank1
+  1979  0694  3002               	movlw	2
+  1980                           
+  1981                           ;LCD.c: 51: TRISB1 = 0;
+  1982                           
+  1983                           ;LCD.c: 52: TRISB4 = 0;
+  1984                           
+  1985                           ;LCD.c: 53: TRISB5 = 0;
+  1986                           
+  1987                           ;LCD.c: 54: TRISB6 = 0;
+  1988                           
+  1989                           ;LCD.c: 55: TRISB7 = 0;
+  1990  0695  27D8  120A  118A   	fcall	PL5	;call to abstracted procedure
+  1991                           
+  1992                           ;LCD.c: 58: _delay((unsigned long)((40)*(20000000/4000.0)));
+  1993  0698  00F5               	movwf	??_InitLCD+2
+  1994  0699  3004               	movlw	4
+  1995  069A  00F4               	movwf	??_InitLCD+1
+  1996  069B  30BA               	movlw	186
+  1997  069C  00F3               	movwf	??_InitLCD
+  1998  069D                     u517:	
+  1999  069D  0BF3               	decfsz	??_InitLCD,f
+  2000  069E  2E9D               	goto	u517
+  2001  069F  0BF4               	decfsz	??_InitLCD+1,f
+  2002  06A0  2E9D               	goto	u517
+  2003  06A1  0BF5               	decfsz	??_InitLCD+2,f
+  2004  06A2  2E9D               	goto	u517
+  2005  06A3  0064               	clrwdt
+  2006                           
+  2007                           ;LCD.c: 60: PORTB &= 0x0F;
+  2008                           
+  2009                           ;LCD.c: 61: PORTB |= 0x30;
+  2010  06A4  27D1  120A  118A   	fcall	PL4	;call to abstracted procedure
+  2011                           
+  2012                           ;LCD.c: 62: ToggleEpinOfLCD();
+  2013  06A7  26EE  120A  118A   	fcall	_ToggleEpinOfLCD
+  2014                           
+  2015                           ;LCD.c: 64: _delay((unsigned long)((6)*(20000000/4000.0)));
+  2016  06AA  3027               	movlw	39
+  2017  06AB  00F4               	movwf	??_InitLCD+1
+  2018  06AC  30F5               	movlw	245
+  2019  06AD  00F3               	movwf	??_InitLCD
+  2020  06AE                     u527:	
+  2021  06AE  0BF3               	decfsz	??_InitLCD,f
+  2022  06AF  2EAE               	goto	u527
+  2023  06B0  0BF4               	decfsz	??_InitLCD+1,f
+  2024  06B1  2EAE               	goto	u527
+  2025                           
+  2026                           ;LCD.c: 66: PORTB &= 0x0F;
+  2027  06B2  300F               	movlw	15
+  2028  06B3  27FD               	call	PL11	;select bank 0
+  2029  06B4  0586               	andwf	6,f	;volatile
+  2030                           
+  2031                           ;LCD.c: 67: PORTB |= 0x30;
+  2032  06B5  3030               	movlw	48
+  2033  06B6  0486               	iorwf	6,f	;volatile
+  2034                           
+  2035                           ;LCD.c: 68: ToggleEpinOfLCD();
+  2036  06B7  26EE  120A  118A   	fcall	_ToggleEpinOfLCD
+  2037                           
+  2038                           ;LCD.c: 70: _delay((unsigned long)((300)*(20000000/4000000.0)));
+  2039  06BA  30D6               	movlw	214
+  2040  06BB  00F3               	movwf	??_InitLCD
+  2041  06BC                     u537:	
+  2042  06BC  2EBD               	nop2
+  2043  06BD  2EBE               	nop2
+  2044  06BE  0BF3               	decfsz	??_InitLCD,f
+  2045  06BF  2EBC               	goto	u537
+  2046  06C0  0064               	clrwdt
+  2047                           
+  2048                           ;LCD.c: 72: PORTB &= 0x0F;
+  2049                           
+  2050                           ;LCD.c: 73: PORTB |= 0x30;
+  2051  06C1  27D1  120A  118A   	fcall	PL4	;call to abstracted procedure
+  2052                           
+  2053                           ;LCD.c: 74: ToggleEpinOfLCD();
+  2054  06C4  26EE  120A  118A   	fcall	_ToggleEpinOfLCD
+  2055                           
+  2056                           ;LCD.c: 76: _delay((unsigned long)((2)*(20000000/4000.0)));
+  2057  06C7  300D               	movlw	13
+  2058  06C8  00F4               	movwf	??_InitLCD+1
+  2059  06C9  30FB               	movlw	251
+  2060  06CA  00F3               	movwf	??_InitLCD
+  2061  06CB                     u547:	
+  2062  06CB  0BF3               	decfsz	??_InitLCD,f
+  2063  06CC  2ECB               	goto	u547
+  2064  06CD  0BF4               	decfsz	??_InitLCD+1,f
+  2065  06CE  2ECB               	goto	u547
+  2066  06CF  2ED0               	nop2
+  2067                           
+  2068                           ;LCD.c: 78: PORTB &= 0x0F;
+  2069  06D0  300F               	movlw	15
+  2070  06D1  27FD               	call	PL11	;select bank 0
+  2071  06D2  0586               	andwf	6,f	;volatile
+  2072                           
+  2073                           ;LCD.c: 79: PORTB |= 0x20;
+  2074  06D3  1686               	bsf	6,5	;volatile
+  2075                           
+  2076                           ;LCD.c: 80: ToggleEpinOfLCD();
+  2077  06D4  26EE  120A  118A   	fcall	_ToggleEpinOfLCD
+  2078                           
+  2079                           ;LCD.c: 82: _delay((unsigned long)((2)*(20000000/4000.0)));
+  2080  06D7  300D               	movlw	13
+  2081  06D8  00F4               	movwf	??_InitLCD+1
+  2082  06D9  30FB               	movlw	251
+  2083  06DA  00F3               	movwf	??_InitLCD
+  2084  06DB                     u557:	
+  2085  06DB  0BF3               	decfsz	??_InitLCD,f
+  2086  06DC  2EDB               	goto	u557
+  2087  06DD  0BF4               	decfsz	??_InitLCD+1,f
+  2088  06DE  2EDB               	goto	u557
+  2089  06DF  2EE0               	nop2
+  2090                           
+  2091                           ;LCD.c: 84: WriteCommandToLCD(0x28);
+  2092  06E0  3028               	movlw	40
+  2093  06E1  2704  120A  118A   	fcall	_WriteCommandToLCD
+  2094                           
+  2095                           ;LCD.c: 85: WriteCommandToLCD(0x0c);
+  2096  06E4  300C               	movlw	12
+  2097  06E5  2704  120A  118A   	fcall	_WriteCommandToLCD
+  2098                           
+  2099                           ;LCD.c: 86: WriteCommandToLCD(0x01);
+  2100  06E8  3001               	movlw	1
+  2101  06E9  2704  120A  118A   	fcall	_WriteCommandToLCD
+  2102                           
+  2103                           ;LCD.c: 87: WriteCommandToLCD(0x06);
+  2104  06EC  3006               	movlw	6
+  2105  06ED  2F04               	ljmp	_WriteCommandToLCD
+  2106  06EE                     __end_of_InitLCD:	
+  2107  06EE                     __ptext577:	
+  2108 ;; =============== function _Set_DS1307_RTC_Time ends ============
+  2109                           
+  2110                           
+  2111 ;; *************** function _ToggleEpinOfLCD *****************
+  2112 ;; Defined at:
+  2113 ;;		line 5 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\LCD.c"
+  2114 ;; Parameters:    Size  Location     Type
+  2115 ;;		None
+  2116 ;; Auto vars:     Size  Location     Type
+  2117 ;;		None
+  2118 ;; Return value:  Size  Location     Type
+  2119 ;;		None               void
+  2120 ;; Registers used:
+  2121 ;;		wreg
+  2122 ;; Tracked objects:
+  2123 ;;		On entry : 60/0
+  2124 ;;		On exit  : 0/0
+  2125 ;;		Unchanged: 0/0
+  2126 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2127 ;;      Params:         0       0       0       0       0
+  2128 ;;      Locals:         0       0       0       0       0
+  2129 ;;      Temps:          2       0       0       0       0
+  2130 ;;      Totals:         2       0       0       0       0
+  2131 ;;Total ram usage:        2 bytes
+  2132 ;; Hardware stack levels used:    1
+  2133 ;; This function calls:
+  2134 ;;		Nothing
+  2135 ;; This function is called by:
+  2136 ;;		_WriteCommandToLCD
+  2137 ;;		_WriteDataToLCD
+  2138 ;;		_InitLCD
+  2139 ;; This function uses a non-reentrant model
+  2140 ;;
+  2141  06EE                     _ToggleEpinOfLCD:	
+  2142  06EE                     l4773:	
+  2143                           ; Regs used in _ToggleEpinOfLCD: [wreg]
+  2144                           
+  2145  06EE  3004               	movlw	4
+  2146                           
+  2147                           ;LCD.c: 6: RB0 = 1;
+  2148  06EF  1406               	bsf	6,0
+  2149                           
+  2150                           ;LCD.c: 7: _delay((unsigned long)((500)*(20000000/4000000.0)));
+  2151  06F0  00F1               	movwf	??_ToggleEpinOfLCD+1
+  2152  06F1  303D               	movlw	61
+  2153  06F2  00F0               	movwf	??_ToggleEpinOfLCD
+  2154  06F3                     u567:	
+  2155  06F3  0BF0               	decfsz	??_ToggleEpinOfLCD,f
+  2156  06F4  2EF3               	goto	u567
+  2157  06F5  0BF1               	decfsz	??_ToggleEpinOfLCD+1,f
+  2158  06F6  2EF3               	goto	u567
+  2159  06F7  2EF8               	nop2
+  2160  06F8  27FD               	call	PL11	;select bank 0
+  2161                           
+  2162                           ;LCD.c: 8: RB0 = 0;
+  2163  06F9  3004               	movlw	4
+  2164  06FA  1006               	bcf	6,0
+  2165                           
+  2166                           ;LCD.c: 9: _delay((unsigned long)((500)*(20000000/4000000.0)));
+  2167  06FB  00F1               	movwf	??_ToggleEpinOfLCD+1
+  2168  06FC  303D               	movlw	61
+  2169  06FD  00F0               	movwf	??_ToggleEpinOfLCD
+  2170  06FE                     u577:	
+  2171  06FE  0BF0               	decfsz	??_ToggleEpinOfLCD,f
+  2172  06FF  2EFE               	goto	u577
+  2173  0700  0BF1               	decfsz	??_ToggleEpinOfLCD+1,f
+  2174  0701  2EFE               	goto	u577
+  2175  0702  2F03               	nop2
+  2176  0703  0008               	return
+  2177  0704                     __end_of_ToggleEpinOfLCD:	
+  2178  0704                     __ptext572:	
+  2179 ;; =============== function _WriteDataToLCD ends ============
+  2180                           
+  2181                           
+  2182 ;; *************** function _WriteCommandToLCD *****************
+  2183 ;; Defined at:
+  2184 ;;		line 14 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\LCD.c"
+  2185 ;; Parameters:    Size  Location     Type
+  2186 ;;  Command         1    wreg     unsigned char 
+  2187 ;; Auto vars:     Size  Location     Type
+  2188 ;;  Command         1    2[COMMON] unsigned char 
+  2189 ;; Return value:  Size  Location     Type
+  2190 ;;		None               void
+  2191 ;; Registers used:
+  2192 ;;		wreg, status,2, status,0, pclath, cstack
+  2193 ;; Tracked objects:
+  2194 ;;		On entry : 0/0
+  2195 ;;		On exit  : 0/0
+  2196 ;;		Unchanged: 0/0
+  2197 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2198 ;;      Params:         0       0       0       0       0
+  2199 ;;      Locals:         1       0       0       0       0
+  2200 ;;      Temps:          0       0       0       0       0
+  2201 ;;      Totals:         1       0       0       0       0
+  2202 ;;Total ram usage:        1 bytes
+  2203 ;; Hardware stack levels used:    1
+  2204 ;; Hardware stack levels required when called:    1
+  2205 ;; This function calls:
+  2206 ;;		_ToggleEpinOfLCD
+  2207 ;; This function is called by:
+  2208 ;;		_InitLCD
+  2209 ;;		_ClearLCDScreen
+  2210 ;;		_DisplayDateOnLCD
+  2211 ;; This function uses a non-reentrant model
+  2212 ;;
+  2213  0704                     _WriteCommandToLCD:	
+  2214                           
+  2215                           ; Regs used in _WriteCommandToLCD: [wreg+status,2+status,0+pclath+cstack]
+  2216                           ;WriteCommandToLCD@Command stored from wreg
+  2217  0704  00F2               	movwf	WriteCommandToLCD@Command
+  2218  0705  27FD               	call	PL11	;select bank 0
+  2219                           
+  2220                           ;LCD.c: 15: RB1 = 0;
+  2221  0706  300F               	movlw	15
+  2222  0707  1086               	bcf	6,1
+  2223                           
+  2224                           ;LCD.c: 17: PORTB &= 0x0F;
+  2225  0708  0586               	andwf	6,f	;volatile
+  2226                           
+  2227                           ;LCD.c: 18: PORTB |= (Command&0xF0);
+  2228  0709  0872               	movf	WriteCommandToLCD@Command,w
+  2229  070A  39F0               	andlw	240
+  2230  070B  0486               	iorwf	6,f	;volatile
+  2231                           
+  2232                           ;LCD.c: 19: ToggleEpinOfLCD();
+  2233  070C  26EE  120A  118A   	fcall	_ToggleEpinOfLCD
+  2234                           
+  2235                           ;LCD.c: 21: PORTB &= 0x0F;
+  2236  070F  300F               	movlw	15
+  2237  0710  27FD               	call	PL11	;select bank 0
+  2238  0711  0586               	andwf	6,f	;volatile
+  2239                           
+  2240                           ;LCD.c: 22: PORTB |= ((Command<<4)&0xF0);
+  2241  0712  0E72               	swapf	WriteCommandToLCD@Command,w
+  2242  0713  39F0               	andlw	240
+  2243  0714  0486               	iorwf	6,f	;volatile
+  2244                           
+  2245                           ;LCD.c: 23: ToggleEpinOfLCD();
+  2246  0715  2EEE               	ljmp	l4773
+  2247  0716                     __end_of_WriteCommandToLCD:	
+  2248  0716                     __ptext579:	
+  2249 ;; =============== function _Read_Bytes_From_DS1307_RTC ends ============
+  2250                           
+  2251                           
+  2252 ;; *************** function _Write_Bytes_To_DS1307_RTC *****************
+  2253 ;; Defined at:
+  2254 ;;		line 57 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\DS1307.c"
+  2255 ;; Parameters:    Size  Location     Type
+  2256 ;;  Address         1    wreg     unsigned char 
+  2257 ;;  pData           1    1[COMMON] PTR unsigned char 
+  2258 ;;		 -> pRTCArray(4), 
+  2259 ;;  NoOfBytes       1    2[COMMON] unsigned char 
+  2260 ;; Auto vars:     Size  Location     Type
+  2261 ;;  Address         1    5[COMMON] unsigned char 
+  2262 ;;  i               2    6[COMMON] unsigned int 
+  2263 ;; Return value:  Size  Location     Type
+  2264 ;;		None               void
+  2265 ;; Registers used:
+  2266 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  2267 ;; Tracked objects:
+  2268 ;;		On entry : 60/0
+  2269 ;;		On exit  : 60/0
+  2270 ;;		Unchanged: FFE9F/0
+  2271 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2272 ;;      Params:         2       0       0       0       0
+  2273 ;;      Locals:         3       0       0       0       0
+  2274 ;;      Temps:          2       0       0       0       0
+  2275 ;;      Totals:         7       0       0       0       0
+  2276 ;;Total ram usage:        7 bytes
+  2277 ;; Hardware stack levels used:    1
+  2278 ;; Hardware stack levels required when called:    1
+  2279 ;; This function calls:
+  2280 ;;		_I2C_Start
+  2281 ;;		_I2C_Write_Byte
+  2282 ;;		_I2C_Stop
+  2283 ;; This function is called by:
+  2284 ;;		_Set_DS1307_RTC_Time
+  2285 ;;		_Set_DS1307_RTC_Date
+  2286 ;; This function uses a non-reentrant model
+  2287 ;;
+  2288  0716                     _Write_Bytes_To_DS1307_RTC:	
+  2289                           
+  2290                           ; Regs used in _Write_Bytes_To_DS1307_RTC: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  2291                           ;Write_Bytes_To_DS1307_RTC@Address stored from wreg
+  2292  0716  00F5               	movwf	Write_Bytes_To_DS1307_RTC@Address
+  2293  0717                     l4729:	
+  2294                           
+  2295                           ;DS1307.c: 58: unsigned int i;
+  2296                           ;DS1307.c: 60: I2C_Start();
+  2297  0717  2788  120A  118A   	fcall	_I2C_Start
+  2298                           
+  2299                           ;DS1307.c: 63: while(I2C_Write_Byte(0xD0 + 0) == 1)
+  2300  071A  30D0               	movlw	208
+  2301  071B  277A  120A  118A   	fcall	_I2C_Write_Byte
+  2302  071E  1803               	btfsc	3,0
+  2303  071F  2F17               	goto	l4729
+  2304                           
+  2305                           ;DS1307.c: 66: I2C_Write_Byte(Address);
+  2306  0720  0875               	movf	Write_Bytes_To_DS1307_RTC@Address,w
+  2307  0721  277A  120A  118A   	fcall	_I2C_Write_Byte
+  2308                           
+  2309                           ;DS1307.c: 68: for(i=0;i<NoOfBytes;i++)
+  2310  0724  01F6               	clrf	Write_Bytes_To_DS1307_RTC@i
+  2311  0725  01F7               	clrf	Write_Bytes_To_DS1307_RTC@i+1
+  2312  0726                     l4743:	
+  2313  0726  0872               	movf	Write_Bytes_To_DS1307_RTC@NoOfBytes,w
+  2314  0727  00F3               	movwf	??_Write_Bytes_To_DS1307_RTC
+  2315  0728  01F4               	clrf	??_Write_Bytes_To_DS1307_RTC+1
+  2316  0729  0874               	movf	??_Write_Bytes_To_DS1307_RTC+1,w
+  2317  072A  0277               	subwf	Write_Bytes_To_DS1307_RTC@i+1,w
+  2318  072B  1D03               	skipz
+  2319  072C  2F2F               	goto	u435
+  2320  072D  0873               	movf	??_Write_Bytes_To_DS1307_RTC,w
+  2321  072E  0276               	subwf	Write_Bytes_To_DS1307_RTC@i,w
+  2322  072F                     u435:	
+  2323  072F  1803               	btfsc	3,0
+  2324  0730  2F3E               	goto	l4745
+  2325                           
+  2326                           ;DS1307.c: 69: I2C_Write_Byte(pData[i]);
+  2327  0731  0876               	movf	Write_Bytes_To_DS1307_RTC@i,w
+  2328  0732  0771               	addwf	Write_Bytes_To_DS1307_RTC@pData,w
+  2329  0733  00F3               	movwf	??_Write_Bytes_To_DS1307_RTC
+  2330  0734  0084               	movwf	4
+  2331  0735  1383               	bcf	3,7	;select IRP bank0
+  2332  0736  0800               	movf	0,w
+  2333  0737  277A  120A  118A   	fcall	_I2C_Write_Byte
+  2334  073A  0AF6               	incf	Write_Bytes_To_DS1307_RTC@i,f
+  2335  073B  1903               	skipnz
+  2336  073C  0AF7               	incf	Write_Bytes_To_DS1307_RTC@i+1,f
+  2337  073D  2F26               	goto	l4743
+  2338  073E                     l4745:	
+  2339                           
+  2340                           ;DS1307.c: 71: I2C_Stop();
+  2341  073E  2F98               	ljmp	l4657
+  2342  073F                     __end_of_Write_Bytes_To_DS1307_RTC:	
+  2343  073F                     __ptext578:	
+  2344 ;; =============== function _ToggleEpinOfLCD ends ============
+  2345                           
+  2346                           
+  2347 ;; *************** function _Read_Bytes_From_DS1307_RTC *****************
+  2348 ;; Defined at:
+  2349 ;;		line 81 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\DS1307.c"
+  2350 ;; Parameters:    Size  Location     Type
+  2351 ;;  Address         1    wreg     unsigned char 
+  2352 ;;  pData           1    1[COMMON] PTR unsigned char 
+  2353 ;;		 -> pRTCArray(4), 
+  2354 ;;  NoOfBytes       2    2[COMMON] unsigned int 
+  2355 ;; Auto vars:     Size  Location     Type
+  2356 ;;  Address         1    5[COMMON] unsigned char 
+  2357 ;;  i               2    6[COMMON] unsigned int 
+  2358 ;; Return value:  Size  Location     Type
+  2359 ;;		None               void
+  2360 ;; Registers used:
+  2361 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  2362 ;; Tracked objects:
+  2363 ;;		On entry : 0/0
+  2364 ;;		On exit  : 160/0
+  2365 ;;		Unchanged: FFE9F/0
+  2366 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2367 ;;      Params:         3       0       0       0       0
+  2368 ;;      Locals:         3       0       0       0       0
+  2369 ;;      Temps:          1       0       0       0       0
+  2370 ;;      Totals:         7       0       0       0       0
+  2371 ;;Total ram usage:        7 bytes
+  2372 ;; Hardware stack levels used:    1
+  2373 ;; Hardware stack levels required when called:    1
+  2374 ;; This function calls:
+  2375 ;;		_I2C_Start
+  2376 ;;		_I2C_Write_Byte
+  2377 ;;		_I2C_ReStart
+  2378 ;;		_I2C_Read_Byte
+  2379 ;;		_I2C_Send_ACK
+  2380 ;;		_I2C_Send_NACK
+  2381 ;;		_I2C_Stop
+  2382 ;; This function is called by:
+  2383 ;;		_Get_DS1307_RTC_Time
+  2384 ;;		_Get_DS1307_RTC_Date
+  2385 ;; This function uses a non-reentrant model
+  2386 ;;
+  2387  073F                     _Read_Bytes_From_DS1307_RTC:	
+  2388                           
+  2389                           ; Regs used in _Read_Bytes_From_DS1307_RTC: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  2390                           ;Read_Bytes_From_DS1307_RTC@Address stored from wreg
+  2391  073F  00F5               	movwf	Read_Bytes_From_DS1307_RTC@Address
+  2392  0740                     l4747:	
+  2393                           
+  2394                           ;DS1307.c: 82: unsigned int i;
+  2395                           ;DS1307.c: 84: I2C_Start();
+  2396  0740  2788  120A  118A   	fcall	_I2C_Start
+  2397                           
+  2398                           ;DS1307.c: 87: while(I2C_Write_Byte(0xD0 + 0) == 1)
+  2399  0743  30D0               	movlw	208
+  2400  0744  277A  120A  118A   	fcall	_I2C_Write_Byte
+  2401  0747  1803               	btfsc	3,0
+  2402  0748  2F40               	goto	l4747
+  2403                           
+  2404                           ;DS1307.c: 90: I2C_Write_Byte(Address);
+  2405  0749  0875               	movf	Read_Bytes_From_DS1307_RTC@Address,w
+  2406  074A  277A  120A  118A   	fcall	_I2C_Write_Byte
+  2407                           
+  2408                           ;DS1307.c: 91: I2C_ReStart();
+  2409  074D  279F  120A  118A   	fcall	_I2C_ReStart
+  2410                           
+  2411                           ;DS1307.c: 94: I2C_Write_Byte(0xD0 + 1);
+  2412  0750  30D1               	movlw	209
+  2413  0751  277A  120A  118A   	fcall	_I2C_Write_Byte
+  2414                           
+  2415                           ;DS1307.c: 96: pData[0] = I2C_Read_Byte();
+  2416  0754  0871               	movf	Read_Bytes_From_DS1307_RTC@pData,w
+  2417  0755  0084               	movwf	4
+  2418  0756  2790  120A  118A   	fcall	_I2C_Read_Byte
+  2419  0759  1383               	bcf	3,7	;select IRP bank0
+  2420  075A  0080               	movwf	0
+  2421                           
+  2422                           ;DS1307.c: 98: for(i=1;i<NoOfBytes;i++)
+  2423  075B  01F6               	clrf	Read_Bytes_From_DS1307_RTC@i
+  2424  075C  0AF6               	incf	Read_Bytes_From_DS1307_RTC@i,f
+  2425  075D  01F7               	clrf	Read_Bytes_From_DS1307_RTC@i+1
+  2426  075E                     l4769:	
+  2427  075E  0873               	movf	Read_Bytes_From_DS1307_RTC@NoOfBytes+1,w
+  2428  075F  0277               	subwf	Read_Bytes_From_DS1307_RTC@i+1,w
+  2429  0760  1D03               	skipz
+  2430  0761  2F64               	goto	u455
+  2431  0762  0872               	movf	Read_Bytes_From_DS1307_RTC@NoOfBytes,w
+  2432  0763  0276               	subwf	Read_Bytes_From_DS1307_RTC@i,w
+  2433  0764                     u455:	
+  2434  0764  1803               	btfsc	3,0
+  2435  0765  2F76               	goto	l4771
+  2436                           
+  2437                           ;DS1307.c: 99: {
+  2438                           ;DS1307.c: 100: I2C_Send_ACK();
+  2439  0766  27AD  120A  118A   	fcall	_I2C_Send_ACK
+  2440                           
+  2441                           ;DS1307.c: 101: pData[i] = I2C_Read_Byte();
+  2442  0769  0876               	movf	Read_Bytes_From_DS1307_RTC@i,w
+  2443  076A  0771               	addwf	Read_Bytes_From_DS1307_RTC@pData,w
+  2444  076B  00F4               	movwf	??_Read_Bytes_From_DS1307_RTC
+  2445  076C  0874               	movf	??_Read_Bytes_From_DS1307_RTC,w
+  2446  076D  0084               	movwf	4
+  2447  076E  2790  120A  118A   	fcall	_I2C_Read_Byte
+  2448  0771  0080               	movwf	0
+  2449  0772  0AF6               	incf	Read_Bytes_From_DS1307_RTC@i,f
+  2450  0773  1903               	skipnz
+  2451  0774  0AF7               	incf	Read_Bytes_From_DS1307_RTC@i+1,f
+  2452  0775  2F5E               	goto	l4769
+  2453  0776                     l4771:	
+  2454                           
+  2455                           ;DS1307.c: 102: }
+  2456                           ;DS1307.c: 104: I2C_Send_NACK();
+  2457  0776  27A5  120A  118A   	fcall	_I2C_Send_NACK
+  2458                           
+  2459                           ;DS1307.c: 105: I2C_Stop();
+  2460  0779  2F98               	ljmp	l4657
+  2461  077A                     __end_of_Read_Bytes_From_DS1307_RTC:	
+  2462  077A                     __ptext589:	
+  2463 ;; =============== function _I2C_Stop ends ============
+  2464                           
+  2465                           
+  2466 ;; *************** function _I2C_Write_Byte *****************
+  2467 ;; Defined at:
+  2468 ;;		line 67 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\I2C.c"
+  2469 ;; Parameters:    Size  Location     Type
+  2470 ;;  Byte            1    wreg     unsigned char 
+  2471 ;; Auto vars:     Size  Location     Type
+  2472 ;;  Byte            1    0[COMMON] unsigned char 
+  2473 ;; Return value:  Size  Location     Type
+  2474 ;;		None               void
+  2475 ;; Registers used:
+  2476 ;;		wreg, status,2, status,0
+  2477 ;; Tracked objects:
+  2478 ;;		On entry : 40/0
+  2479 ;;		On exit  : 60/20
+  2480 ;;		Unchanged: FFF9F/0
+  2481 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2482 ;;      Params:         0       0       0       0       0
+  2483 ;;      Locals:         1       0       0       0       0
+  2484 ;;      Temps:          0       0       0       0       0
+  2485 ;;      Totals:         1       0       0       0       0
+  2486 ;;Total ram usage:        1 bytes
+  2487 ;; Hardware stack levels used:    1
+  2488 ;; This function calls:
+  2489 ;;		Nothing
+  2490 ;; This function is called by:
+  2491 ;;		_Write_Bytes_To_DS1307_RTC
+  2492 ;;		_Read_Bytes_From_DS1307_RTC
+  2493 ;; This function uses a non-reentrant model
+  2494 ;;
+  2495  077A                     _I2C_Write_Byte:	
+  2496                           
+  2497                           ; Regs used in _I2C_Write_Byte: [wreg+status,2+status,0]
+  2498                           ;I2C_Write_Byte@Byte stored from wreg
+  2499  077A  00F0               	movwf	I2C_Write_Byte@Byte
+  2500                           
+  2501                           ;I2C.c: 68: SSPBUF = Byte;
+  2502  077B  0870               	movf	I2C_Write_Byte@Byte,w
+  2503  077C  1283               	bcf	3,5	;RP0=0, select bank0
+  2504  077D  0093               	movwf	19	;volatile
+  2505  077E                     l1381:	
+  2506                           ;I2C.c: 69: while(!SSPIF);
+  2507                           
+  2508  077E  1D8C               	btfss	12,3
+  2509  077F  2F7E               	goto	l1381
+  2510                           
+  2511                           ;I2C.c: 70: SSPIF = 0;
+  2512  0780  118C               	bcf	12,3
+  2513                           
+  2514                           ;I2C.c: 72: return ACKSTAT;
+  2515  0781  1683               	bsf	3,5	;RP0=1, select bank1
+  2516  0782  1B11               	btfsc	17,6
+  2517  0783  2F86               	goto	l4653
+  2518  0784  1003               	clrc
+  2519  0785  0008               	return
+  2520  0786                     l4653:	
+  2521  0786  1403               	setc
+  2522  0787  0008               	return
+  2523  0788                     __end_of_I2C_Write_Byte:	
+  2524  0788                     __ptext590:	
+  2525 ;; =============== function _I2C_Write_Byte ends ============
+  2526                           
+  2527                           
+  2528 ;; *************** function _I2C_Start *****************
+  2529 ;; Defined at:
+  2530 ;;		line 19 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\I2C.c"
+  2531 ;; Parameters:    Size  Location     Type
+  2532 ;;		None
+  2533 ;; Auto vars:     Size  Location     Type
+  2534 ;;		None
+  2535 ;; Return value:  Size  Location     Type
+  2536 ;;		None               void
+  2537 ;; Registers used:
+  2538 ;;		None
+  2539 ;; Tracked objects:
+  2540 ;;		On entry : 0/0
+  2541 ;;		On exit  : 60/0
+  2542 ;;		Unchanged: FFF9F/0
+  2543 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2544 ;;      Params:         0       0       0       0       0
+  2545 ;;      Locals:         0       0       0       0       0
+  2546 ;;      Temps:          0       0       0       0       0
+  2547 ;;      Totals:         0       0       0       0       0
+  2548 ;;Total ram usage:        0 bytes
+  2549 ;; Hardware stack levels used:    1
+  2550 ;; This function calls:
+  2551 ;;		Nothing
+  2552 ;; This function is called by:
+  2553 ;;		_Write_Bytes_To_DS1307_RTC
+  2554 ;;		_Read_Bytes_From_DS1307_RTC
+  2555 ;; This function uses a non-reentrant model
+  2556 ;;
+  2557  0788                     _I2C_Start:	
+  2558                           
+  2559                           ;I2C.c: 20: SEN = 1;
+  2560                           
+  2561                           ; Regs used in _I2C_Start: []
+  2562  0788  1683               	bsf	3,5	;RP0=1, select bank1
+  2563  0789  1303               	bcf	3,6	;RP1=0, select bank1
+  2564  078A  1411               	bsf	17,0
+  2565  078B                     l1351:	
+  2566                           ;I2C.c: 21: while(!SSPIF);
+  2567                           
+  2568  078B  1283               	bcf	3,5	;RP0=0, select bank0
+  2569  078C  1D8C               	btfss	12,3
+  2570  078D  2F8B               	goto	l1351
+  2571                           
+  2572                           ;I2C.c: 22: SSPIF = 0;
+  2573  078E  118C               	bcf	12,3
+  2574  078F  0008               	return
+  2575  0790                     __end_of_I2C_Start:	
+  2576  0790                     __ptext586:	
+  2577 ;; =============== function _I2C_Send_NACK ends ============
+  2578                           
+  2579                           
+  2580 ;; *************** function _I2C_Read_Byte *****************
+  2581 ;; Defined at:
+  2582 ;;		line 78 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\I2C.c"
+  2583 ;; Parameters:    Size  Location     Type
+  2584 ;;		None
+  2585 ;; Auto vars:     Size  Location     Type
+  2586 ;;		None
+  2587 ;; Return value:  Size  Location     Type
+  2588 ;;                  1    wreg      unsigned char 
+  2589 ;; Registers used:
+  2590 ;;		wreg
+  2591 ;; Tracked objects:
+  2592 ;;		On entry : 40/20
+  2593 ;;		On exit  : 60/0
+  2594 ;;		Unchanged: FFF9F/0
+  2595 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2596 ;;      Params:         0       0       0       0       0
+  2597 ;;      Locals:         0       0       0       0       0
+  2598 ;;      Temps:          0       0       0       0       0
+  2599 ;;      Totals:         0       0       0       0       0
+  2600 ;;Total ram usage:        0 bytes
+  2601 ;; Hardware stack levels used:    1
+  2602 ;; This function calls:
+  2603 ;;		Nothing
+  2604 ;; This function is called by:
+  2605 ;;		_Read_Bytes_From_DS1307_RTC
+  2606 ;; This function uses a non-reentrant model
+  2607 ;;
+  2608  0790                     _I2C_Read_Byte:	
+  2609                           
+  2610                           ;I2C.c: 79: RCEN = 1;
+  2611                           
+  2612                           ; Regs used in _I2C_Read_Byte: [wreg]
+  2613  0790  1683               	bsf	3,5	;RP0=1, select bank1
+  2614  0791  1591               	bsf	17,3
+  2615  0792                     l1387:	
+  2616                           ;I2C.c: 80: while(!SSPIF);
+  2617                           
+  2618  0792  1283               	bcf	3,5	;RP0=0, select bank0
+  2619  0793  1D8C               	btfss	12,3
+  2620  0794  2F92               	goto	l1387
+  2621                           
+  2622                           ;I2C.c: 81: SSPIF = 0;
+  2623  0795  118C               	bcf	12,3
+  2624                           
+  2625                           ;I2C.c: 83: return SSPBUF;
+  2626  0796  0813               	movf	19,w	;volatile
+  2627  0797  0008               	return
+  2628  0798                     __end_of_I2C_Read_Byte:	
+  2629  0798                     __ptext588:	
+  2630 ;; =============== function _I2C_ReStart ends ============
+  2631                           
+  2632                           
+  2633 ;; *************** function _I2C_Stop *****************
+  2634 ;; Defined at:
+  2635 ;;		line 37 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\I2C.c"
+  2636 ;; Parameters:    Size  Location     Type
+  2637 ;;		None
+  2638 ;; Auto vars:     Size  Location     Type
+  2639 ;;		None
+  2640 ;; Return value:  Size  Location     Type
+  2641 ;;		None               void
+  2642 ;; Registers used:
+  2643 ;;		None
+  2644 ;; Tracked objects:
+  2645 ;;		On entry : 40/0
+  2646 ;;		On exit  : 60/0
+  2647 ;;		Unchanged: FFF9F/0
+  2648 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2649 ;;      Params:         0       0       0       0       0
+  2650 ;;      Locals:         0       0       0       0       0
+  2651 ;;      Temps:          0       0       0       0       0
+  2652 ;;      Totals:         0       0       0       0       0
+  2653 ;;Total ram usage:        0 bytes
+  2654 ;; Hardware stack levels used:    1
+  2655 ;; This function calls:
+  2656 ;;		Nothing
+  2657 ;; This function is called by:
+  2658 ;;		_Write_Bytes_To_DS1307_RTC
+  2659 ;;		_Read_Bytes_From_DS1307_RTC
+  2660 ;; This function uses a non-reentrant model
+  2661 ;;
+  2662  0798                     _I2C_Stop:	
+  2663  0798                     l4657:	
+  2664                           ; Regs used in _I2C_Stop: []
+  2665                           
+  2666                           
+  2667                           ;I2C.c: 38: PEN = 1;
+  2668  0798  1683               	bsf	3,5	;RP0=1, select bank1
+  2669  0799  1511               	bsf	17,2
+  2670  079A                     l1363:	
+  2671                           ;I2C.c: 39: while(!SSPIF);
+  2672                           
+  2673  079A  1283               	bcf	3,5	;RP0=0, select bank0
+  2674  079B  1D8C               	btfss	12,3
+  2675  079C  2F9A               	goto	l1363
+  2676                           
+  2677                           ;I2C.c: 40: SSPIF = 0;
+  2678  079D  118C               	bcf	12,3
+  2679  079E  0008               	return
+  2680  079F                     __end_of_I2C_Stop:	
+  2681  079F                     __ptext587:	
+  2682 ;; =============== function _I2C_Read_Byte ends ============
+  2683                           
+  2684                           
+  2685 ;; *************** function _I2C_ReStart *****************
+  2686 ;; Defined at:
+  2687 ;;		line 28 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\I2C.c"
+  2688 ;; Parameters:    Size  Location     Type
+  2689 ;;		None
+  2690 ;; Auto vars:     Size  Location     Type
+  2691 ;;		None
+  2692 ;; Return value:  Size  Location     Type
+  2693 ;;		None               void
+  2694 ;; Registers used:
+  2695 ;;		None
+  2696 ;; Tracked objects:
+  2697 ;;		On entry : 60/20
+  2698 ;;		On exit  : 60/0
+  2699 ;;		Unchanged: FFF9F/0
+  2700 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2701 ;;      Params:         0       0       0       0       0
+  2702 ;;      Locals:         0       0       0       0       0
+  2703 ;;      Temps:          0       0       0       0       0
+  2704 ;;      Totals:         0       0       0       0       0
+  2705 ;;Total ram usage:        0 bytes
+  2706 ;; Hardware stack levels used:    1
+  2707 ;; This function calls:
+  2708 ;;		Nothing
+  2709 ;; This function is called by:
+  2710 ;;		_Read_Bytes_From_DS1307_RTC
+  2711 ;; This function uses a non-reentrant model
+  2712 ;;
+  2713  079F                     _I2C_ReStart:	
+  2714                           
+  2715                           ;I2C.c: 29: RSEN = 1;
+  2716                           
+  2717                           ; Regs used in _I2C_ReStart: []
+  2718  079F  1491               	bsf	17,1
+  2719  07A0                     l1357:	
+  2720                           ;I2C.c: 30: while(!SSPIF);
+  2721                           
+  2722  07A0  1283               	bcf	3,5	;RP0=0, select bank0
+  2723  07A1  1D8C               	btfss	12,3
+  2724  07A2  2FA0               	goto	l1357
+  2725                           
+  2726                           ;I2C.c: 31: SSPIF = 0;
+  2727  07A3  118C               	bcf	12,3
+  2728  07A4  0008               	return
+  2729  07A5                     __end_of_I2C_ReStart:	
+  2730  07A5                     __ptext585:	
+  2731 ;; =============== function _I2C_Send_ACK ends ============
+  2732                           
+  2733                           
+  2734 ;; *************** function _I2C_Send_NACK *****************
+  2735 ;; Defined at:
+  2736 ;;		line 57 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\I2C.c"
+  2737 ;; Parameters:    Size  Location     Type
+  2738 ;;		None
+  2739 ;; Auto vars:     Size  Location     Type
+  2740 ;;		None
+  2741 ;; Return value:  Size  Location     Type
+  2742 ;;		None               void
+  2743 ;; Registers used:
+  2744 ;;		None
+  2745 ;; Tracked objects:
+  2746 ;;		On entry : 160/0
+  2747 ;;		On exit  : 160/0
+  2748 ;;		Unchanged: FFE9F/0
+  2749 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2750 ;;      Params:         0       0       0       0       0
+  2751 ;;      Locals:         0       0       0       0       0
+  2752 ;;      Temps:          0       0       0       0       0
+  2753 ;;      Totals:         0       0       0       0       0
+  2754 ;;Total ram usage:        0 bytes
+  2755 ;; Hardware stack levels used:    1
+  2756 ;; This function calls:
+  2757 ;;		Nothing
+  2758 ;; This function is called by:
+  2759 ;;		_Read_Bytes_From_DS1307_RTC
+  2760 ;; This function uses a non-reentrant model
+  2761 ;;
+  2762  07A5                     _I2C_Send_NACK:	
+  2763                           
+  2764                           ;I2C.c: 58: ACKDT = 1;
+  2765                           
+  2766                           ; Regs used in _I2C_Send_NACK: []
+  2767  07A5  1683               	bsf	3,5	;RP0=1, select bank1
+  2768  07A6  1691               	bsf	17,5
+  2769                           
+  2770                           ;I2C.c: 59: ACKEN = 1;
+  2771  07A7  1611               	bsf	17,4
+  2772  07A8                     l1375:	
+  2773                           ;I2C.c: 60: while(!SSPIF);
+  2774                           
+  2775  07A8  1283               	bcf	3,5	;RP0=0, select bank0
+  2776  07A9  1D8C               	btfss	12,3
+  2777  07AA  2FA8               	goto	l1375
+  2778                           
+  2779                           ;I2C.c: 61: SSPIF = 0;
+  2780  07AB  118C               	bcf	12,3
+  2781  07AC  0008               	return
+  2782  07AD                     __end_of_I2C_Send_NACK:	
+  2783  07AD                     __ptext584:	
+  2784 ;; =============== function _InitI2C ends ============
+  2785                           
+  2786                           
+  2787 ;; *************** function _I2C_Send_ACK *****************
+  2788 ;; Defined at:
+  2789 ;;		line 47 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\I2C.c"
+  2790 ;; Parameters:    Size  Location     Type
+  2791 ;;		None
+  2792 ;; Auto vars:     Size  Location     Type
+  2793 ;;		None
+  2794 ;; Return value:  Size  Location     Type
+  2795 ;;		None               void
+  2796 ;; Registers used:
+  2797 ;;		None
+  2798 ;; Tracked objects:
+  2799 ;;		On entry : 0/0
+  2800 ;;		On exit  : 60/0
+  2801 ;;		Unchanged: FFF9F/0
+  2802 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2803 ;;      Params:         0       0       0       0       0
+  2804 ;;      Locals:         0       0       0       0       0
+  2805 ;;      Temps:          0       0       0       0       0
+  2806 ;;      Totals:         0       0       0       0       0
+  2807 ;;Total ram usage:        0 bytes
+  2808 ;; Hardware stack levels used:    1
+  2809 ;; This function calls:
+  2810 ;;		Nothing
+  2811 ;; This function is called by:
+  2812 ;;		_Read_Bytes_From_DS1307_RTC
+  2813 ;; This function uses a non-reentrant model
+  2814 ;;
+  2815  07AD                     _I2C_Send_ACK:	
+  2816                           
+  2817                           ;I2C.c: 48: ACKDT = 0;
+  2818                           
+  2819                           ; Regs used in _I2C_Send_ACK: []
+  2820  07AD  1683               	bsf	3,5	;RP0=1, select bank1
+  2821  07AE  1303               	bcf	3,6	;RP1=0, select bank1
+  2822  07AF  1291               	bcf	17,5
+  2823                           
+  2824                           ;I2C.c: 49: ACKEN = 1;
+  2825  07B0  1611               	bsf	17,4
+  2826  07B1                     l1369:	
+  2827                           ;I2C.c: 50: while(!SSPIF);
+  2828                           
+  2829  07B1  1283               	bcf	3,5	;RP0=0, select bank0
+  2830  07B2  1D8C               	btfss	12,3
+  2831  07B3  2FB1               	goto	l1369
+  2832                           
+  2833                           ;I2C.c: 51: SSPIF = 0;
+  2834  07B4  118C               	bcf	12,3
+  2835  07B5  0008               	return
+  2836  07B6                     __end_of_I2C_Send_ACK:	
+  2837  07B6                     __ptext568:	
+  2838 ;; =============== function _DisplayTimeToLCD ends ============
+  2839                           
+  2840                           
+  2841 ;; *************** function _ClearLCDScreen *****************
+  2842 ;; Defined at:
+  2843 ;;		line 99 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\LCD.c"
+  2844 ;; Parameters:    Size  Location     Type
+  2845 ;;		None
+  2846 ;; Auto vars:     Size  Location     Type
+  2847 ;;		None
+  2848 ;; Return value:  Size  Location     Type
+  2849 ;;		None               void
+  2850 ;; Registers used:
+  2851 ;;		wreg, status,2, status,0, pclath, cstack
+  2852 ;; Tracked objects:
+  2853 ;;		On entry : 160/0
+  2854 ;;		On exit  : 0/0
+  2855 ;;		Unchanged: 0/0
+  2856 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2857 ;;      Params:         0       0       0       0       0
+  2858 ;;      Locals:         0       0       0       0       0
+  2859 ;;      Temps:          2       0       0       0       0
+  2860 ;;      Totals:         2       0       0       0       0
+  2861 ;;Total ram usage:        2 bytes
+  2862 ;; Hardware stack levels used:    1
+  2863 ;; Hardware stack levels required when called:    2
+  2864 ;; This function calls:
+  2865 ;;		_WriteCommandToLCD
+  2866 ;; This function is called by:
+  2867 ;;		_DisplayTimeToLCD
+  2868 ;; This function uses a non-reentrant model
+  2869 ;;
+  2870  07B6                     _ClearLCDScreen:	
+  2871                           
+  2872                           ;LCD.c: 100: WriteCommandToLCD(0x01);
+  2873                           
+  2874                           ; Regs used in _ClearLCDScreen: [wreg+status,2+status,0+pclath+cstack]
+  2875  07B6  3001               	movlw	1
+  2876  07B7  2704  120A  118A   	fcall	_WriteCommandToLCD
+  2877                           
+  2878                           ;LCD.c: 101: _delay((unsigned long)((2)*(20000000/4000.0)));
+  2879  07BA  300D               	movlw	13
+  2880  07BB  00F4               	movwf	??_ClearLCDScreen+1
+  2881  07BC  30FB               	movlw	251
+  2882  07BD  00F3               	movwf	??_ClearLCDScreen
+  2883  07BE                     u507:	
+  2884  07BE  0BF3               	decfsz	??_ClearLCDScreen,f
+  2885  07BF  2FBE               	goto	u507
+  2886  07C0  0BF4               	decfsz	??_ClearLCDScreen+1,f
+  2887  07C1  2FBE               	goto	u507
+  2888  07C2  2FC3               	nop2
+  2889  07C3  0008               	return
+  2890  07C4                     __end_of_ClearLCDScreen:	
+  2891  07C4                     PL2:	
+  2892  07C4  0823               	movf	_pRTCArray+2,w
+  2893  07C5  00A0               	movwf	_Temp
+  2894  07C6  300A               	movlw	10
+  2895  07C7  00F0               	movwf	?___bmul
+  2896  07C8  0E20               	swapf	_Temp,w
+  2897  07C9  390F               	andlw	15
+  2898  07CA  0008               	return
+  2899  07CB                     PL3:	
+  2900  07CB  00A0               	movwf	_Temp
+  2901  07CC  300A               	movlw	10
+  2902  07CD  00F0               	movwf	?___bmul
+  2903  07CE  0E20               	swapf	_Temp,w
+  2904  07CF  390F               	andlw	15
+  2905  07D0  0008               	return
+  2906  07D1                     PL4:	
+  2907  07D1  300F               	movlw	15
+  2908  07D2  1283               	bcf	3,5	;RP0=0, select bank0
+  2909  07D3  1303               	bcf	3,6	;RP1=0, select bank0
+  2910  07D4  0586               	andwf	6,f	;volatile
+  2911  07D5  3030               	movlw	48
+  2912  07D6  0486               	iorwf	6,f	;volatile
+  2913  07D7  0008               	return
+  2914  07D8                     PL5:	
+  2915  07D8  1006               	bcf	6,0
+  2916  07D9  1086               	bcf	6,1
+  2917  07DA  1206               	bcf	6,4
+  2918  07DB  1286               	bcf	6,5
+  2919  07DC  1306               	bcf	6,6
+  2920  07DD  1386               	bcf	6,7
+  2921  07DE  0008               	return
+  2922  07DF                     PL6:	
+  2923  07DF  0875               	movf	DisplayTimeToLCD@pTimeArray,w
+  2924  07E0  3E02               	addlw	2
+  2925  07E1  0084               	movwf	4
+  2926  07E2  1383               	bcf	3,7	;select IRP bank0
+  2927  07E3  0800               	movf	0,w
+  2928  07E4  0008               	return
+  2929  07E5                     PL7:	
+  2930  07E5  0875               	movf	DisplayTimeToLCD@pTimeArray,w
+  2931  07E6  3E01               	addlw	1
+  2932  07E7  0084               	movwf	4
+  2933  07E8  1383               	bcf	3,7	;select IRP bank0
+  2934  07E9  0800               	movf	0,w
+  2935  07EA  0008               	return
+  2936  07EB                     PL8:	
+  2937  07EB  0875               	movf	DisplayDateOnLCD@pDateArray,w
+  2938  07EC  3E03               	addlw	3
+  2939  07ED  0084               	movwf	4
+  2940  07EE  1383               	bcf	3,7	;select IRP bank0
+  2941  07EF  0800               	movf	0,w
+  2942  07F0  0008               	return
+  2943  07F1                     PL9:	
+  2944  07F1  0875               	movf	DisplayDateOnLCD@pDateArray,w
+  2945  07F2  3E02               	addlw	2
+  2946  07F3  0084               	movwf	4
+  2947  07F4  1383               	bcf	3,7	;select IRP bank0
+  2948  07F5  0800               	movf	0,w
+  2949  07F6  0008               	return
+  2950  07F7                     PL10:	
+  2951  07F7  0875               	movf	DisplayDateOnLCD@pDateArray,w
+  2952  07F8  3E01               	addlw	1
+  2953  07F9  0084               	movwf	4
+  2954  07FA  1383               	bcf	3,7	;select IRP bank0
+  2955  07FB  0800               	movf	0,w
+  2956  07FC  0008               	return
+  2957  07FD                     PL11:	
+  2958  07FD  1283               	bcf	3,5	;RP0=0, select bank0
+  2959  07FE  1303               	bcf	3,6	;RP1=0, select bank0
+  2960  07FF  0008               	return
+  2961                           
+  2962                           	psect	text583
+  2963  03D8                     __ptext583:	
+  2964 ;; =============== function ___bmul ends ============
+  2965                           
+  2966                           
+  2967 ;; *************** function _InitI2C *****************
+  2968 ;; Defined at:
+  2969 ;;		line 7 in file "C:\Users\Saeed\Desktop\PIC16F877 with DS1307 RTC Code\Code\I2C.c"
+  2970 ;; Parameters:    Size  Location     Type
+  2971 ;;		None
+  2972 ;; Auto vars:     Size  Location     Type
+  2973 ;;		None
+  2974 ;; Return value:  Size  Location     Type
+  2975 ;;		None               void
+  2976 ;; Registers used:
+  2977 ;;		wreg
+  2978 ;; Tracked objects:
+  2979 ;;		On entry : 0/0
+  2980 ;;		On exit  : 60/0
+  2981 ;;		Unchanged: FFF9F/0
+  2982 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2983 ;;      Params:         0       0       0       0       0
+  2984 ;;      Locals:         0       0       0       0       0
+  2985 ;;      Temps:          0       0       0       0       0
+  2986 ;;      Totals:         0       0       0       0       0
+  2987 ;;Total ram usage:        0 bytes
+  2988 ;; Hardware stack levels used:    1
+  2989 ;; This function calls:
+  2990 ;;		Nothing
+  2991 ;; This function is called by:
+  2992 ;;		_main
+  2993 ;; This function uses a non-reentrant model
+  2994 ;;
+  2995  03D8                     _InitI2C:	
+  2996                           
+  2997                           ;I2C.c: 8: TRISC4 = 1;
+  2998                           
+  2999                           ; Regs used in _InitI2C: [wreg]
+  3000  03D8  1683               	bsf	3,5	;RP0=1, select bank1
+  3001  03D9  1303               	bcf	3,6	;RP1=0, select bank1
+  3002  03DA  3031               	movlw	49
+  3003  03DB  1607               	bsf	7,4
+  3004                           
+  3005                           ;I2C.c: 9: TRISC3 = 1;
+  3006  03DC  1587               	bsf	7,3
+  3007                           
+  3008                           ;I2C.c: 11: SSPADD = ((20000000/4000)/100) - 1;
+  3009  03DD  0093               	movwf	19	;volatile
+  3010                           
+  3011                           ;I2C.c: 12: SSPSTAT = 0x80;
+  3012  03DE  3080               	movlw	128
+  3013  03DF  0094               	movwf	20	;volatile
+  3014                           
+  3015                           ;I2C.c: 13: SSPCON = 0x28;
+  3016  03E0  3028               	movlw	40
+  3017  03E1  1283               	bcf	3,5	;RP0=0, select bank0
+  3018  03E2  0094               	movwf	20	;volatile
+  3019  03E3  0008               	return
+  3020  03E4                     __end_of_InitI2C:	
+  3021                           
+  3022                           	psect	text591
+  3023  0000                     __ptext591:	
+  3024 ;; =============== function _I2C_Start ends ============
+  3025                           
+  3026  007E                     btemp	set	126	;btemp
+  3027  007E                     wtemp0	set	126
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Thu Jan 31 17:42:40 2013
+
+                                  pc 0002                       ___bmul@product 0071  
+                 __size_of_I2C_Start 0008                                   fsr 0004  
+                                l701 0000                                  l704 0000  
+                                l707 0000                                  l690 04DD  
+                                l677 0000                                  l686 0000  
+                                l694 0000                                  _RB0 0030  
+                                _RB1 0031                                  _RB4 0034  
+                                _RB5 0035                                  _RB6 0036  
+                                _RB7 0037                                  _PEN 048A  
+                                u435 072F                                  u507 07BE  
+                                u517 069D                                  u455 0764  
+                                u527 06AE                                  u537 06BC  
+                                u547 06CB                                  _SEN 0488  
+                                u557 06DB                                  u567 06F3  
+                                u577 06FE                                  u497 0421  
+               __size_of_I2C_ReStart 0006                                  fsr0 0004  
+                                indf 0000                   I2C_Write_Byte@Byte 0070  
+            Set_DS1307_RTC_Time@Mode 007D              Set_DS1307_RTC_Time@Mins 0079  
+            Set_DS1307_RTC_Time@Secs 007A                                 l2033 0000  
+                               l2042 0000                                 l2051 0000  
+                               l2036 0000                                 l1351 078B  
+                               l2039 0000                                 l1360 0000  
+                               l2048 0000                                 l1354 0000  
+                               l1363 079A                                 l1372 0000  
+                               l1348 0000                                 l1381 077E  
+                               l1357 07A0                                 l1366 0000  
+                               l1390 0000                                 l1375 07A8  
+                               l1369 07B1                                 l1378 0000  
+                               l3410 0000                                 l1387 0792  
+                               l3407 064E                                 l3416 0000  
+                               l3374 0000                                 l4255 0000  
+                               l4257 0000                                 l4701 0000  
+                               l4711 0000                                 l4705 0000  
+                               l4713 0000                                 l4707 065B  
+                               l4723 0675                                 l4715 0661  
+                               l4811 048B                                 l4653 0786  
+                               l4661 0000                                 l4725 0000  
+                               l4717 0000                                 l4741 0000  
+                               l4733 0000                                 l4813 0000  
+                               l4805 047F                                 l4821 0000  
+                               l4901 0000                                 l4647 0000  
+                               l4663 0000                                 l4671 0000  
+                               l4719 0000                                 l4743 0726  
+                               l4751 0000                                 l4815 0000  
+                               l4807 0480                                 l4823 0000  
+                               l4831 0000                                 l4903 0000  
+                               l4911 0000                                 l4649 0000  
+                               l4657 0798                                 l4681 0000  
+                               l4673 0499                                 l4745 073E  
+                               l4737 0000                                 l4729 0717  
+                               l4761 0000                                 l4809 0000  
+                               l4833 0000                                 l4825 0000  
+                               l4905 0000                                 l4913 067A  
+                               l4921 0000                                 l4659 0000  
+                               l4667 0000                                 l4691 0000  
+                               l4771 0776                                 l4755 0000  
+                               l4747 0740                                 l4835 0000  
+                               l4827 0000                                 l4851 0000  
+                               l4843 0000                                 l4907 0000  
+                               l4915 0000                                 l4931 0000  
+                               l4923 0000                                 l4669 0000  
+                               l4693 0648                                 l4765 0000  
+                               l4757 0000                                 l4773 06EE  
+                               l4781 04DF                                 l4837 0000  
+                               l4829 0000                                 l4853 0000  
+                               l4845 0000                                 l4861 0000  
+                               l4917 0000                                 l4933 062A  
+                               l4925 0000                                 l4679 0000  
+                               l4687 0000                                 l4767 0000  
+                               l4759 0000                                 l4775 0000  
+                               l4791 0000                                 l4839 0000  
+                               l4847 0000                                 l4863 0000  
+                               l4855 0000                                 l4871 0000  
+                               l4935 062C                                 l4927 0000  
+                               l4919 0000                                 l4951 0000  
+                               l4943 0000                                 l4697 0000  
+                               l4689 0000                                 l4769 075E  
+                               l4777 0000                                 l4785 04E2  
+                               l4793 0000                                 l4849 0000  
+                               l4865 0000                                 l4857 0000  
+                               l4881 0000                                 l4873 0000  
+                               l4937 062E                                 l4929 0000  
+                               l4961 05B7                                 l4953 0000  
+                               l4945 0000                                 l4787 04EA  
+                               l4779 0000                                 l4795 0000  
+                               l4859 0000                                 l4891 0000  
+                               l4883 0000                                 l4875 0000  
+                               l4867 0000                                 l4971 05C1  
+                               l4963 05B9                                 l4955 0000  
+                               l4947 0000                                 l4797 0000  
+                               l4789 0000                                 l4893 0000  
+                               l4885 0000                                 l4877 0000  
+                               l4869 0000                                 l4965 05BB  
+                               l4957 05B3                                 l4949 0000  
+                               l4981 0000                                 l4799 0000  
+                               l4895 0000                                 l4887 0000  
+                               l4879 0000                                 l4967 05BD  
+                               l4959 05B5                                 l4983 0405  
+                               l4897 0000                                 l4889 0000  
+                               l4969 05BF                                 l4985 0000  
+                               l4977 0000                                 l4899 0000  
+                               l4987 0000                                 l4979 0000  
+                               STR_1 0029                                 STR_2 002C  
+                               STR_3 0019                                 STR_4 0011  
+                               STR_5 000D                                 STR_6 0025  
+                               STR_7 0015                                 STR_8 0021  
+                               STR_9 001D                                 _RCEN 048B  
+                               _RSEN 0489                                 _Temp 0020  
+        ??_Write_Bytes_To_DS1307_RTC 0073                                 _main 03E4  
+                               btemp 007E                     __end_of_I2C_Stop 079F  
+              __size_of_I2C_Send_ACK 0009                                 start 0000  
+                  ___bmul@multiplier 0072                      __end_of_InitI2C 03E4  
+                    __end_of_InitLCD 06EE             Set_DS1307_RTC_Time@Hours 0078  
+                              ?_main 0070                                _ACKEN 048C  
+                              _ACKDT 048D                      __end_of___lbdiv 065D  
+                              STR_10 0009                      __end_of___lbmod 0679  
+                              _PORTB 0006                                _SSPIF 0063  
+ __end_of_Read_Bytes_From_DS1307_RTC 077A           _Read_Bytes_From_DS1307_RTC 073F  
+             __size_of_I2C_Read_Byte 0008                         _I2C_Send_ACK 07AD  
+                  __end_of_I2C_Start 0790                                pclath 000A  
+             __size_of_I2C_Send_NACK 0008                                status 0003  
+            __size_of_WriteDataToLCD 0012                                wtemp0 007E  
+                    ___lbdiv@divisor 0070                      ___lbdiv@counter 0072  
+                    _ToggleEpinOfLCD 06EE                         __end_of_main 0429  
+        __end_of_Get_DS1307_RTC_Date 0454          __end_of_Set_DS1307_RTC_Date 053F  
+        __end_of_Get_DS1307_RTC_Time 0497            _Write_Bytes_To_DS1307_RTC 0716  
+        __end_of_Set_DS1307_RTC_Time 04F0                               ??_main 0025  
+                   ??_ClearLCDScreen 0073                               _SSPADD 0093  
+                             _TRISB0 0430                               _TRISB1 0431  
+                             _TRISB4 0434                               _TRISC3 043B  
+                             _TRISB5 0435                               _TRISC4 043C  
+                             _TRISB6 0436                               _TRISB7 0437  
+                             _SSPCON 0014                               _SSPBUF 0013  
+          __size_of_DisplayDateOnLCD 0084                            ??_InitI2C 0070  
+                          ??_InitLCD 0073                               ___bmul 0497  
+                      _I2C_Read_Byte 0790                            ??___lbdiv 0071  
+                          ??___lbmod 0071                    WriteStringToLCD@s 0073  
+                      _I2C_Send_NACK 07A5                    ?_WriteStringToLCD 0070  
+                          ?_I2C_Stop 0070                   ??_WriteStringToLCD 0073  
+                   ___lbdiv@dividend 0071              __end_of_ToggleEpinOfLCD 0704  
+                    ___lbmod@divisor 0070                      ___lbmod@counter 0073  
+Read_Bytes_From_DS1307_RTC@NoOfBytes 0072                  ___bmul@multiplicand 0070  
+          __size_of_DisplayTimeToLCD 006D                       ?_I2C_Read_Byte 0070  
+                     __pcstackCOMMON 0070                       ?_I2C_Send_NACK 0070  
+                   ___lbdiv@quotient 0073             WriteCommandToLCD@Command 0072  
+                         ??_I2C_Stop 0070                           __pbssBANK0 0020  
+                     _WriteDataToLCD 0630                           __pmaintext 03E4  
+                            ?___bmul 0070                WriteDataToLCD@LCDChar 0072  
+            __size_of_I2C_Write_Byte 000E                              _ACKSTAT 048E  
+                      ??_I2C_ReStart 0070          ?_Read_Bytes_From_DS1307_RTC 0071  
+ __size_of_Write_Bytes_To_DS1307_RTC 0029                              _SSPSTAT 0094  
+             __end_of_WriteDataToLCD 0642                     ?_ToggleEpinOfLCD 0070  
+                   _DisplayDateOnLCD 053F                              _InitI2C 03D8  
+                            _InitLCD 0690                            _I2C_Start 0788  
+                    ??_I2C_Read_Byte 0070                      __size_of___bmul 000E  
+                    ??_I2C_Send_NACK 0070                              ___lbdiv 0642  
+                            ___lbmod 065D                  __end_of_I2C_ReStart 07A5  
+         DisplayDateOnLCD@pDateArray 0075    __end_of_Write_Bytes_To_DS1307_RTC 073F  
+               end_of_initialization 03D4                      ?_WriteDataToLCD 0070  
+                         ?_I2C_Start 0070                     _DisplayTimeToLCD 05C3  
+                   ___lbmod@dividend 0072         __size_of_Get_DS1307_RTC_Date 002B  
+       __size_of_Set_DS1307_RTC_Date 004F         __size_of_Get_DS1307_RTC_Time 0043  
+       __size_of_Set_DS1307_RTC_Time 004B           Write_Bytes_To_DS1307_RTC@i 0076  
+                  __size_of_I2C_Stop 0007    Read_Bytes_From_DS1307_RTC@Address 0075  
+                        ___lbmod@rem 0074            __size_of_WriteStringToLCD 0017  
+   Write_Bytes_To_DS1307_RTC@Address 0075  __size_of_Read_Bytes_From_DS1307_RTC 003B  
+                     __end_of___bmul 04A5                       _I2C_Write_Byte 077A  
+                        _I2C_ReStart 079F                  start_initialization 03CF  
+            __size_of_ClearLCDScreen 000E                          ??_I2C_Start 0070  
+             __end_of_I2C_Write_Byte 0788                             ??___bmul 0071  
+        Read_Bytes_From_DS1307_RTC@i 0076             __end_of_DisplayDateOnLCD 05C3  
+                          _pRTCArray 0021                        __pcstackBANK0 0025  
+     Write_Bytes_To_DS1307_RTC@pData 0071                        ?_I2C_Send_ACK 0070  
+                           ?_InitI2C 0070                             ?_InitLCD 0070  
+                    ?_I2C_Write_Byte 0070           DisplayTimeToLCD@pTimeArray 0075  
+                           ?___lbdiv 0070                            __ptext570 0690  
+                          __ptext571 0630                             ?___lbmod 0070  
+                          __ptext580 065D                            __ptext572 0704  
+                          __ptext581 0642                            __ptext573 0429  
+                          __ptext565 0000                            __ptext590 0788  
+                          __ptext582 0497                            __ptext574 04F0  
+                          __ptext566 053F                            __ptext591 0000  
+                          __ptext583 03D8                            __ptext575 0454  
+                          __ptext567 05C3                            __ptext584 07AD  
+                          __ptext576 04A5                            __ptext568 07B6  
+                          __ptext585 07A5                            __ptext577 06EE  
+                          __ptext569 0679                            __ptext586 0790  
+                          __ptext578 073F                            __ptext587 079F  
+                          __ptext579 0716                            __ptext588 0798  
+                          __ptext589 077A                            __pstrings 0003  
+                   ??_WriteDataToLCD 0072                             _I2C_Stop 0798  
+           __end_of_DisplayTimeToLCD 0630                       ??_I2C_Send_ACK 0070  
+                   _WriteStringToLCD 0679                  _Get_DS1307_RTC_Date 0429  
+                _Set_DS1307_RTC_Date 04F0                  _Get_DS1307_RTC_Time 0454  
+              __end_of_I2C_Read_Byte 0798                  _Set_DS1307_RTC_Time 04A5  
+           __size_of_ToggleEpinOfLCD 0016      Read_Bytes_From_DS1307_RTC@pData 0071  
+              __end_of_I2C_Send_NACK 07AD                          __stringbase 0008  
+               ?_Get_DS1307_RTC_Date 0070                 ?_Set_DS1307_RTC_Date 0078  
+               ?_Get_DS1307_RTC_Time 0070                 ?_Set_DS1307_RTC_Time 0078  
+                     _ClearLCDScreen 07B6           ?_Write_Bytes_To_DS1307_RTC 0071  
+                  _WriteCommandToLCD 0704                   ?_WriteCommandToLCD 0070  
+                   __size_of_InitI2C 000C                     __size_of_InitLCD 005E  
+                ??_WriteCommandToLCD 0072                     __size_of___lbdiv 001B  
+                   __size_of___lbmod 001C                         ?_I2C_ReStart 0070  
+              ??_Get_DS1307_RTC_Date 0078                ??_Set_DS1307_RTC_Date 007B  
+              ??_Get_DS1307_RTC_Time 0078                ??_Set_DS1307_RTC_Time 007B  
+             __end_of_ClearLCDScreen 07C4            __end_of_WriteCommandToLCD 0716  
+                      __size_of_main 0045                 __end_of_I2C_Send_ACK 07B6  
+                  ??_ToggleEpinOfLCD 0070                    ?_DisplayDateOnLCD 0070  
+                 ??_DisplayDateOnLCD 0075         ??_Read_Bytes_From_DS1307_RTC 0074  
+                    ?_ClearLCDScreen 0070   Write_Bytes_To_DS1307_RTC@NoOfBytes 0072  
+                   ??_I2C_Write_Byte 0070             Set_DS1307_RTC_Date@Month 0078  
+                          stringcode 0003             __end_of_WriteStringToLCD 0690  
+            Set_DS1307_RTC_Date@Date 007D              Set_DS1307_RTC_Date@Year 0079  
+                           stringdir 0003                             stringtab 0003  
+                  ?_DisplayTimeToLCD 0070           __size_of_WriteCommandToLCD 0012  
+                 ??_DisplayTimeToLCD 0075               Set_DS1307_RTC_Date@Day 007A  

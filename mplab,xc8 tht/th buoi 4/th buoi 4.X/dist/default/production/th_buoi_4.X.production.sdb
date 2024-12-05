@@ -1,0 +1,142 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F877A ]
+[d frameptr 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"26 E:\minh\vi xu ly\mplab,xc8 tht\th buoi 4\th buoi 4.X\th buoi 4.c
+[v _scanled scanled `(v  1 e 1 0 ]
+"53
+[v _scanled1 scanled1 `(v  1 e 1 0 ]
+"92
+[v _setup_timer2 setup_timer2 `(v  1 e 1 0 ]
+"120
+[v _ngat_timer2 ngat_timer2 `II(v  1 e 1 0 ]
+"138
+[v _main main `(v  1 e 1 0 ]
+"217 C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f877a.h
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+"731
+[v _TMR2 TMR2 `VEuc  1 e 1 @17 ]
+"1376
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1438
+[v _TRISC TRISC `VEuc  1 e 1 @135 ]
+"1500
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+"1817
+[v _PR2 PR2 `VEuc  1 e 1 @146 ]
+"2574
+[v _GIE GIE `VEb  1 e 0 @95 ]
+"2634
+[v _PEIE PEIE `VEb  1 e 0 @94 ]
+"2700
+[v _RB7 RB7 `VEb  1 e 0 @55 ]
+"2709
+[v _RC0 RC0 `VEb  1 e 0 @56 ]
+"2718
+[v _RC3 RC3 `VEb  1 e 0 @59 ]
+"2727
+[v _RC6 RC6 `VEb  1 e 0 @62 ]
+"2877
+[v _T2CKPS0 T2CKPS0 `VEb  1 e 0 @144 ]
+"2880
+[v _T2CKPS1 T2CKPS1 `VEb  1 e 0 @145 ]
+"2901
+[v _TMR2IE TMR2IE `VEb  1 e 0 @1121 ]
+"2904
+[v _TMR2IF TMR2IF `VEb  1 e 0 @97 ]
+"2907
+[v _TMR2ON TMR2ON `VEb  1 e 0 @146 ]
+"2910
+[v _TOUTPS0 TOUTPS0 `VEb  1 e 0 @147 ]
+"2913
+[v _TOUTPS1 TOUTPS1 `VEb  1 e 0 @148 ]
+"2916
+[v _TOUTPS2 TOUTPS2 `VEb  1 e 0 @149 ]
+"2919
+[v _TOUTPS3 TOUTPS3 `VEb  1 e 0 @150 ]
+"25 E:\minh\vi xu ly\mplab,xc8 tht\th buoi 4\th buoi 4.X\th buoi 4.c
+[v _Ma Ma `[10]uc  1 e 10 0 ]
+"91
+[v _count count `i  1 e 2 0 ]
+"138
+[v _main main `(v  1 e 1 0 ]
+{
+"149
+[v main@k k `i  1 a 2 30 ]
+"145
+[v main@j j `i  1 a 2 28 ]
+"158
+} 0
+"92
+[v _setup_timer2 setup_timer2 `(v  1 e 1 0 ]
+{
+"117
+} 0
+"53
+[v _scanled1 scanled1 `(v  1 e 1 0 ]
+{
+"60
+[v scanled1@i i `i  1 a 2 26 ]
+"55
+[v scanled1@dv dv `i  1 a 2 22 ]
+[v scanled1@c c `i  1 a 2 20 ]
+[v scanled1@t t `i  1 a 2 18 ]
+"53
+[v scanled1@x x `i  1 p 2 14 ]
+"80
+} 0
+"26
+[v _scanled scanled `(v  1 e 1 0 ]
+{
+"33
+[v scanled@i i `i  1 a 2 26 ]
+"28
+[v scanled@dv dv `i  1 a 2 22 ]
+[v scanled@c c `i  1 a 2 20 ]
+[v scanled@t t `i  1 a 2 18 ]
+"26
+[v scanled@x x `i  1 p 2 14 ]
+"51
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"10
+[v ___awmod@sign sign `uc  1 a 1 5 ]
+[v ___awmod@counter counter `uc  1 a 1 4 ]
+"5
+[v ___awmod@divisor divisor `i  1 p 2 0 ]
+[v ___awmod@dividend dividend `i  1 p 2 2 ]
+"34
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 12 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 11 ]
+[v ___awdiv@counter counter `uc  1 a 1 10 ]
+"5
+[v ___awdiv@divisor divisor `i  1 p 2 6 ]
+[v ___awdiv@dividend dividend `i  1 p 2 8 ]
+"41
+} 0
+"120 E:\minh\vi xu ly\mplab,xc8 tht\th buoi 4\th buoi 4.X\th buoi 4.c
+[v _ngat_timer2 ngat_timer2 `II(v  1 e 1 0 ]
+{
+"136
+} 0

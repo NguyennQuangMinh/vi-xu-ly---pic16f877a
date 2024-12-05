@@ -1,0 +1,7 @@
+// mục đích cần tìm là TMR0_innit = giá trị bao nhiêu để set giá trị TMR0
+
+Tchu kỳ xung = 4/Fosc(tần số)
+
+thời gian cần tạo = C * Tchu kỳ xung => C= ?=( 255 - TMR0_innit)*prescaler => TMR0_innit>0,chọn prescaler
+
+TMR0 = ( 255 - TMR0_innit)*prescaler
